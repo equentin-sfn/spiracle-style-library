@@ -12,6 +12,7 @@ import {
   CardContent,
   CardFooter,
 } from "@/components/molecules";
+import { BentoHero, CollectionShowcase } from "@/components/organisms";
 
 // Sample book data with cover images
 const books = [
@@ -212,6 +213,44 @@ export default function BooksPreviewPage() {
             Hidden gems, unearthed treasure, written by great authors
           </p>
         </header>
+
+        {/* Bento Hero Section */}
+        <BentoHero
+          sectionLabel="Bento Grid Section"
+          title="Feature-rich layout that captures attention"
+          description="Add a concise value statement that highlights your product's key features and benefits in a visually dynamic grid. Focus on creating balanced content blocks while keeping it under 2-3 lines. Align with your grid layout structure."
+          books={[
+            {
+              title: "The Door",
+              author: "Magda Szabó",
+              coverImage: "/images/covers/Size=Med, Image=01.png",
+              price: "14.99",
+              memberPrice: "11.99",
+            },
+            {
+              title: "The Golden Notebook",
+              author: "Doris Lessing",
+              coverImage: "/images/covers/Size=Med, Image=02.png",
+              price: "16.99",
+              memberPrice: "13.99",
+            },
+          ]}
+          className="-mx-8 px-0"
+        />
+
+        {/* Collection Showcase */}
+        <CollectionShowcase
+          collectionName="Top 10 Books That Changed Britain"
+          collectionDescription="Original voices, overturning conventions, causing trouble. Perfect listening."
+          coverImages={[
+            "/images/covers/Size=Med, Image=02.png",
+            "/images/covers/Size=Med, Image=03.png",
+            "/images/covers/Size=Med, Image=04.png",
+            "/images/covers/Size=Med, Image=05.png",
+            "/images/covers/Size=Med, Image=06.png",
+          ]}
+          className="-mx-8 px-0"
+        />
 
         {/* Books Grid */}
         <section className="space-y-6">

@@ -3,3 +3,8 @@
 
 export { BentoHero, type BentoHeroProps, type BentoHeroBook } from "./bento-hero";
 export { CollectionShowcase, type CollectionShowcaseProps } from "./collection-showcase";
+export {
+  CollectionSpotlight,
+  type CollectionSpotlightProps,
+  type CollectionSpotlightBook,
+} from "./collection-spotlight";

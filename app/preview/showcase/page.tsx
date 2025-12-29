@@ -1,11 +1,65 @@
 "use client";
 
 import { CollectionCard } from "@/components/molecules";
-import { BentoHero, CollectionShowcase } from "@/components/organisms";
+import { BentoHero, CollectionShowcase, CollectionSpotlight } from "@/components/organisms";
 
 export default function ShowcasePage() {
   return (
     <div className="min-h-screen">
+      {/* Section 0: Collection Spotlight */}
+      <CollectionSpotlight
+        heroImage="/images/hero-spotlight.png"
+        label="Collection"
+        headline="Celebrating Black History Month"
+        description="Add a concise value statement that highlights your product's key features and benefits in a visually dynamic grid. Focus on creating balanced content blocks while keeping it under 2-3 lines. Align with your grid layout structure."
+        ctaText="Browse the collection"
+        ctaLink="#"
+        books={[
+          {
+            title: "Black and Female",
+            author: "Tsitsi Dangarembga",
+            coverImage: "/images/covers/Size=Med, Image=01.png",
+            price: "14.99",
+            memberPrice: "11.99",
+          },
+          {
+            title: "The Strangers",
+            author: "Ekow Eshun",
+            coverImage: "/images/covers/Size=Med, Image=02.png",
+            price: "16.99",
+            memberPrice: "13.99",
+          },
+          {
+            title: "Flashlight",
+            author: "Susan Choi",
+            coverImage: "/images/covers/Size=Med, Image=03.png",
+            price: "12.99",
+            memberPrice: "9.99",
+          },
+          {
+            title: "Black Skin, White Masks",
+            author: "Frantz Fanon",
+            coverImage: "/images/covers/Size=Med, Image=04.png",
+            price: "11.99",
+            memberPrice: "8.99",
+          },
+          {
+            title: "The Shadow Line",
+            author: "Joseph Conrad",
+            coverImage: "/images/covers/Size=Med, Image=05.png",
+            price: "13.99",
+            memberPrice: "10.99",
+          },
+          {
+            title: "Heart of Darkness",
+            author: "Joseph Conrad",
+            coverImage: "/images/covers/Size=Med, Image=06.png",
+            price: "12.99",
+            memberPrice: "9.99",
+          },
+        ]}
+      />
+
       {/* Section 1: Bento Hero */}
       <BentoHero
         sectionLabel="Bento Grid Section"

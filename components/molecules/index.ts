@@ -105,3 +105,4 @@ export {
 // Spiracle custom components
 export { ReviewCard, type ReviewCardProps } from "./review-card";
 export { CollectionCard, type CollectionCardProps } from "./collection-card";
+export { BookCard, type BookCardProps } from "./book-card";

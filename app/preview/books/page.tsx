@@ -4,6 +4,7 @@ import { Button, Badge, Separator } from "@/components/atoms";
 import {
   ReviewCard,
   CollectionCard,
+  BookCard,
   Card,
   CardHeader,
   CardTitle,
@@ -254,6 +255,46 @@ export default function BooksPreviewPage() {
                 memberCount={collection.memberCount}
               />
             ))}
+          </div>
+        </section>
+
+        <Separator />
+
+        {/* BookCards Section */}
+        <section className="space-y-6">
+          <div className="flex items-center justify-between">
+            <h2 className="font-serif text-2xl">Staff Picks</h2>
+            <Button variant="outline" size="sm">View All</Button>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <BookCard
+              title="The Door"
+              author="Magda Szabó"
+              coverImage="/images/covers/Size=Med, Image=01.png"
+              price="14.99"
+              memberPrice="11.99"
+            />
+            <BookCard
+              title="The Golden Notebook"
+              author="Doris Lessing"
+              coverImage="/images/covers/Size=Med, Image=02.png"
+              price="16.99"
+              memberPrice="13.99"
+            />
+            <BookCard
+              title="Victory"
+              author="Joseph Conrad"
+              coverImage="/images/covers/Size=Med, Image=04.png"
+              price="13.99"
+              memberPrice="10.99"
+            />
+            <BookCard
+              title="The Waves"
+              author="Virginia Woolf"
+              coverImage="/images/covers/Size=Med, Image=03.png"
+              price="11.99"
+              memberPrice="8.99"
+            />
           </div>
         </section>
 

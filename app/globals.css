@@ -1,0 +1,221 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/* Jannon Font Family - Spiracle Brand Typeface */
+@font-face {
+  font-family: "Jannon";
+  src: url("/fonts/JJannon-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Jannon";
+  src: url("/fonts/JJannon-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Jannon";
+  src: url("/fonts/JJannon-Book.ttf") format("truetype");
+  font-weight: 350;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Jannon";
+  src: url("/fonts/JJannon-BookItalic.ttf") format("truetype");
+  font-weight: 350;
+  font-style: italic;
+  font-display: swap;
+}
+
+/* Jannon Display - For headlines and display text */
+@font-face {
+  font-family: "Jannon Display";
+  src: url("/fonts/JJannonDisplay-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Jannon Display";
+  src: url("/fonts/JJannonDisplay-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Jannon Display";
+  src: url("/fonts/JJannonDisplay-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Jannon Display";
+  src: url("/fonts/JJannonDisplay-LightItalic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-serif: "Jannon", Georgia, "Times New Roman", serif;
+  --font-display: "Jannon Display", "Jannon", Georgia, serif;
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  /* Spiracle Brand Colors */
+  --color-spiracle-cream: #F9F7ED;
+  --color-spiracle-parchment: #F4EEDC;
+  --color-spiracle-sand: #E8E1CF;
+  --color-spiracle-ink: #000000;
+  --color-spiracle-forest: #266D36;
+  --color-spiracle-pine: #2F5337;
+  --color-spiracle-blush: #EBDEDB;
+  --color-spiracle-honey: #F1E5A3;
+  --color-spiracle-terracotta: #9F4300;
+  --color-spiracle-burgundy: #730000;
+  --color-spiracle-sage: #C0C9C2;
+  --color-spiracle-slate: #47507C;
+  --color-spiracle-navy: #333B51;
+}
+
+:root {
+  /* Spiracle Light Mode - Warm, literary palette */
+  --background: #F9F7ED;
+  --foreground: #1a1a18;
+  --card: #F4EEDC;
+  --card-foreground: #1a1a18;
+  --popover: #F9F7ED;
+  --popover-foreground: #1a1a18;
+  --primary: #266D36;
+  --primary-foreground: #F9F7ED;
+  --secondary: #E8E1CF;
+  --secondary-foreground: #1a1a18;
+  --muted: #F4EEDC;
+  --muted-foreground: #47507C;
+  --accent: #730000;
+  --accent-foreground: #F9F7ED;
+  --destructive: #730000;
+  --border: #E8E1CF;
+  --input: #E8E1CF;
+  --ring: #266D36;
+
+  /* Chart colors using Spiracle palette */
+  --chart-1: #266D36;
+  --chart-2: #730000;
+  --chart-3: #9F4300;
+  --chart-4: #47507C;
+  --chart-5: #F1E5A3;
+
+  /* Slightly larger radius for warmer feel */
+  --radius: 0.5rem;
+
+  /* Sidebar */
+  --sidebar: #F4EEDC;
+  --sidebar-foreground: #1a1a18;
+  --sidebar-primary: #266D36;
+  --sidebar-primary-foreground: #F9F7ED;
+  --sidebar-accent: #E8E1CF;
+  --sidebar-accent-foreground: #1a1a18;
+  --sidebar-border: #E8E1CF;
+  --sidebar-ring: #266D36;
+}
+
+.dark {
+  /* Spiracle Dark Mode - Warm dark tones */
+  --background: #1a1a18;
+  --foreground: #F9F7ED;
+  --card: #2a2a26;
+  --card-foreground: #F9F7ED;
+  --popover: #2a2a26;
+  --popover-foreground: #F9F7ED;
+  --primary: #3d9e52;
+  --primary-foreground: #1a1a18;
+  --secondary: #3a3a35;
+  --secondary-foreground: #F9F7ED;
+  --muted: #3a3a35;
+  --muted-foreground: #C0C9C2;
+  --accent: #9F4300;
+  --accent-foreground: #F9F7ED;
+  --destructive: #b84c4c;
+  --border: rgba(249, 247, 237, 0.1);
+  --input: rgba(249, 247, 237, 0.15);
+  --ring: #3d9e52;
+
+  /* Chart colors - adjusted for dark mode */
+  --chart-1: #3d9e52;
+  --chart-2: #c44d4d;
+  --chart-3: #d4722e;
+  --chart-4: #6b7ab0;
+  --chart-5: #F1E5A3;
+
+  /* Sidebar */
+  --sidebar: #2a2a26;
+  --sidebar-foreground: #F9F7ED;
+  --sidebar-primary: #3d9e52;
+  --sidebar-primary-foreground: #1a1a18;
+  --sidebar-accent: #3a3a35;
+  --sidebar-accent-foreground: #F9F7ED;
+  --sidebar-border: rgba(249, 247, 237, 0.1);
+  --sidebar-ring: #3d9e52;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

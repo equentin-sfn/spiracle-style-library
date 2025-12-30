@@ -14,6 +14,8 @@ export interface BookTag {
 
 export interface BookCoverActionsProps
   extends React.HTMLAttributes<HTMLElement> {
+  /** Book title for accessible image alt text */
+  bookTitle: string;
   coverImage: string;
   onSample?: () => void;
   addToLibraryHref?: string;
@@ -22,6 +24,7 @@ export interface BookCoverActionsProps
 }
 
 function BookCoverActions({
+  bookTitle,
   coverImage,
   onSample,
   addToLibraryHref = "#",
@@ -39,7 +42,7 @@ function BookCoverActions({
       <figure className="relative aspect-square w-full overflow-hidden rounded-sm">
         <Image
           src={coverImage}
-          alt="Book cover"
+          alt={`Cover of ${bookTitle}`}
           fill
           className="object-cover"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px"

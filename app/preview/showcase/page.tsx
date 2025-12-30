@@ -65,6 +65,7 @@ export default function ShowcasePage() {
           <div className="grid grid-cols-1 md:grid-cols-[280px_1fr] lg:grid-cols-[280px_1fr_280px] gap-8 lg:gap-10">
             {/* Left Column: Cover + Actions */}
             <BookCoverActions
+              bookTitle="Chewing the Fat"
               coverImage="/images/covers/Size=Med, Image=01.png"
               onSample={() => console.log("Sample clicked")}
               addToLibraryHref="/library/add"

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Star } from "@phosphor-icons/react";
 import { Separator } from "@/components/atoms";
@@ -61,11 +62,15 @@ function CriticCard({
       {/* Publication Logo/Name */}
       <header className="mb-4 sm:mb-5">
         {publicationLogo ? (
-          <img
-            src={publicationLogo}
-            alt={publication}
-            className="h-6 sm:h-8 w-auto object-contain"
-          />
+          <div className="relative h-6 sm:h-8 w-32">
+            <Image
+              src={publicationLogo}
+              alt={publication}
+              fill
+              className="object-contain object-left"
+              sizes="128px"
+            />
+          </div>
         ) : (
           <p className="font-serif text-lg sm:text-xl font-bold text-foreground">
             {publication}

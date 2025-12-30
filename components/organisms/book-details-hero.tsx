@@ -62,13 +62,14 @@ function BookDetailsHero({
 }: BookDetailsHeroProps) {
   return (
     <section
-      className={cn("w-full bg-spiracle-cream py-8 sm:py-12 lg:py-16", className)}
+      className={cn("w-full bg-background py-8 sm:py-12 lg:py-16", className)}
       {...props}
     >
       <PageWrapper>
         <div className="grid grid-cols-1 md:grid-cols-[240px_1fr] lg:grid-cols-[240px_2fr_280px] gap-6 md:gap-8 lg:gap-10">
           {/* Column 1: Cover + Actions */}
           <BookCoverActions
+            bookTitle={details.title}
             coverImage={cover.image}
             onSample={cover.onSample}
             addToLibraryHref={cover.addToLibraryHref}

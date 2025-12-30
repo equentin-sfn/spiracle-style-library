@@ -1,0 +1,190 @@
+"use client";
+
+import * as React from "react";
+import Link from "next/link";
+import Image from "next/image";
+import { MagnifyingGlass, Bag, List, X } from "@phosphor-icons/react";
+import { cn } from "@/lib/utils";
+import { Button } from "@/components/ui/button";
+
+export interface NavItem {
+  label: string;
+  href: string;
+}
+
+export interface TopNavigationProps extends React.HTMLAttributes<HTMLElement> {
+  navItems: NavItem[];
+  onSearch?: () => void;
+  onCart?: () => void;
+  loginHref?: string;
+  joinHref?: string;
+}
+
+function TopNavigation({
+  navItems,
+  onSearch,
+  onCart,
+  loginHref = "/login",
+  joinHref = "/join",
+  className,
+  ...props
+}: TopNavigationProps) {
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
+
+  return (
+    <header
+      className={cn("w-full bg-spiracle-cream", className)}
+      {...props}
+    >
+      <nav
+        className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8"
+        aria-label="Main navigation"
+      >
+        {/* Left: Logo */}
+        <Link
+          href="/"
+          className="shrink-0"
+          aria-label="Spiracle home"
+        >
+          <Image
+            src="/logos/logo-spiracle-spiral-black@3x.png"
+            alt="Spiracle"
+            width={120}
+            height={32}
+            className="h-6 sm:h-7 w-auto"
+            priority
+          />
+        </Link>
+
+        {/* Center: Desktop Navigation Links */}
+        <ul className="hidden lg:flex items-center gap-6 xl:gap-8">
+          {navItems.map((item) => (
+            <li key={item.href}>
+              <Link
+                href={item.href}
+                className="text-xs xl:text-sm uppercase tracking-[0.15em] text-foreground hover:text-muted-foreground transition-colors"
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        {/* Right: Actions */}
+        <div className="flex items-center gap-2 sm:gap-3">
+          {/* Search - Hidden on mobile when menu is open */}
+          <button
+            type="button"
+            onClick={onSearch}
+            className="hidden sm:flex p-2 text-foreground hover:text-muted-foreground transition-colors"
+            aria-label="Search"
+          >
+            <MagnifyingGlass className="size-5" weight="regular" />
+          </button>
+
+          {/* Cart - Hidden on mobile when menu is open */}
+          <button
+            type="button"
+            onClick={onCart}
+            className="hidden sm:flex p-2 text-foreground hover:text-muted-foreground transition-colors"
+            aria-label="Shopping cart"
+          >
+            <Bag className="size-5" weight="regular" />
+          </button>
+
+          {/* Log In Link - Desktop only */}
+          <Link
+            href={loginHref}
+            className="hidden lg:block text-xs xl:text-sm uppercase tracking-[0.15em] text-foreground hover:text-muted-foreground transition-colors px-2"
+          >
+            Log In
+          </Link>
+
+          {/* Join Button */}
+          <Button
+            asChild
+            className="bg-spiracle-burgundy hover:bg-spiracle-burgundy/90 text-spiracle-cream border-spiracle-burgundy px-4 sm:px-6"
+          >
+            <Link href={joinHref}>Join</Link>
+          </Button>
+
+          {/* Mobile Menu Toggle */}
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="lg:hidden p-2 text-foreground hover:text-muted-foreground transition-colors ml-1"
+            aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={mobileMenuOpen}
+          >
+            {mobileMenuOpen ? (
+              <X className="size-6" weight="regular" />
+            ) : (
+              <List className="size-6" weight="regular" />
+            )}
+          </button>
+        </div>
+      </nav>
+
+      {/* Mobile Menu */}
+      {mobileMenuOpen && (
+        <div className="lg:hidden border-t border-border bg-spiracle-cream">
+          <div className="px-4 py-4 sm:px-6 space-y-4">
+            {/* Mobile Nav Links */}
+            <ul className="space-y-3">
+              {navItems.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="block text-sm uppercase tracking-[0.15em] text-foreground hover:text-muted-foreground transition-colors py-2"
+                    onClick={() => setMobileMenuOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+
+            {/* Mobile Actions */}
+            <div className="flex items-center gap-4 pt-3 border-t border-border">
+              <button
+                type="button"
+                onClick={() => {
+                  onSearch?.();
+                  setMobileMenuOpen(false);
+                }}
+                className="flex items-center gap-2 text-sm text-foreground hover:text-muted-foreground transition-colors"
+                aria-label="Search"
+              >
+                <MagnifyingGlass className="size-5" weight="regular" />
+                <span>Search</span>
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  onCart?.();
+                  setMobileMenuOpen(false);
+                }}
+                className="flex items-center gap-2 text-sm text-foreground hover:text-muted-foreground transition-colors"
+                aria-label="Shopping cart"
+              >
+                <Bag className="size-5" weight="regular" />
+                <span>Cart</span>
+              </button>
+
+              <Link
+                href={loginHref}
+                className="text-sm uppercase tracking-[0.15em] text-foreground hover:text-muted-foreground transition-colors ml-auto"
+                onClick={() => setMobileMenuOpen(false)}
+              >
+                Log In
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+}
+
+export { TopNavigation };

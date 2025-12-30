@@ -106,3 +106,5 @@ export {
 export { ReviewCard, type ReviewCardProps } from "./review-card";
 export { CollectionCard, type CollectionCardProps } from "./collection-card";
 export { BookCard, type BookCardProps } from "./book-card";
+export { CriticCard, type CriticCardProps } from "./critic-card";
+export { InfoBar, type InfoBarProps, type InfoBarItem } from "./info-bar";

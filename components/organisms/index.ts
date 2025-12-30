@@ -8,3 +8,13 @@ export {
   type CollectionSpotlightProps,
   type CollectionSpotlightBook,
 } from "./collection-spotlight";
+export {
+  CriticsSection,
+  type CriticsSectionProps,
+  type CriticReview,
+} from "./critics-section";
+export {
+  TopNavigation,
+  type TopNavigationProps,
+  type NavItem,
+} from "./top-navigation";

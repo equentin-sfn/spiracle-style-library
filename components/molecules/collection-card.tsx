@@ -38,14 +38,14 @@ function CollectionCard({
         />
       </div>
 
-      {/* Content */}
+      {/* Content - light background, always dark text */}
       <div className="flex flex-1 flex-col justify-between bg-spiracle-parchment p-3 sm:p-4">
-        <h3 className="font-serif text-sm sm:text-base leading-snug text-foreground line-clamp-3">
+        <h3 className="font-serif text-sm sm:text-base leading-snug text-spiracle-ink line-clamp-3">
           {title}
         </h3>
 
         {/* Stats */}
-        <div className="flex items-center gap-3 sm:gap-4 text-muted-foreground">
+        <div className="flex items-center gap-3 sm:gap-4 text-spiracle-slate">
           <div className="flex items-center gap-1.5" aria-label={`${bookCount} books`}>
             <Book size={18} aria-hidden="true" />
             <span className="text-xs sm:text-sm">{bookCount}</span>

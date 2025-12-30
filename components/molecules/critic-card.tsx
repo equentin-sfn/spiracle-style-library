@@ -59,7 +59,7 @@ function CriticCard({
       )}
       {...props}
     >
-      {/* Publication Logo/Name */}
+      {/* Publication Logo/Name - light background, always dark text */}
       <header className="mb-4 sm:mb-5">
         {publicationLogo ? (
           <div className="relative h-6 sm:h-8 w-32">
@@ -72,7 +72,7 @@ function CriticCard({
             />
           </div>
         ) : (
-          <p className="font-serif text-lg sm:text-xl font-bold text-foreground">
+          <p className="font-serif text-lg sm:text-xl font-bold text-spiracle-ink">
             {publication}
           </p>
         )}
@@ -81,12 +81,12 @@ function CriticCard({
       {/* Star Rating */}
       <StarRating rating={rating} maxRating={maxRating} />
 
-      {/* Review Content */}
+      {/* Review Content - light background, always dark text */}
       <div className="mt-4 space-y-2 flex-1">
-        <h3 className="font-medium text-base sm:text-lg text-foreground">
+        <h3 className="font-medium text-base sm:text-lg text-spiracle-ink">
           {reviewTitle}
         </h3>
-        <p className="text-sm text-muted-foreground leading-relaxed line-clamp-6">
+        <p className="text-sm text-spiracle-slate leading-relaxed line-clamp-6">
           {reviewExcerpt}
         </p>
       </div>
@@ -96,8 +96,8 @@ function CriticCard({
         <Separator className="mb-3 bg-spiracle-sand" />
         <div className="flex items-start justify-between gap-2">
           <div className="space-y-0.5">
-            <p className="text-sm text-muted-foreground">{journalistName}</p>
-            <p className="text-xs text-muted-foreground/70">{date}</p>
+            <p className="text-sm text-spiracle-slate">{journalistName}</p>
+            <p className="text-xs text-spiracle-slate/70">{date}</p>
           </div>
           {reviewUrl && (
             <a

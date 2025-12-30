@@ -5,6 +5,7 @@ import { useRef } from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/atoms";
 import { BookCard } from "@/components/molecules";
+import { PageWrapper } from "@/components/templates";
 import { CaretLeft, CaretRight } from "@phosphor-icons/react";
 
 export interface CollectionSpotlightBook {
@@ -54,7 +55,7 @@ function CollectionSpotlight({
       {...props}
     >
       {/* Hero Section */}
-      <div className="relative w-full max-w-[1440px] mx-auto">
+      <PageWrapper fullBleed className="relative">
         {/* Background Image with Gradient Overlay */}
         <div className="absolute inset-0 overflow-hidden">
           <Image
@@ -73,7 +74,7 @@ function CollectionSpotlight({
         </div>
 
         {/* Hero Content */}
-        <div className="relative z-10 px-6 sm:px-8 lg:px-12 py-12 sm:py-16 lg:py-20 min-h-[400px] sm:min-h-[480px] lg:min-h-[560px] flex items-center">
+        <div className="relative z-10 px-6 sm:px-8 lg:px-12 py-12 sm:py-16 lg:py-20 min-h-96 sm:min-h-[30rem] lg:min-h-[35rem] flex items-center">
           <header className="max-w-md lg:max-w-lg space-y-4 sm:space-y-6">
             <p className="text-xs sm:text-sm uppercase tracking-[0.2em] text-white/70">
               {label}
@@ -94,10 +95,10 @@ function CollectionSpotlight({
             </a>
           </header>
         </div>
-      </div>
+      </PageWrapper>
 
       {/* Book Carousel Section */}
-      <div className="w-full max-w-[1440px] mx-auto px-6 sm:px-8 lg:px-12 py-8 sm:py-12">
+      <PageWrapper className="py-8 sm:py-12">
         {/* Carousel Controls */}
         <div className="relative">
           {/* Scroll Buttons */}
@@ -125,8 +126,8 @@ function CollectionSpotlight({
             {books.map((book, index) => (
               <div
                 key={index}
-                className="flex-shrink-0 snap-start"
-                style={{ width: "calc((100% - 3rem) / 3.5)", minWidth: "240px" }}
+                className="flex-shrink-0 snap-start min-w-60"
+                style={{ width: "calc((100% - 3rem) / 3.5)" }}
               >
                 <BookCard
                   title={book.title}
@@ -139,7 +140,7 @@ function CollectionSpotlight({
             ))}
           </div>
         </div>
-      </div>
+      </PageWrapper>
     </section>
   );
 }

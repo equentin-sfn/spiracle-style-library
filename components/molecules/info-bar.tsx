@@ -19,7 +19,7 @@ export interface InfoBarProps extends React.HTMLAttributes<HTMLElement> {
 function InfoBar({ items, className, ...props }: InfoBarProps) {
   return (
     <nav
-      className={cn("w-full bg-spiracle-cream", className)}
+      className={cn("w-full bg-background", className)}
       aria-label="Audiobook information"
       {...props}
     >
@@ -38,7 +38,7 @@ function InfoBar({ items, className, ...props }: InfoBarProps) {
                     weight="regular"
                     aria-hidden="true"
                   />
-                  <span className="text-[10px] sm:text-xs text-muted-foreground whitespace-nowrap">
+                  <span className="text-xs text-muted-foreground whitespace-nowrap">
                     {item.label}
                   </span>
                   <span className="text-xs sm:text-sm text-foreground font-medium whitespace-nowrap">

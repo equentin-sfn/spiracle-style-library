@@ -66,7 +66,7 @@ function PurchasePanel({
         <Button
           asChild
           variant="secondary"
-          className="w-full bg-spiracle-parchment hover:bg-spiracle-sand text-foreground border border-border"
+          className="w-full bg-spiracle-parchment hover:bg-spiracle-sand text-spiracle-ink border border-spiracle-sand"
         >
           <Link href={buyCtaHref}>
             {buyPrice} / {memberPrice} for Premium Members

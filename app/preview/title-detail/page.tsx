@@ -328,9 +328,9 @@ export default function TitleDetailPreviewPage() {
               key={index}
               className="flex-shrink-0 w-[280px] sm:w-[320px] bg-white rounded-xl p-4 sm:p-5"
             >
-              <p className="font-medium text-sm mb-2">Reviewer name</p>
-              <p className="text-xs text-muted-foreground mb-3">1 month ago</p>
-              <p className="text-sm text-foreground leading-relaxed line-clamp-4">
+              <p className="font-medium text-sm mb-2 text-spiracle-ink">Reviewer name</p>
+              <p className="text-xs text-spiracle-slate mb-3">1 month ago</p>
+              <p className="text-sm text-spiracle-ink leading-relaxed line-clamp-4">
                 Imagine both Oshima & Borowczyk working together after their notorious years at Argo Films and still there again – frankly this film would be the answer.
               </p>
             </div>

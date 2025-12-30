@@ -108,3 +108,16 @@ export { CollectionCard, type CollectionCardProps } from "./collection-card";
 export { BookCard, type BookCardProps } from "./book-card";
 export { CriticCard, type CriticCardProps } from "./critic-card";
 export { InfoBar, type InfoBarProps, type InfoBarItem } from "./info-bar";
+export {
+  BookCoverActions,
+  type BookCoverActionsProps,
+  type BookTag,
+} from "./book-cover-actions";
+export {
+  BookDetails,
+  type BookDetailsProps,
+  type LinkedValue,
+  type BookSeries,
+} from "./book-details";
+export { PurchasePanel, type PurchasePanelProps } from "./purchase-panel";
+export { ScrollCarousel, type ScrollCarouselProps } from "./scroll-carousel";

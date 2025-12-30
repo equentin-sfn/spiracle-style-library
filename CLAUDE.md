@@ -65,6 +65,146 @@ Design tokens are defined as CSS variables in `app/globals.css`. See `DESIGN_SYS
 
 ---
 
+## Layout System
+
+The project uses a two-layer layout system for consistent page structure.
+
+### Layout Widths
+
+| Layer | Max Width | Tailwind Class | Purpose |
+|-------|-----------|----------------|---------|
+| **Outer** | 1440px | `max-w-[1440px]` | Page container, constrains entire layout |
+| **Inner** | 1280px | `max-w-7xl` | Content area with horizontal padding |
+| **Narrow** | 1024-1152px | `max-w-5xl`, `max-w-6xl` | Text-heavy content for readability |
+
+### PageWrapper Component
+
+Use `PageWrapper` from `@/components/templates` for consistent layout:
+
+```tsx
+import { PageWrapper } from "@/components/templates";
+
+// Standard content section
+<PageWrapper>
+  <MyContent />
+</PageWrapper>
+
+// Full-bleed hero (removes inner constraint)
+<PageWrapper fullBleed>
+  <HeroWithBackground />
+</PageWrapper>
+
+// Narrower text content
+<PageWrapper innerMaxWidth="max-w-5xl">
+  <ArticleContent />
+</PageWrapper>
+```
+
+**Props:**
+- `fullBleed` - Removes inner 1280px constraint for hero sections
+- `innerMaxWidth` - Override inner width: `"max-w-5xl"` | `"max-w-6xl"` | `"max-w-7xl"`
+- `noPadding` - Remove horizontal padding when children handle their own
+
+### Carousels (ScrollCarousel)
+
+Horizontal scrolling content uses `ScrollCarousel` from `@/components/molecules`:
+
+```tsx
+import { ScrollCarousel } from "@/components/molecules";
+
+<ScrollCarousel>
+  <div className="flex gap-4">
+    {items.map(item => <Card key={item.id} />)}
+  </div>
+</ScrollCarousel>
+```
+
+**Behavior:**
+- Content starts at the 1280px content edge
+- Items scroll horizontally beyond the edge into padding
+- Subtle fade on right edge hints at more content
+- Fade disappears when scrolled to end
+
+**Props:**
+- `showFade` - Show/hide right fade (default: true)
+- `fadeWidth` - Fade gradient width: `"w-8"` | `"w-12"` | `"w-16"` | `"w-24"`
+
+### Layout Guidelines
+
+1. **Standard sections**: Use `<PageWrapper>` for consistent 1440px/1280px structure
+2. **Full-bleed heroes**: Use `<PageWrapper fullBleed>` for backgrounds that span full width
+3. **Text content**: Use `innerMaxWidth="max-w-5xl"` or `"max-w-6xl"` for better readability
+4. **Carousels**: Wrap in `<ScrollCarousel>` within a `<PageWrapper>`
+5. **Organisms**: Should NOT include their own max-width constraints; let `PageWrapper` handle it
+
+---
+
+## Section Components
+
+Page sections follow a consistent naming pattern: `{Layout}Section`
+
+### Available Sections
+
+| Component | Purpose | Content Examples |
+|-----------|---------|------------------|
+| `GridSection` | Grid layout with label heading | CollectionCards, any grid content |
+| `CarouselSection` | Horizontal scroll with label | BookCards, ReviewCards |
+| `QuoteSection` | Multi-column quotes/reviews | CriticCards with publication logos |
+
+### Shared Props
+
+All section components share these props:
+
+```tsx
+interface SectionProps {
+  label: string;           // Section heading (displayed in spaced caps)
+  labelHref?: string;      // Optional link on the label
+  background?: "cream" | "dark" | "white";  // Background color variant
+  children: ReactNode;     // Section content
+  className?: string;      // Additional styling
+}
+```
+
+### Background Variants
+
+| Variant | Color | Use Case |
+|---------|-------|----------|
+| `cream` | `bg-spiracle-cream` | Default, most sections |
+| `dark` | `bg-[#2D2520]` | CollectionCards grid, contrast sections |
+| `white` | `bg-white` | Alternate light sections |
+
+### Usage Examples
+
+```tsx
+// Grid of CollectionCards on dark background
+<GridSection
+  label="FOUND IN THE FOLLOWING COLLECTIONS"
+  background="dark"
+  columns={3}
+>
+  {collections.map(c => <CollectionCard key={c.id} {...c} />)}
+</GridSection>
+
+// Carousel of BookCards
+<CarouselSection label="MORE BY AUTHOR NAME">
+  {books.map(b => <BookCard key={b.id} {...b} />)}
+</CarouselSection>
+
+// Critic reviews with logos
+<QuoteSection label="WHAT THE CRITICS ARE SAYING">
+  {reviews.map(r => <CriticCard key={r.id} {...r} />)}
+</QuoteSection>
+```
+
+### Vertical Rhythm
+
+Sections use consistent vertical spacing:
+- Section padding: `py-12 sm:py-16` (48px / 64px)
+- Between sections: No gap needed (padding handles it)
+- Label margin-bottom: `mb-6 sm:mb-8` (24px / 32px)
+
+---
+
 ## Component Coding Standards
 
 **Before creating any new component, confirm it follows these standards. After creating a component, review it against this checklist.**

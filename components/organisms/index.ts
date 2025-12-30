@@ -18,3 +18,15 @@ export {
   type TopNavigationProps,
   type NavItem,
 } from "./top-navigation";
+export {
+  BookDetailsHero,
+  type BookDetailsHeroProps,
+  type BookDetailsHeroCover,
+  type BookDetailsHeroDetails,
+  type BookDetailsHeroPurchase,
+} from "./book-details-hero";
+
+// Section components
+export { GridSection, type GridSectionProps } from "./grid-section";
+export { CarouselSection, type CarouselSectionProps } from "./carousel-section";
+export { QuoteSection, type QuoteSectionProps } from "./quote-section";

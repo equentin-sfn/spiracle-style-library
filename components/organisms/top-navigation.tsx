@@ -6,6 +6,7 @@ import Image from "next/image";
 import { MagnifyingGlass, Bag, List, X } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { PageWrapper } from "@/components/templates";
 
 export interface NavItem {
   label: string;
@@ -36,10 +37,11 @@ function TopNavigation({
       className={cn("w-full bg-spiracle-cream", className)}
       {...props}
     >
-      <nav
-        className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 lg:px-8"
-        aria-label="Main navigation"
-      >
+      <PageWrapper>
+        <nav
+          className="flex items-center justify-between py-4"
+          aria-label="Main navigation"
+        >
         {/* Left: Logo */}
         <Link
           href="/"
@@ -123,12 +125,14 @@ function TopNavigation({
             )}
           </button>
         </div>
-      </nav>
+        </nav>
+      </PageWrapper>
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
         <div className="lg:hidden border-t border-border bg-spiracle-cream">
-          <div className="px-4 py-4 sm:px-6 space-y-4">
+          <PageWrapper>
+            <div className="py-4 space-y-4">
             {/* Mobile Nav Links */}
             <ul className="space-y-3">
               {navItems.map((item) => (
@@ -180,7 +184,8 @@ function TopNavigation({
                 Log In
               </Link>
             </div>
-          </div>
+            </div>
+          </PageWrapper>
         </div>
       )}
     </header>

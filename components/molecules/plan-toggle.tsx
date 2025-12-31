@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 export type BillingPeriod = "monthly" | "annually";
 
-export interface PlanToggleProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface PlanToggleProps extends Omit<React.HTMLAttributes<HTMLDivElement>, "onChange"> {
   /** Current selected period */
   value: BillingPeriod;
   /** Callback when period changes */

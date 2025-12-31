@@ -61,7 +61,11 @@ function GridSection({
   className,
   ...props
 }: GridSectionProps) {
-  const LabelWrapper = labelHref ? Link : "span";
+  const labelClassName = cn(
+    "text-xs sm:text-sm uppercase tracking-[0.2em]",
+    labelStyles[background],
+    labelHref && "hover:underline"
+  );
 
   return (
     <section
@@ -75,17 +79,13 @@ function GridSection({
       <PageWrapper>
         {/* Section Label */}
         <header className="text-center mb-6 sm:mb-8">
-          <LabelWrapper
-            {...(labelHref ? { href: labelHref } : {})}
-            className={cn(
-              "text-xs sm:text-sm uppercase tracking-[0.2em]",
-              labelStyles[background],
-              labelHref && "hover:underline"
-            )}
-          >
-            {label}
-            {labelHref && " →"}
-          </LabelWrapper>
+          {labelHref ? (
+            <Link href={labelHref} className={labelClassName}>
+              {label} →
+            </Link>
+          ) : (
+            <span className={labelClassName}>{label}</span>
+          )}
         </header>
 
         {/* Grid Content */}

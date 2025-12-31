@@ -131,6 +131,8 @@ In this rollicking collection of his hilarious columns, the award-winning writer
         description="Add a concise value statement that highlights your product's key features and benefits in a visually dynamic grid. Focus on creating balanced content blocks while keeping it under 2-3 lines. Align with your grid layout structure."
         ctaText="Browse the collection"
         ctaLink="#"
+        themeColor="#1a1a1a"
+        themeMode="dark"
         books={[
           {
             title: "Black and Female",

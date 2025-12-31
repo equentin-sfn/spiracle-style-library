@@ -22,6 +22,10 @@ export interface CollectionSpotlightProps extends React.HTMLAttributes<HTMLEleme
   ctaText: string;
   ctaLink: string;
   books: CollectionSpotlightBook[];
+  /** Theme color sampled from the hero image (hex value) - used for section bg and gradient */
+  themeColor?: string;
+  /** Whether the theme is light (requires dark text) or dark (uses light text) */
+  themeMode?: "dark" | "light";
 }
 
 function CollectionSpotlight({
@@ -32,9 +36,20 @@ function CollectionSpotlight({
   ctaText,
   ctaLink,
   books,
+  themeColor = "#000000",
+  themeMode = "dark",
   className,
   ...props
 }: CollectionSpotlightProps) {
+  const isDark = themeMode === "dark";
+  const textColor = isDark ? "text-white" : "text-foreground";
+  const textMuted = isDark ? "text-white/70" : "text-foreground/70";
+  const buttonStyle = isDark
+    ? "border-white/30 text-white hover:bg-white/10"
+    : "border-foreground/30 text-foreground hover:bg-foreground/10";
+  const arrowStyle = isDark
+    ? "bg-white/10 hover:bg-white/20 text-white"
+    : "bg-foreground/10 hover:bg-foreground/20 text-foreground";
   const carouselRef = useRef<HTMLDivElement>(null);
 
   const scroll = (direction: "left" | "right") => {
@@ -49,7 +64,8 @@ function CollectionSpotlight({
 
   return (
     <section
-      className={cn("w-full bg-black", className)}
+      className={cn("w-full", className)}
+      style={{ backgroundColor: themeColor }}
       {...props}
     >
       {/* Hero Section */}
@@ -64,9 +80,12 @@ function CollectionSpotlight({
             sizes="1440px"
             aria-hidden="true"
           />
-          {/* Dark gradient overlay - stronger on left for text readability */}
+          {/* Gradient overlay using theme color for seamless blend */}
           <div
-            className="absolute inset-0 bg-gradient-to-r from-black via-black/80 to-transparent"
+            className="absolute inset-0"
+            style={{
+              background: `linear-gradient(to right, ${themeColor} 0%, ${themeColor}cc 30%, transparent 70%)`,
+            }}
             aria-hidden="true"
           />
         </div>
@@ -74,19 +93,19 @@ function CollectionSpotlight({
         {/* Hero Content */}
         <div className="relative z-10 px-6 sm:px-8 lg:px-12 py-12 sm:py-16 lg:py-20 min-h-96 sm:min-h-[30rem] lg:min-h-[35rem] flex items-center">
           <header className="max-w-md lg:max-w-lg space-y-4 sm:space-y-6">
-            <p className="text-xs sm:text-sm uppercase tracking-[0.2em] text-white/70">
+            <p className={cn("text-xs sm:text-sm uppercase tracking-[0.2em]", textMuted)}>
               {label}
             </p>
-            <h2 className="font-serif text-3xl sm:text-4xl lg:text-5xl leading-tight text-white">
+            <h2 className={cn("font-serif text-3xl sm:text-4xl lg:text-5xl leading-tight", textColor)}>
               {headline}
             </h2>
-            <p className="text-sm sm:text-base text-white/70 leading-relaxed">
+            <p className={cn("text-sm sm:text-base leading-relaxed", textMuted)}>
               {description}
             </p>
             <a href={ctaLink}>
               <Button
                 variant="outline"
-                className="border-white/30 text-white hover:bg-white/10 mt-2"
+                className={cn(buttonStyle, "mt-2")}
               >
                 {ctaText}
               </Button>
@@ -102,14 +121,22 @@ function CollectionSpotlight({
           {/* Scroll Buttons */}
           <button
             onClick={() => scroll("left")}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors hidden sm:flex"
+            className={cn(
+              "absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 z-10",
+              "w-10 h-10 rounded-full flex items-center justify-center transition-colors hidden sm:flex",
+              arrowStyle
+            )}
             aria-label="Scroll left"
           >
             <CaretLeft size={20} />
           </button>
           <button
             onClick={() => scroll("right")}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white transition-colors hidden sm:flex"
+            className={cn(
+              "absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 z-10",
+              "w-10 h-10 rounded-full flex items-center justify-center transition-colors hidden sm:flex",
+              arrowStyle
+            )}
             aria-label="Scroll right"
           >
             <CaretRight size={20} />

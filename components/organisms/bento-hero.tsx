@@ -7,8 +7,6 @@ export interface BentoHeroBook {
   title: string;
   author: string;
   coverImage: string;
-  price: string;
-  memberPrice: string;
 }
 
 export interface BentoHeroProps extends React.HTMLAttributes<HTMLElement> {
@@ -56,8 +54,6 @@ function BentoHero({
               title={book.title}
               author={book.author}
               coverImage={book.coverImage}
-              price={book.price}
-              memberPrice={book.memberPrice}
             />
           ))}
         </div>

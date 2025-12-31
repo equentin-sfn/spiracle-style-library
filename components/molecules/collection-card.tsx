@@ -28,7 +28,7 @@ function CollectionCard({
       {...props}
     >
       {/* Square Image */}
-      <div className="relative aspect-square h-full flex-shrink-0">
+      <div className="relative aspect-square h-full flex-shrink-0 overflow-hidden rounded-l-sm">
         <Image
           src={image}
           alt={`Cover image for "${title}" collection`}

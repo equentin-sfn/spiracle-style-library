@@ -65,18 +65,36 @@ Colors are derived from the Spiracle brand identity kit. The palette features wa
 
 ### Semantic Colors (Dark Mode)
 
+Dark mode uses **warm browns** instead of cold greys, maintaining the cozy, literary feel of the Spiracle brand. The base dark color `#2D2520` is derived from the dark sections in collection spotlights.
+
 | Token | Value | Usage |
 |-------|-------|-------|
-| `--background` | `#1a1a18` | Page background |
+| `--background` | `#2D2520` (Warm Charcoal) | Page background |
 | `--foreground` | `#F9F7ED` (Cream) | Default text |
-| `--card` | `#2a2a26` | Card backgrounds |
+| `--card` | `#3a332c` (Warm Brown) | Card backgrounds |
 | `--card-foreground` | `#F9F7ED` (Cream) | Card text |
-| `--primary` | `#3d9e52` | Primary actions (lighter forest) |
-| `--primary-foreground` | `#1a1a18` | Text on primary |
-| `--secondary` | `#3a3a35` | Secondary actions |
+| `--popover` | `#3a332c` (Warm Brown) | Popover backgrounds |
+| `--popover-foreground` | `#F9F7ED` (Cream) | Popover text |
+| `--primary` | `#4aad60` (Bright Forest) | Primary actions |
+| `--primary-foreground` | `#2D2520` | Text on primary |
+| `--secondary` | `#4a423a` (Warm Taupe) | Secondary actions |
 | `--secondary-foreground` | `#F9F7ED` (Cream) | Text on secondary |
-| `--accent` | `#9f4300` (Terracotta) | Accent highlights |
+| `--muted` | `#4a423a` (Warm Taupe) | Muted backgrounds |
+| `--muted-foreground` | `#C0C9C2` (Sage) | Muted text |
+| `--accent` | `#c45500` (Bright Terracotta) | Accent highlights |
 | `--accent-foreground` | `#F9F7ED` (Cream) | Text on accent |
+| `--destructive` | `#c44d4d` | Error/danger states |
+| `--border` | `rgba(249, 247, 237, 0.12)` | Subtle borders |
+| `--input` | `rgba(249, 247, 237, 0.15)` | Input backgrounds |
+| `--ring` | `#4aad60` (Bright Forest) | Focus rings |
+
+### Dark Mode Design Principles
+
+1. **Warm, not cold**: Use brown-based darks (`#2D2520`) instead of blue/grey (`#1a1a1a`)
+2. **Cream as foreground**: Invert the light mode - cream text on dark backgrounds
+3. **Boosted primaries**: Forest green and terracotta are slightly brighter for legibility
+4. **Subtle borders**: Use low-opacity cream for borders, not solid colors
+5. **Maintain brand feel**: Dark mode should feel like reading by lamplight, not in a tech office
 
 ### Chart Colors (Spiracle Palette)
 
@@ -260,3 +278,26 @@ Subtle shadows that maintain the warm, paper-like aesthetic.
   color: var(--accent);
 }
 ```
+
+### Dark Mode
+
+Dark mode uses the `class` strategy, toggled via the `.dark` class on `<html>`.
+
+```tsx
+// Use semantic tokens - they auto-switch in dark mode
+<div className="bg-background text-foreground" />
+<div className="bg-card border-border" />
+
+// Use dark: prefix for dark-mode-specific overrides
+<img className="dark:invert" src="/logo-black.png" />
+<div className="bg-spiracle-cream dark:bg-spiracle-navy" />
+
+// ThemeToggle component cycles: Light → Dark → System
+import { ThemeToggle } from "@/components/atoms";
+<ThemeToggle iconSize={20} />
+```
+
+**Best Practices:**
+- Prefer semantic tokens (`bg-background`) over brand colors (`bg-spiracle-cream`)
+- Use `dark:` prefix only when semantic tokens don't apply
+- Test all new components in both light and dark mode

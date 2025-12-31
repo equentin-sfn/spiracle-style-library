@@ -3,83 +3,68 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
-export interface ScrollCarouselProps
-  extends React.HTMLAttributes<HTMLDivElement> {
-  /**
-   * Show fade effect on the right edge to hint at more content.
-   * Defaults to true.
-   */
+export interface ScrollCarouselProps extends React.HTMLAttributes<HTMLDivElement> {
+  /** Show/hide right fade (default: true) */
   showFade?: boolean;
-  /**
-   * Width of the fade gradient.
-   * Defaults to "w-16" (64px).
-   */
+  /** Fade gradient width */
   fadeWidth?: "w-8" | "w-12" | "w-16" | "w-24";
+  /** Custom fade gradient "from" color class (e.g., "from-background") */
+  fadeFromClass?: string;
 }
 
-/**
- * ScrollCarousel - Horizontal scrolling container with fade hint
- *
- * Content starts at the container edge and can scroll horizontally.
- * A subtle fade on the right edge hints at more content.
- *
- * @example
- * <ScrollCarousel>
- *   <div className="flex gap-4">
- *     {items.map(item => <Card key={item.id} />)}
- *   </div>
- * </ScrollCarousel>
- */
 function ScrollCarousel({
   children,
+  className,
   showFade = true,
   fadeWidth = "w-16",
-  className,
+  fadeFromClass = "from-background",
   ...props
 }: ScrollCarouselProps) {
   const scrollRef = React.useRef<HTMLDivElement>(null);
-  const [showRightFade, setShowRightFade] = React.useState(true);
+  const [isAtEnd, setIsAtEnd] = React.useState(false);
 
-  const checkScroll = React.useCallback(() => {
-    if (!scrollRef.current) return;
-    const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-    const isAtEnd = scrollLeft + clientWidth >= scrollWidth - 10;
-    setShowRightFade(!isAtEnd);
+  const handleScroll = React.useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+
+    // Check if scrolled to the end (with small tolerance for rounding)
+    const atEnd = el.scrollLeft + el.clientWidth >= el.scrollWidth - 2;
+    setIsAtEnd(atEnd);
   }, []);
 
   React.useEffect(() => {
-    const scrollElement = scrollRef.current;
-    if (!scrollElement) return;
+    const el = scrollRef.current;
+    if (!el) return;
 
-    checkScroll();
-    scrollElement.addEventListener("scroll", checkScroll);
-    window.addEventListener("resize", checkScroll);
+    // Check initial state
+    handleScroll();
+
+    el.addEventListener("scroll", handleScroll, { passive: true });
+    window.addEventListener("resize", handleScroll);
 
     return () => {
-      scrollElement.removeEventListener("scroll", checkScroll);
-      window.removeEventListener("resize", checkScroll);
+      el.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("resize", handleScroll);
     };
-  }, [checkScroll]);
+  }, [handleScroll]);
 
   return (
     <div className={cn("relative", className)} {...props}>
       <div
         ref={scrollRef}
         className="overflow-x-auto scrollbar-hide"
-        style={{
-          scrollbarWidth: "none",
-          msOverflowStyle: "none",
-        }}
+        style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
         {children}
       </div>
 
-      {/* Right fade gradient */}
-      {showFade && showRightFade && (
+      {/* Right fade overlay */}
+      {showFade && !isAtEnd && (
         <div
           className={cn(
-            "absolute top-0 right-0 h-full pointer-events-none",
-            "bg-gradient-to-l from-spiracle-cream to-transparent",
+            "absolute right-0 top-0 bottom-0 pointer-events-none",
+            "bg-gradient-to-l to-transparent",
+            fadeFromClass,
             fadeWidth
           )}
           aria-hidden="true"

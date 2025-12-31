@@ -2,101 +2,107 @@
 
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { Badge } from "@/components/atoms";
+import { Star, Clock, Heart } from "@phosphor-icons/react";
 
 export interface ReviewCardProps extends React.HTMLAttributes<HTMLElement> {
+  /** URL to reviewer's avatar image */
+  avatarUrl: string;
+  /** Reviewer's display name */
+  reviewerName: string;
+  /** Rating from 1-5 */
+  rating: number;
+  /** Review title/headline */
   title: string;
-  author: string;
-  coverImage: string;
-  price?: string;
-  memberPrice?: string;
-  narrator?: string;
-  duration?: string;
-  isSpiracleSpecial?: boolean;
-  category?: string;
+  /** Review body text */
+  body: string;
+  /** Time since review was posted (e.g., "1 month ago") */
+  timeAgo: string;
+  /** Number of likes */
+  likes: number;
+}
+
+function StarRating({
+  rating,
+  maxRating = 5,
+}: {
+  rating: number;
+  maxRating?: number;
+}) {
+  return (
+    <div className="flex gap-0.5" role="img" aria-label={`${rating} out of ${maxRating} stars`}>
+      {Array.from({ length: maxRating }, (_, i) => (
+        <Star
+          key={i}
+          size={18}
+          weight={i < rating ? "fill" : "regular"}
+          className={i < rating ? "text-spiracle-terracotta" : "text-spiracle-sand"}
+        />
+      ))}
+    </div>
+  );
 }
 
 function ReviewCard({
+  avatarUrl,
+  reviewerName,
+  rating,
   title,
-  author,
-  coverImage,
-  price,
-  memberPrice,
-  narrator,
-  duration,
-  isSpiracleSpecial,
-  category,
+  body,
+  timeAgo,
+  likes,
   className,
   ...props
 }: ReviewCardProps) {
   return (
     <article
       className={cn(
-        "group flex flex-col rounded-xl bg-card border border-border overflow-hidden transition-shadow hover:shadow-md",
+        "flex flex-col bg-white rounded-sm p-4 sm:p-5",
         className
       )}
       {...props}
     >
-      {/* Cover Image */}
-      <div className="relative aspect-square w-full overflow-hidden bg-muted">
-        <Image
-          src={coverImage}
-          alt={`Book cover: ${title} by ${author}`}
-          fill
-          className="object-cover transition-transform group-hover:scale-105"
-          sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
-        />
-        {isSpiracleSpecial && (
-          <div className="absolute top-2 left-2">
-            <Badge
-              className="bg-accent text-accent-foreground text-xs"
-              aria-label="This is a Spiracle special edition"
-            >
-              Spiracle special
-            </Badge>
-          </div>
-        )}
+      {/* Header: Avatar + Name */}
+      <header className="flex items-center gap-3 mb-3">
+        <div className="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
+          <Image
+            src={avatarUrl}
+            alt={`${reviewerName}'s avatar`}
+            fill
+            className="object-cover"
+            sizes="40px"
+          />
+        </div>
+        <span className="font-medium text-sm text-spiracle-ink">
+          {reviewerName}
+        </span>
+      </header>
+
+      {/* Star Rating */}
+      <div className="mb-3">
+        <StarRating rating={rating} />
       </div>
 
-      {/* Content */}
-      <div className="flex flex-col gap-1.5 sm:gap-2 p-3 sm:p-4">
-        {category && (
-          <Badge variant="outline" className="w-fit text-xs">
-            {category}
-          </Badge>
-        )}
-        <header className="space-y-0.5 sm:space-y-1">
-          <h3 className="font-serif text-base sm:text-lg leading-tight line-clamp-2">
-            {title}
-          </h3>
-          <p className="text-xs sm:text-sm text-muted-foreground">{author}</p>
-        </header>
-
-        {(narrator || duration) && (
-          <div className="text-xs text-muted-foreground space-y-0.5">
-            {narrator && <p>Narrated by {narrator}</p>}
-            {duration && <p aria-label={`Duration: ${duration}`}>{duration}</p>}
-          </div>
-        )}
-
-        {(price || memberPrice) && (
-          <footer className="flex items-baseline gap-2 mt-1 sm:mt-2 pt-2 border-t border-border">
-            {price && (
-              <span className="font-semibold" aria-label={`Price: ${price} pounds`}>
-                £{price}
-              </span>
-            )}
-            {memberPrice && (
-              <span
-                className="text-xs text-muted-foreground"
-                aria-label={`Member price: ${memberPrice} pounds`}
-              >
-                £{memberPrice} members
-              </span>
-            )}
-          </footer>
-        )}
+      {/* Review Content */}
+      <div className="flex-1 mb-4">
+        <h3 className="font-serif text-lg font-medium text-spiracle-ink mb-2">
+          {title}
+        </h3>
+        <p className="text-sm text-spiracle-ink leading-relaxed">
+          {body}
+        </p>
       </div>
+
+      {/* Footer: Time + Likes */}
+      <footer className="flex items-center justify-between text-spiracle-slate">
+        <div className="flex items-center gap-1.5">
+          <Clock size={16} weight="regular" />
+          <span className="text-xs">{timeAgo}</span>
+        </div>
+        <div className="flex items-center gap-1.5">
+          <Heart size={16} weight="regular" />
+          <span className="text-xs">{likes}</span>
+        </div>
+      </footer>
     </article>
   );
 }

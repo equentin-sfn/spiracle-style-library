@@ -12,8 +12,6 @@ export interface CollectionSpotlightBook {
   title: string;
   author: string;
   coverImage: string;
-  price: string;
-  memberPrice: string;
 }
 
 export interface CollectionSpotlightProps extends React.HTMLAttributes<HTMLElement> {
@@ -133,8 +131,6 @@ function CollectionSpotlight({
                   title={book.title}
                   author={book.author}
                   coverImage={book.coverImage}
-                  price={book.price}
-                  memberPrice={book.memberPrice}
                 />
               </div>
             ))}

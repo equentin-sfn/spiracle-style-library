@@ -54,7 +54,7 @@ function CriticCard({
   return (
     <article
       className={cn(
-        "flex flex-col bg-white rounded-xl p-5 sm:p-6",
+        "flex flex-col bg-white rounded-sm p-5 sm:p-6",
         className
       )}
       {...props}

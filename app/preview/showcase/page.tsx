@@ -66,7 +66,7 @@ export default function ShowcasePage() {
             {/* Left Column: Cover + Actions */}
             <BookCoverActions
               bookTitle="Chewing the Fat"
-              coverImage="/images/covers/Size=Med, Image=01.png"
+              coverImage="/images/covers/cover-med-01.png"
               onSample={() => console.log("Sample clicked")}
               addToLibraryHref="/library/add"
               favoriteHref="/favorites/add"
@@ -135,44 +135,32 @@ In this rollicking collection of his hilarious columns, the award-winning writer
           {
             title: "Black and Female",
             author: "Tsitsi Dangarembga",
-            coverImage: "/images/covers/Size=Med, Image=01.png",
-            price: "14.99",
-            memberPrice: "11.99",
+            coverImage: "/images/covers/cover-med-01.png",
           },
           {
             title: "The Strangers",
             author: "Ekow Eshun",
-            coverImage: "/images/covers/Size=Med, Image=02.png",
-            price: "16.99",
-            memberPrice: "13.99",
+            coverImage: "/images/covers/cover-med-02.png",
           },
           {
             title: "Flashlight",
             author: "Susan Choi",
-            coverImage: "/images/covers/Size=Med, Image=03.png",
-            price: "12.99",
-            memberPrice: "9.99",
+            coverImage: "/images/covers/cover-med-03.png",
           },
           {
             title: "Black Skin, White Masks",
             author: "Frantz Fanon",
-            coverImage: "/images/covers/Size=Med, Image=04.png",
-            price: "11.99",
-            memberPrice: "8.99",
+            coverImage: "/images/covers/cover-med-04.png",
           },
           {
             title: "The Shadow Line",
             author: "Joseph Conrad",
-            coverImage: "/images/covers/Size=Med, Image=05.png",
-            price: "13.99",
-            memberPrice: "10.99",
+            coverImage: "/images/covers/cover-med-05.png",
           },
           {
             title: "Heart of Darkness",
             author: "Joseph Conrad",
-            coverImage: "/images/covers/Size=Med, Image=06.png",
-            price: "12.99",
-            memberPrice: "9.99",
+            coverImage: "/images/covers/cover-med-06.png",
           },
         ]}
       />
@@ -186,16 +174,12 @@ In this rollicking collection of his hilarious columns, the award-winning writer
           {
             title: "The Door",
             author: "Magda Szabó",
-            coverImage: "/images/covers/Size=Med, Image=01.png",
-            price: "14.99",
-            memberPrice: "11.99",
+            coverImage: "/images/covers/cover-med-01.png",
           },
           {
             title: "The Golden Notebook",
             author: "Doris Lessing",
-            coverImage: "/images/covers/Size=Med, Image=02.png",
-            price: "16.99",
-            memberPrice: "13.99",
+            coverImage: "/images/covers/cover-med-02.png",
           },
         ]}
       />
@@ -255,11 +239,11 @@ In this rollicking collection of his hilarious columns, the award-winning writer
         collectionName="Top 10 Books That Changed Britain"
         collectionDescription="Original voices, overturning conventions, causing trouble. Perfect listening."
         coverImages={[
-          "/images/covers/Size=Med, Image=02.png",
-          "/images/covers/Size=Med, Image=03.png",
-          "/images/covers/Size=Med, Image=04.png",
-          "/images/covers/Size=Med, Image=05.png",
-          "/images/covers/Size=Med, Image=06.png",
+          "/images/covers/cover-med-02.png",
+          "/images/covers/cover-med-03.png",
+          "/images/covers/cover-med-04.png",
+          "/images/covers/cover-med-05.png",
+          "/images/covers/cover-med-06.png",
         ]}
       />
 

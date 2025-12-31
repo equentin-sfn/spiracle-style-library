@@ -101,89 +101,76 @@ const metadataItems = [
   { icon: Headphones, label: "Audiobook", value: "" },
 ];
 
-// Sample collection data - titles matched to image themes
+// Sample collection data
 const collections = [
   {
-    title: "Rock Memoirs: Stories from the Stage",
+    title: "Title over two or three lines depending on...",
     image: "/images/collections/image-1.png",
-    bookCount: 34,
-    memberCount: 892,
+    bookCount: 26,
+    memberCount: 26,
   },
   {
-    title: "Sound & Vision: Creative Lives",
+    title: "Title over two or three lines depending on...",
     image: "/images/collections/image-2.png",
-    bookCount: 18,
-    memberCount: 456,
+    bookCount: 26,
+    memberCount: 26,
   },
   {
-    title: "Comfort Reads & Guilty Pleasures",
+    title: "Title over two or three lines depending on...",
     image: "/images/collections/image-3.png",
-    bookCount: 42,
-    memberCount: 1247,
+    bookCount: 26,
+    memberCount: 26,
   },
   {
-    title: "Journeys East: Writing from India",
+    title: "Title over two or three lines depending on...",
     image: "/images/collections/image-4.png",
-    bookCount: 28,
-    memberCount: 673,
+    bookCount: 26,
+    memberCount: 26,
   },
   {
-    title: "Mediterranean Tales",
+    title: "Title over two or three lines depending on...",
     image: "/images/collections/image-5.png",
-    bookCount: 15,
-    memberCount: 389,
+    bookCount: 26,
+    memberCount: 26,
   },
   {
-    title: "Fresh Picks: Summer Reading",
+    title: "Title over two or three lines depending on...",
     image: "/images/collections/image-6.png",
-    bookCount: 24,
-    memberCount: 712,
+    bookCount: 26,
+    memberCount: 26,
   },
 ];
 
-// Collection showcase data - featured collection with book covers (at bottom)
-const showcaseCollection = {
-  name: "Top 10 Books That Changed Britain",
-  description: "A curated selection of the most influential books in British literary history, from classic memoirs to groundbreaking essays.",
-  images: [
-    "/images/covers/cover-med-01.png",
-    "/images/covers/cover-med-02.png",
-    "/images/covers/cover-med-03.png",
-    "/images/covers/cover-med-04.png",
-    "/images/covers/cover-med-05.png",
-  ],
-};
-
-// Sample critic reviews - varied publications and perspectives
+// Sample critic reviews
 const criticReviews = [
   {
     publication: "The Guardian",
-    rating: 5,
-    reviewTitle: "A feast for the ears",
+    rating: 4,
+    reviewTitle: "A masterpiece of modern literature",
     reviewExcerpt:
-      "Rayner's self-narrated audiobook transforms what could have been a simple collection of columns into something approaching memoir. His voice—by turns indignant, tender, and wickedly funny—carries the listener through culinary adventures and misadventures with equal aplomb. This is food writing that nourishes the soul.",
-    journalistName: "Felicity Cloake",
-    date: "15 November 2024",
+      "Imagine both Oshima & Borowczyk working together after their notorious years at Argo Films and still there again – frankly this film would be the answer. It's a beautifully, melancholic, surreal, & erotic work of art from the unique Terayama.",
+    journalistName: "Sarah Mitchell",
+    date: "15 October 2024",
     reviewUrl: "#",
   },
   {
     publication: "Financial Times",
     rating: 4,
-    reviewTitle: "Essential listening for foodies",
+    reviewTitle: "Exceptional storytelling",
     reviewExcerpt:
-      "In an age of algorithmic restaurant recommendations, Rayner reminds us why we need human critics. His prose is muscular and precise, his opinions unapologetically his own. The audiobook format suits his conversational style perfectly—it's like having dinner with a very opinionated, very entertaining friend.",
-    journalistName: "Tim Hayward",
-    date: "8 November 2024",
+      "Imagine both Oshima & Borowczyk working together after their notorious years at Argo Films and still there again – frankly this film would be the answer. It's a beautifully, melancholic, surreal, & erotic work of art from the unique Terayama.",
+    journalistName: "James Chen",
+    date: "12 October 2024",
     reviewUrl: "#",
   },
   {
-    publication: "The Observer",
+    publication: "Los Angeles Times",
     rating: 4,
-    reviewTitle: "Rayner at his irreverent best",
+    reviewTitle: "A triumph of the audiobook form",
     reviewExcerpt:
-      "Few writers can make you simultaneously hungry and thoughtful, but Rayner manages it with characteristic panache. His reading brings an intimacy to these pieces that print cannot match—you can hear the relish in his voice when describing a perfect gravy, the righteous fury when confronting culinary pretension.",
-    journalistName: "Rachel Cooke",
-    date: "2 November 2024",
+      "Imagine both Oshima & Borowczyk working together after their notorious years at Argo Films and still there again – frankly this film would be the answer. It's a beautifully, melancholic, surreal, & erotic work of art from the unique Terayama.",
+    journalistName: "Maria Rodriguez",
+    date: "10 October 2024",
     reviewUrl: "#",
   },
 ];
@@ -245,79 +232,27 @@ const similarBooks = [
   },
 ];
 
-// Community review cards - 8 reviews for 4x2 grid with varied perspectives
+// Community review cards (using ReviewCard for now)
 const communityReviews = [
   {
-    avatarUrl: "https://i.pravatar.cc/80?img=47",
-    reviewerName: "Priya Sharma",
-    rating: 5,
-    title: "Made me laugh out loud on the tube",
-    body: "I must have looked absolutely mad giggling to myself on the Northern Line. Rayner's timing is impeccable—pauses in exactly the right places, lets the jokes land perfectly. His voice has this warmth that makes you feel like you're at a dinner party with him.",
-    timeAgo: "1 week ago",
-    likes: 342
+    title: "Review title",
+    author: "Reviewer name",
+    coverImage: "/images/covers/cover-med-01.png",
   },
   {
-    avatarUrl: "https://i.pravatar.cc/80?img=32",
-    reviewerName: "Michael O'Connor",
-    rating: 4,
-    title: "Best enjoyed with a good meal",
-    body: "Started this while cooking Sunday roast and nearly burnt the potatoes because I was so absorbed. The chapter on gravy alone is worth the credit. Only four stars because a few pieces feel a bit dated, but overall a delicious listen.",
-    timeAgo: "2 weeks ago",
-    likes: 187
+    title: "Review title",
+    author: "Reviewer name",
+    coverImage: "/images/covers/cover-med-02.png",
   },
   {
-    avatarUrl: "https://i.pravatar.cc/80?img=23",
-    reviewerName: "Eleanor Hughes",
-    rating: 5,
-    title: "Author narration done right",
-    body: "This is how audiobooks should be done. You can tell Rayner genuinely enjoys reading his own work—there's none of that flat, going-through-the-motions energy you sometimes get. Every anecdote feels like he's telling it for the first time.",
-    timeAgo: "3 weeks ago",
-    likes: 456
+    title: "Review title",
+    author: "Reviewer name",
+    coverImage: "/images/covers/cover-med-03.png",
   },
   {
-    avatarUrl: "https://i.pravatar.cc/80?img=51",
-    reviewerName: "Daniel Okafor",
-    rating: 3,
-    title: "Good but repetitive in places",
-    body: "Enjoyable collection, though some themes do repeat across chapters—how many times can one discuss the merits of a good pie? That said, when Rayner is on form, he's brilliant. The chapter about his mother had me unexpectedly emotional.",
-    timeAgo: "1 month ago",
-    likes: 89
-  },
-  {
-    avatarUrl: "https://i.pravatar.cc/80?img=44",
-    reviewerName: "Sophie Andersson",
-    rating: 5,
-    title: "Perfect audiobook for food lovers",
-    body: "Listened to this during a long drive through France and it was absolutely perfect. His descriptions of meals past made me want to pull over at every restaurant we passed. The narration is intimate, funny, and surprisingly moving in places.",
-    timeAgo: "1 month ago",
-    likes: 278
-  },
-  {
-    avatarUrl: "https://i.pravatar.cc/80?img=15",
-    reviewerName: "Robert Kim",
-    rating: 4,
-    title: "Comfort listening at its finest",
-    body: "This has become my go-to when I need something familiar and warm. Rayner's voice is like a good whisky—rich, complex, occasionally sharp. Perfect for unwinding after a long day. Already on my third listen.",
-    timeAgo: "2 months ago",
-    likes: 156
-  },
-  {
-    avatarUrl: "https://i.pravatar.cc/80?img=28",
-    reviewerName: "Amara Obi",
-    rating: 4,
-    title: "Surprisingly touching",
-    body: "Expected laughs, got those and more. The way Rayner weaves personal history into food writing is masterful. The pieces about family meals hit differently in audio—his voice catches in places, and you realize how much this stuff matters to him.",
-    timeAgo: "3 months ago",
-    likes: 203
-  },
-  {
-    avatarUrl: "https://i.pravatar.cc/80?img=68",
-    reviewerName: "James Whitfield",
-    rating: 5,
-    title: "Converted me to audiobooks",
-    body: "I was a physical book snob until this. There's something about hearing Rayner deliver his own zingers that print just can't capture. The righteous indignation! The theatrical sighs! I've since bought three more audiobooks. This is a gateway drug.",
-    timeAgo: "4 months ago",
-    likes: 412
+    title: "Review title",
+    author: "Reviewer name",
+    coverImage: "/images/covers/cover-med-04.png",
   },
 ];
 
@@ -331,8 +266,8 @@ export default function TitleDetailPreviewPage() {
       metadataItems={metadataItems}
       onSearch={() => console.log("Search clicked")}
       onCart={() => console.log("Cart clicked")}
-      // Collections Grid (below info bar)
-      collectionsLabel="FOUND IN THE FOLLOWING COLLECTIONS"
+      // Collections Grid
+      collectionsLabel="FOUND IN THE FOLLOWING COLLECTIONS →"
       collectionsContent={
         <>
           {collections.map((collection, index) => (
@@ -346,10 +281,6 @@ export default function TitleDetailPreviewPage() {
           ))}
         </>
       }
-      // Collection Showcase (at bottom of page)
-      showcaseCollectionName={showcaseCollection.name}
-      showcaseCollectionDescription={showcaseCollection.description}
-      showcaseCollectionImages={showcaseCollection.images}
       // Critics Section
       criticsLabel="WHAT THE CRITICS ARE SAYING"
       criticsContent={
@@ -368,22 +299,21 @@ export default function TitleDetailPreviewPage() {
           ))}
         </>
       }
-      // Community Reviews Grid (8 cards, 4x2 on desktop)
+      // Community Reviews (placeholder)
       communityLabel="WHAT OUR COMMUNITY IS SAYING"
-      communitySeeMoreHref="/reviews/chewing-the-fat"
       communityContent={
         <>
           {communityReviews.map((review, index) => (
-            <ReviewCard
+            <div
               key={index}
-              avatarUrl={review.avatarUrl}
-              reviewerName={review.reviewerName}
-              rating={review.rating}
-              title={review.title}
-              body={review.body}
-              timeAgo={review.timeAgo}
-              likes={review.likes}
-            />
+              className="flex-shrink-0 w-[280px] sm:w-[320px] bg-white rounded-xl p-4 sm:p-5"
+            >
+              <p className="font-medium text-sm mb-2 text-spiracle-ink">Reviewer name</p>
+              <p className="text-xs text-spiracle-slate mb-3">1 month ago</p>
+              <p className="text-sm text-spiracle-ink leading-relaxed line-clamp-4">
+                Imagine both Oshima & Borowczyk working together after their notorious years at Argo Films and still there again – frankly this film would be the answer.
+              </p>
+            </div>
           ))}
         </>
       }

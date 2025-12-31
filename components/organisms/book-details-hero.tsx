@@ -66,7 +66,7 @@ function BookDetailsHero({
       {...props}
     >
       <PageWrapper>
-        <div className="grid grid-cols-1 md:grid-cols-[240px_1fr] lg:grid-cols-[240px_2fr_280px] gap-6 md:gap-8 lg:gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-[280px_1fr] lg:grid-cols-[300px_1fr_320px] gap-6 md:gap-6 lg:gap-8 items-start">
           {/* Column 1: Cover + Actions */}
           <BookCoverActions
             bookTitle={details.title}

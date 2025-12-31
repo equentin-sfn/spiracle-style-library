@@ -6,24 +6,34 @@ import { cn } from "@/lib/utils";
 import { PageWrapper } from "@/components/templates";
 import { ScrollCarousel } from "@/components/molecules";
 
-type BackgroundVariant = "cream" | "dark" | "white";
+type BackgroundVariant = "cream" | "dark" | "white" | "blush" | "sage" | "honey";
 
 const backgroundStyles: Record<BackgroundVariant, string> = {
-  cream: "bg-spiracle-cream",
+  cream: "bg-background",
   dark: "bg-[#2D2520]",
-  white: "bg-white",
+  white: "bg-white dark:bg-card",
+  // Subtle tinted backgrounds - light mode uses brand colors, dark mode uses warm tinted browns
+  blush: "bg-[#EBDEDB] dark:bg-[#3a2d2a]",
+  sage: "bg-[#C0C9C2] dark:bg-[#2d3530]",
+  honey: "bg-[#f6eecd] dark:bg-[#3a3525]",
 };
 
 const labelStyles: Record<BackgroundVariant, string> = {
   cream: "text-foreground",
   dark: "text-white/60",
   white: "text-foreground",
+  blush: "text-foreground",
+  sage: "text-foreground",
+  honey: "text-foreground",
 };
 
 const fadeColors: Record<BackgroundVariant, string> = {
-  cream: "from-spiracle-cream",
+  cream: "from-background",
   dark: "from-[#2D2520]",
-  white: "from-white",
+  white: "from-white dark:from-card",
+  blush: "from-[#EBDEDB] dark:from-[#3a2d2a]",
+  sage: "from-[#C0C9C2] dark:from-[#2d3530]",
+  honey: "from-[#f6eecd] dark:from-[#3a3525]",
 };
 
 export interface CarouselSectionProps
@@ -81,12 +91,7 @@ function CarouselSection({
         </header>
 
         {/* Carousel Content */}
-        <ScrollCarousel
-          className={cn(
-            "[&_.bg-gradient-to-l]:from-transparent",
-            `[&_.bg-gradient-to-l]:${fadeColors[background]}`
-          )}
-        >
+        <ScrollCarousel fadeFromClass={fadeColors[background]}>
           <div
             className={cn(
               "flex px-4 sm:px-6 lg:px-8 pb-2",

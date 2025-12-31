@@ -7,29 +7,25 @@ export interface BookCardProps extends React.HTMLAttributes<HTMLElement> {
   title: string;
   author: string;
   coverImage: string;
-  price: string;
-  memberPrice: string;
 }
 
 function BookCard({
   title,
   author,
   coverImage,
-  price,
-  memberPrice,
   className,
   ...props
 }: BookCardProps) {
   return (
     <article
       className={cn(
-        "flex flex-col overflow-hidden rounded-xl bg-spiracle-cream shadow-sm",
+        "flex flex-col overflow-hidden rounded-sm bg-card border border-spiracle-sand/50",
         className
       )}
       {...props}
     >
       {/* Cover Image - square */}
-      <figure className="relative aspect-square w-full overflow-hidden">
+      <figure className="relative aspect-square w-full overflow-hidden rounded-t-sm">
         <Image
           src={coverImage}
           alt={`Book cover: ${title} by ${author}`}
@@ -39,19 +35,16 @@ function BookCard({
         />
       </figure>
 
-      {/* Footer with title, author, price - cream background */}
-      <footer className="px-4 py-3 sm:px-5 sm:py-4 space-y-1 bg-spiracle-cream border-t border-spiracle-sand">
+      {/* Footer with title, author, premium text */}
+      <footer className="px-4 py-3 sm:px-5 sm:py-4 space-y-1 bg-card">
         <h3 className="text-sm sm:text-base font-medium text-foreground line-clamp-1">
           {title}
         </h3>
-        <p className="text-xs sm:text-sm text-muted-foreground">
+        <p className="text-xs sm:text-sm text-muted-foreground line-clamp-1">
           {author}
         </p>
-        <p
-          className="text-xs sm:text-sm text-spiracle-terracotta"
-          aria-label={`Price: ${price} pounds, or ${memberPrice} pounds for premium members`}
-        >
-          £{price} / £{memberPrice} for premium members
+        <p className="text-xs text-muted-foreground/70">
+          Included in Premium
         </p>
       </footer>
     </article>

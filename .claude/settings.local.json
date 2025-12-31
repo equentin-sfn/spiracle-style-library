@@ -1,0 +1,25 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm dev)",
+      "Bash(npm run dev:*)",
+      "Bash(open http://localhost:3000/preview/showcase)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(open http://localhost:3000/preview/book-details)",
+      "Bash(curl:*)",
+      "Bash(open http://localhost:3000/preview/title-detail)",
+      "Bash(chmod:*)",
+      "Bash(npx next dev --turbopack=false)",
+      "Bash(npx next dev --help:*)",
+      "Bash(npx next dev:*)",
+      "Bash(npx pnpm --version)",
+      "Bash(npx pnpm install)",
+      "Bash(npx pnpm dev)",
+      "Bash(open http://localhost:3000/preview/components)",
+      "Bash(open http://localhost:3000)",
+      "Bash(pkill:*)",
+      "Bash(NEXT_TURBOPACK_PERSISTENT_CACHING=0 npx next dev:*)"
+    ]
+  }
+}

@@ -2,7 +2,6 @@
 
 import { Button, Badge, Separator } from "@/components/atoms";
 import {
-  ReviewCard,
   CollectionCard,
   BookCard,
   Card,
@@ -22,7 +21,7 @@ const books = [
     author: "Joseph Conrad",
     price: "12.99",
     memberPrice: "9.99",
-    coverImage: "/images/covers/Size=Med, Image=01.png",
+    coverImage: "/images/covers/cover-med-01.png",
     narrator: "Simon Slater",
     duration: "4 hrs 12 mins",
     isSpiracleSpecial: true,
@@ -34,7 +33,7 @@ const books = [
     author: "George Saunders",
     price: "14.99",
     memberPrice: "11.99",
-    coverImage: "/images/covers/Size=Med, Image=02.png",
+    coverImage: "/images/covers/cover-med-02.png",
     narrator: "George Saunders",
     duration: "7 hrs 55 mins",
     category: "non-fiction",
@@ -45,7 +44,7 @@ const books = [
     author: "Virginia Woolf",
     price: "11.99",
     memberPrice: "8.99",
-    coverImage: "/images/covers/Size=Med, Image=03.png",
+    coverImage: "/images/covers/cover-med-03.png",
     narrator: "Frances Jeater",
     duration: "8 hrs 30 mins",
     isSpiracleSpecial: true,
@@ -57,7 +56,7 @@ const books = [
     author: "Joseph Conrad",
     price: "13.99",
     memberPrice: "10.99",
-    coverImage: "/images/covers/Size=Med, Image=04.png",
+    coverImage: "/images/covers/cover-med-04.png",
     narrator: "Simon Slater",
     duration: "12 hrs 25 mins",
     category: "fiction",
@@ -68,7 +67,7 @@ const books = [
     author: "Michel Houellebecq",
     price: "14.99",
     memberPrice: "11.99",
-    coverImage: "/images/covers/Size=Med, Image=05.png",
+    coverImage: "/images/covers/cover-med-05.png",
     narrator: "Guillaume Gallienne",
     duration: "9 hrs 15 mins",
     category: "fiction",
@@ -79,7 +78,7 @@ const books = [
     author: "Joseph Conrad",
     price: "10.99",
     memberPrice: "7.99",
-    coverImage: "/images/covers/Size=Med, Image=06.png",
+    coverImage: "/images/covers/cover-med-06.png",
     narrator: "Simon Slater",
     duration: "3 hrs 45 mins",
     isSpiracleSpecial: true,
@@ -91,7 +90,7 @@ const books = [
     author: "Joan Didion",
     price: "12.99",
     memberPrice: "9.99",
-    coverImage: "/images/covers/Size=Med, Image=07.png",
+    coverImage: "/images/covers/cover-med-07.png",
     narrator: "Diane Keaton",
     duration: "2 hrs 30 mins",
     category: "non-fiction",
@@ -102,7 +101,7 @@ const books = [
     author: "Anton Chekhov",
     price: "15.99",
     memberPrice: "12.99",
-    coverImage: "/images/covers/Size=Med, Image=08.png",
+    coverImage: "/images/covers/cover-med-08.png",
     narrator: "Kenneth Branagh",
     duration: "18 hrs 40 mins",
     category: "fiction",
@@ -113,7 +112,7 @@ const books = [
     author: "Carolyn Burke",
     price: "14.99",
     memberPrice: "11.99",
-    coverImage: "/images/covers/Size=Med, Image=09.png",
+    coverImage: "/images/covers/cover-med-09.png",
     narrator: "Kate Winslet",
     duration: "14 hrs 20 mins",
     category: "biography",
@@ -124,7 +123,7 @@ const books = [
     author: "W.B. Yeats",
     price: "16.99",
     memberPrice: "13.99",
-    coverImage: "/images/covers/Size=Med, Image=10.png",
+    coverImage: "/images/covers/cover-med-10.png",
     narrator: "Gabriel Byrne",
     duration: "6 hrs 15 mins",
     isSpiracleSpecial: true,
@@ -136,7 +135,7 @@ const books = [
     author: "Jorge Luis Borges",
     price: "11.99",
     memberPrice: "8.99",
-    coverImage: "/images/covers/Size=Med, Image=11.png",
+    coverImage: "/images/covers/cover-med-11.png",
     narrator: "Edoardo Ballerini",
     duration: "5 hrs 10 mins",
     category: "fiction",
@@ -147,7 +146,7 @@ const books = [
     author: "Arthur Koestler",
     price: "13.99",
     memberPrice: "10.99",
-    coverImage: "/images/covers/Size=Med, Image=12.png",
+    coverImage: "/images/covers/cover-med-12.png",
     narrator: "Frank Muller",
     duration: "7 hrs 55 mins",
     category: "fiction",
@@ -158,7 +157,7 @@ const books = [
     author: "Albert Camus",
     price: "10.99",
     memberPrice: "7.99",
-    coverImage: "/images/covers/Size=Med, Image=13.png",
+    coverImage: "/images/covers/cover-med-13.png",
     narrator: "Jonathan Davis",
     duration: "3 hrs 50 mins",
     isSpiracleSpecial: true,
@@ -170,7 +169,7 @@ const books = [
     author: "Virginia Woolf",
     price: "12.99",
     memberPrice: "9.99",
-    coverImage: "/images/covers/Size=Med, Image=14.png",
+    coverImage: "/images/covers/cover-med-14.png",
     narrator: "Annette Bening",
     duration: "7 hrs 10 mins",
     category: "fiction",
@@ -223,16 +222,12 @@ export default function BooksPreviewPage() {
             {
               title: "The Door",
               author: "Magda Szabó",
-              coverImage: "/images/covers/Size=Med, Image=01.png",
-              price: "14.99",
-              memberPrice: "11.99",
+              coverImage: "/images/covers/cover-med-01.png",
             },
             {
               title: "The Golden Notebook",
               author: "Doris Lessing",
-              coverImage: "/images/covers/Size=Med, Image=02.png",
-              price: "16.99",
-              memberPrice: "13.99",
+              coverImage: "/images/covers/cover-med-02.png",
             },
           ]}
           className="-mx-8 px-0"
@@ -243,11 +238,11 @@ export default function BooksPreviewPage() {
           collectionName="Top 10 Books That Changed Britain"
           collectionDescription="Original voices, overturning conventions, causing trouble. Perfect listening."
           coverImages={[
-            "/images/covers/Size=Med, Image=02.png",
-            "/images/covers/Size=Med, Image=03.png",
-            "/images/covers/Size=Med, Image=04.png",
-            "/images/covers/Size=Med, Image=05.png",
-            "/images/covers/Size=Med, Image=06.png",
+            "/images/covers/cover-med-02.png",
+            "/images/covers/cover-med-03.png",
+            "/images/covers/cover-med-04.png",
+            "/images/covers/cover-med-05.png",
+            "/images/covers/cover-med-06.png",
           ]}
           className="-mx-8 px-0"
         />
@@ -260,17 +255,11 @@ export default function BooksPreviewPage() {
           </div>
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
             {books.slice(0, 5).map((book) => (
-              <ReviewCard
+              <BookCard
                 key={book.id}
                 title={book.title}
                 author={book.author}
                 coverImage={book.coverImage}
-                price={book.price}
-                memberPrice={book.memberPrice}
-                narrator={book.narrator}
-                duration={book.duration}
-                isSpiracleSpecial={book.isSpiracleSpecial}
-                category={book.category}
               />
             ))}
           </div>
@@ -309,30 +298,22 @@ export default function BooksPreviewPage() {
             <BookCard
               title="The Door"
               author="Magda Szabó"
-              coverImage="/images/covers/Size=Med, Image=01.png"
-              price="14.99"
-              memberPrice="11.99"
+              coverImage="/images/covers/cover-med-01.png"
             />
             <BookCard
               title="The Golden Notebook"
               author="Doris Lessing"
-              coverImage="/images/covers/Size=Med, Image=02.png"
-              price="16.99"
-              memberPrice="13.99"
+              coverImage="/images/covers/cover-med-02.png"
             />
             <BookCard
               title="Victory"
               author="Joseph Conrad"
-              coverImage="/images/covers/Size=Med, Image=04.png"
-              price="13.99"
-              memberPrice="10.99"
+              coverImage="/images/covers/cover-med-04.png"
             />
             <BookCard
               title="The Waves"
               author="Virginia Woolf"
-              coverImage="/images/covers/Size=Med, Image=03.png"
-              price="11.99"
-              memberPrice="8.99"
+              coverImage="/images/covers/cover-med-03.png"
             />
           </div>
         </section>

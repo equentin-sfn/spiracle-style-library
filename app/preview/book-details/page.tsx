@@ -40,7 +40,7 @@ const infoBarItems = [
 
 const bookDetailsData = {
   cover: {
-    image: "/images/covers/Size=Med, Image=01.png",
+    image: "/images/covers/cover-med-01.png",
     tags: [
       { label: "Food & Drink", href: "/tags/food-drink" },
       { label: "Memoir", href: "/tags/memoir" },

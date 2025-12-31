@@ -5,7 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { MagnifyingGlass, Bag, List, X } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/button";
+import { Button, ThemeToggle } from "@/components/atoms";
 import { PageWrapper } from "@/components/templates";
 
 export interface NavItem {
@@ -34,7 +34,11 @@ function TopNavigation({
 
   return (
     <header
-      className={cn("w-full bg-spiracle-cream", className)}
+      className={cn(
+        "w-full bg-background sticky top-0 z-50 border-b border-transparent",
+        "shadow-[0_1px_3px_0_rgba(0,0,0,0.05)]",
+        className
+      )}
       {...props}
     >
       <PageWrapper>
@@ -53,7 +57,7 @@ function TopNavigation({
             alt="Spiracle"
             width={120}
             height={32}
-            className="h-6 sm:h-7 w-auto"
+            className="h-6 sm:h-7 w-auto dark:invert"
             priority
           />
         </Link>
@@ -94,6 +98,9 @@ function TopNavigation({
             <Bag className="size-5" weight="regular" />
           </button>
 
+          {/* Theme Toggle - Desktop only */}
+          <ThemeToggle className="hidden sm:flex" iconSize={20} />
+
           {/* Log In Link - Desktop only */}
           <Link
             href={loginHref}
@@ -130,7 +137,7 @@ function TopNavigation({
 
       {/* Mobile Menu */}
       {mobileMenuOpen && (
-        <div className="lg:hidden border-t border-border bg-spiracle-cream">
+        <div className="lg:hidden border-t border-border bg-background">
           <PageWrapper>
             <div className="py-4 space-y-4">
             {/* Mobile Nav Links */}
@@ -175,6 +182,8 @@ function TopNavigation({
                 <Bag className="size-5" weight="regular" />
                 <span>Cart</span>
               </button>
+
+              <ThemeToggle iconSize={20} />
 
               <Link
                 href={loginHref}

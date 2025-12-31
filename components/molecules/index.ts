@@ -152,3 +152,8 @@ export {
   type FAQItem,
 } from "./faq-accordion";
 export { PreviewBar, type PreviewBarProps } from "./preview-bar";
+export {
+  SerendipityPills,
+  type SerendipityPillsProps,
+  type SerendipityPill,
+} from "./serendipity-pills";

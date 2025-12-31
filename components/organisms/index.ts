@@ -72,3 +72,9 @@ export {
   type FAQSectionProps,
   type FAQCategory,
 } from "./faq-section";
+export {
+  DiscoveryMachine,
+  type DiscoveryMachineProps,
+  type DiscoveryMachineBook,
+  type DiscoveryMachineResult,
+} from "./discovery-machine";

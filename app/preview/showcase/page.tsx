@@ -1,12 +1,15 @@
 "use client";
 
-import { CollectionCard, InfoBar, BookCoverActions, BookDetails, PurchasePanel, PreviewBar } from "@/components/molecules";
+import * as React from "react";
+import { CollectionCard, InfoBar, BookCoverActions, BookDetails, PurchasePanel, PreviewBar, SerendipityPills, type SerendipityPill } from "@/components/molecules";
 import {
   BentoHero,
   CollectionShowcase,
   CollectionSpotlight,
   CriticsSection,
   TopNavigation,
+  DiscoveryMachine,
+  type DiscoveryMachineResult,
 } from "@/components/organisms";
 import {
   Book,
@@ -30,6 +33,28 @@ const navItems = [
   { label: "Membership", href: "/membership" },
 ];
 
+// Sample serendipity pills data
+const serendipityPillsData: SerendipityPill[] = [
+  { id: "scottish-gothic", label: "Scottish Gothic" },
+  { id: "comfort-reads", label: "Comfort reads" },
+  { id: "under-4-hours", label: "Under 4 hours" },
+  { id: "train-journey", label: "Train journey listens" },
+  { id: "cosy-mysteries", label: "Cosy mysteries" },
+  { id: "award-winners", label: "Award winners I missed" },
+];
+
+// Sample discovery machine results
+const sampleDiscoveryResults: DiscoveryMachineResult = {
+  collectionTitle: "Cosy Scottish Mysteries",
+  collectionDescription: "Atmospheric tales of intrigue set among misty lochs and ancient castles, perfect for dark winter evenings.",
+  books: [
+    { id: "1", title: "The Vanishing Act of Esme Lennox", author: "Maggie O'Farrell", coverImage: "/images/covers/cover-med-01.png" },
+    { id: "2", title: "Loch Down Abbey", author: "Beth Cowan-Erskine", coverImage: "/images/covers/cover-med-02.png" },
+    { id: "3", title: "The Dead of Winter", author: "Stuart MacBride", coverImage: "/images/covers/cover-med-03.png" },
+    { id: "4", title: "A Grave Talent", author: "Laurie R. King", coverImage: "/images/covers/cover-med-04.png" },
+  ],
+};
+
 const infoBarItems = [
   { icon: Book, label: "Book 1 of 2", value: "The Wire" },
   { icon: Timer, label: "Duration", value: "2hrs and 25mins" },
@@ -45,6 +70,19 @@ const infoBarItems = [
 ];
 
 export default function ShowcasePage() {
+  const [discoveryValue, setDiscoveryValue] = React.useState("");
+  const [isGenerating, setIsGenerating] = React.useState(false);
+  const [showResults, setShowResults] = React.useState(false);
+
+  const handleGenerate = (prompt: string) => {
+    setIsGenerating(true);
+    // Simulate API call
+    setTimeout(() => {
+      setIsGenerating(false);
+      setShowResults(true);
+    }, 1500);
+  };
+
   return (
     <div className="min-h-screen">
       <PreviewBar currentPath="/preview/showcase" />
@@ -289,6 +327,26 @@ In this rollicking collection of his hilarious columns, the award-winning writer
             reviewUrl: "#",
           },
         ]}
+      />
+
+      {/* Section 5: Serendipity Pills */}
+      <section className="py-12 sm:py-16 bg-spiracle-cream">
+        <div className="max-w-5xl mx-auto px-6 sm:px-8">
+          <SerendipityPills
+            pills={serendipityPillsData}
+            onPillClick={(pill) => console.log("Clicked:", pill.label)}
+            onShuffle={() => console.log("Shuffled!")}
+          />
+        </div>
+      </section>
+
+      {/* Section 6: Discovery Machine */}
+      <DiscoveryMachine
+        value={discoveryValue}
+        onValueChange={setDiscoveryValue}
+        onGenerate={handleGenerate}
+        isGenerating={isGenerating}
+        results={showResults ? sampleDiscoveryResults : null}
       />
     </div>
   );

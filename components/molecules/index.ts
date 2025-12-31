@@ -121,3 +121,14 @@ export {
 } from "./book-details";
 export { PurchasePanel, type PurchasePanelProps } from "./purchase-panel";
 export { ScrollCarousel, type ScrollCarouselProps } from "./scroll-carousel";
+export {
+  NewsletterSignup,
+  type NewsletterSignupProps,
+  type NewsletterSignupStatus,
+} from "./newsletter-signup";
+export { AnnouncementBar, type AnnouncementBarProps } from "./announcement-bar";
+export { PullQuote, type PullQuoteProps } from "./pull-quote";
+export { PodcastCard, type PodcastCardProps } from "./podcast-card";
+export { EssayCard, type EssayCardProps } from "./essay-card";
+export { InterviewCard, type InterviewCardProps } from "./interview-card";
+export { AuthorBio, type AuthorBioProps, type AuthorLink } from "./author-bio";

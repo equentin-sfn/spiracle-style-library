@@ -81,7 +81,7 @@ function GettingStartedSteps({
               {heading}
             </h2>
             {subheading && (
-              <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
+              <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto text-left">
                 {subheading}
               </p>
             )}
@@ -129,10 +129,10 @@ function GettingStartedSteps({
                   </div>
 
                   {/* Content */}
-                  <h3 className="mt-6 font-display text-xl sm:text-2xl text-foreground">
+                  <h3 className="mt-6 font-display text-xl sm:text-2xl text-foreground text-center">
                     {step.heading}
                   </h3>
-                  <p className="mt-3 text-sm sm:text-base text-muted-foreground leading-relaxed max-w-xs">
+                  <p className="mt-3 text-sm sm:text-base text-muted-foreground leading-relaxed max-w-xs text-left">
                     {step.description}
                   </p>
 

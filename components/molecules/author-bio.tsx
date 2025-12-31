@@ -126,7 +126,7 @@ function AuthorBio({
         {/* Bio */}
         <p
           className={cn(
-            "text-muted-foreground leading-relaxed",
+            "text-muted-foreground leading-relaxed text-left",
             isCompact
               ? "text-sm mt-3 line-clamp-3"
               : isInline

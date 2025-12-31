@@ -220,6 +220,7 @@ Sections use consistent vertical spacing:
 - Use `aria-hidden="true"` on decorative elements
 - Maintain proper heading hierarchy (`h1` → `h2` → `h3`)
 - Ensure sufficient color contrast using design tokens
+- **Text alignment**: Body text, descriptions, and paragraphs must ALWAYS be left-aligned (`text-left`). Only headings and titles may be centered. Center-aligned body text is difficult to read and fails accessibility standards.
 
 ### 3. Responsive Design
 - Use mobile-first breakpoints: `sm:`, `md:`, `lg:`, `xl:`

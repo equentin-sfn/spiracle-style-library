@@ -236,7 +236,7 @@ function AuthorHero({
               {/* Bio */}
               <p
                 className={cn(
-                  "text-base sm:text-lg leading-relaxed mt-6",
+                  "text-base sm:text-lg leading-relaxed mt-6 text-left",
                   styles.muted,
                   isCentered ? "max-w-xl mx-auto" : "max-w-2xl"
                 )}

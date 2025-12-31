@@ -19,31 +19,32 @@ function BookCard({
   return (
     <article
       className={cn(
-        "flex flex-col overflow-hidden rounded-sm bg-card border border-spiracle-sand/50",
+        "group flex flex-col overflow-hidden rounded-sm bg-card",
+        "transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_6px_16px_rgba(0,0,0,0.1)]",
         className
       )}
       {...props}
     >
       {/* Cover Image - square */}
-      <figure className="relative aspect-square w-full overflow-hidden rounded-t-sm">
+      <figure className="relative aspect-square w-full overflow-hidden">
         <Image
           src={coverImage}
           alt={`Book cover: ${title} by ${author}`}
           fill
-          className="object-cover"
+          className="object-cover transition-transform duration-300 ease-out group-hover:scale-[1.02]"
           sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
         />
       </figure>
 
       {/* Footer with title, author, premium text */}
-      <footer className="px-4 py-3 sm:px-5 sm:py-4 space-y-1 bg-card">
-        <h3 className="text-sm sm:text-base font-medium text-foreground line-clamp-1">
+      <footer className="px-3 py-2.5 sm:px-4 sm:py-3 space-y-0.5 bg-card border-t border-border/30">
+        <h3 className="text-sm font-medium text-foreground line-clamp-1 leading-snug">
           {title}
         </h3>
-        <p className="text-xs sm:text-sm text-muted-foreground line-clamp-1">
+        <p className="text-xs text-muted-foreground line-clamp-1">
           {author}
         </p>
-        <p className="text-xs text-muted-foreground/70">
+        <p className="text-[0.65rem] text-muted-foreground/60 uppercase tracking-wider pt-0.5">
           Included in Premium
         </p>
       </footer>

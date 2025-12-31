@@ -19,12 +19,12 @@ const backgroundStyles: Record<BackgroundVariant, string> = {
 };
 
 const labelStyles: Record<BackgroundVariant, string> = {
-  cream: "text-foreground",
-  dark: "text-white/60",
-  white: "text-foreground",
-  blush: "text-foreground",
-  sage: "text-foreground",
-  honey: "text-foreground",
+  cream: "text-muted-foreground",
+  dark: "text-white/50",
+  white: "text-muted-foreground",
+  blush: "text-foreground/60",
+  sage: "text-foreground/60",
+  honey: "text-foreground/60",
 };
 
 const fadeColors: Record<BackgroundVariant, string> = {
@@ -64,9 +64,9 @@ function CarouselSection({
   ...props
 }: CarouselSectionProps) {
   const labelClassName = cn(
-    "text-xs sm:text-sm uppercase tracking-[0.2em]",
+    "text-[0.65rem] sm:text-xs uppercase tracking-[0.25em] font-medium",
     labelStyles[background],
-    labelHref && "hover:underline"
+    labelHref && "hover:underline underline-offset-4"
   );
 
   return (
@@ -94,7 +94,7 @@ function CarouselSection({
         <ScrollCarousel fadeFromClass={fadeColors[background]}>
           <div
             className={cn(
-              "flex px-4 sm:px-6 lg:px-8 pb-2",
+              "flex px-4 sm:px-6 lg:px-8 pb-2 stagger-children",
               gapStyles[gap]
             )}
           >

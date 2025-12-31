@@ -2,7 +2,6 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import Link from "next/link";
 import {
   TopNavigation,
   BookDetailsHero,
@@ -16,7 +15,6 @@ import {
   type BookDetailsHeroPurchase,
 } from "@/components/organisms";
 import { InfoBar, type InfoBarItem } from "@/components/molecules";
-import { Button } from "@/components/atoms";
 
 export interface TitleDetailPageProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -116,11 +114,8 @@ function TitleDetailPage({
         purchase={purchase}
       />
 
-      {/* 3. MetadataBar (InfoBar) - subtle parchment tint */}
-      <InfoBar
-        items={metadataItems}
-        className="border-y border-border bg-[#F4EEDC]/50 dark:bg-[#352f28]"
-      />
+      {/* 3. MetadataBar (InfoBar) - subtle warm tint */}
+      <InfoBar items={metadataItems} />
 
       {/* 4a. Collections Grid Section - soft blush/rose */}
       {collectionsContent && (
@@ -128,7 +123,6 @@ function TitleDetailPage({
           label={collectionsLabel}
           background="blush"
           columns={3}
-          className="mt-12 sm:mt-16"
         >
           {collectionsContent}
         </GridSection>
@@ -152,16 +146,10 @@ function TitleDetailPage({
           background="sage"
           columns={4}
           gap="md"
+          seeMoreHref={communitySeeMoreHref}
+          seeMoreLabel="See more reviews →"
         >
           {communityContent}
-          {/* See more button - spans full width */}
-          {communitySeeMoreHref && (
-            <div className="col-span-full flex justify-center pt-6">
-              <Button variant="outline" asChild className="bg-transparent border-foreground/30 hover:bg-foreground/5">
-                <Link href={communitySeeMoreHref}>See more reviews</Link>
-              </Button>
-            </div>
-          )}
         </GridSection>
       )}
 

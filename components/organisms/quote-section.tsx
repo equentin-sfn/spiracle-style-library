@@ -18,12 +18,12 @@ const backgroundStyles: Record<BackgroundVariant, string> = {
 };
 
 const labelStyles: Record<BackgroundVariant, string> = {
-  cream: "text-foreground",
-  dark: "text-white/60",
-  white: "text-foreground",
-  blush: "text-foreground",
-  sage: "text-foreground",
-  honey: "text-foreground",
+  cream: "text-muted-foreground",
+  dark: "text-white/50",
+  white: "text-muted-foreground",
+  blush: "text-foreground/60",
+  sage: "text-foreground/60",
+  honey: "text-foreground/60",
 };
 
 export interface QuoteSectionProps extends React.HTMLAttributes<HTMLElement> {
@@ -52,9 +52,9 @@ function QuoteSection({
   ...props
 }: QuoteSectionProps) {
   const labelClassName = cn(
-    "text-xs sm:text-sm uppercase tracking-[0.2em]",
+    "text-[0.65rem] sm:text-xs uppercase tracking-[0.25em] font-medium",
     labelStyles[background],
-    labelHref && "hover:underline"
+    labelHref && "hover:underline underline-offset-4"
   );
 
   return (
@@ -81,7 +81,7 @@ function QuoteSection({
         {/* Quote Cards Grid */}
         <div
           className={cn(
-            "grid grid-cols-1 gap-6 lg:gap-8",
+            "grid grid-cols-1 gap-6 lg:gap-8 stagger-children",
             columnStyles[columns]
           )}
         >

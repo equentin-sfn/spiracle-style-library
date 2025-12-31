@@ -220,3 +220,163 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* ============================================
+   SUBTLE DELIGHT ANIMATIONS
+   Premium publishing house aesthetic
+   ============================================ */
+
+/* Keyframes for subtle animations */
+@keyframes gentle-pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.15); }
+}
+
+@keyframes star-fill {
+  0% { opacity: 0.3; transform: scale(0.8); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes soft-entrance {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Utility classes for animations */
+@layer utilities {
+  /* Card hover effect - subtle lift and shadow */
+  .card-hover {
+    @apply transition-all duration-300 ease-out;
+  }
+  .card-hover:hover {
+    @apply -translate-y-0.5;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Cover image hover - very subtle scale */
+  .cover-hover {
+    @apply transition-transform duration-300 ease-out;
+  }
+  .cover-hover:hover {
+    transform: scale(1.02);
+  }
+
+  /* Button press state */
+  .btn-press:active {
+    transform: scale(0.98);
+  }
+
+  /* Smooth color transitions */
+  .color-transition {
+    @apply transition-colors duration-200 ease-out;
+  }
+
+  /* Icon interaction - gentle pulse on click */
+  .icon-interactive {
+    @apply transition-transform duration-150 ease-out cursor-pointer;
+  }
+  .icon-interactive:active {
+    animation: gentle-pulse 0.3s ease-out;
+  }
+
+  /* Star rating animation */
+  .star-animate {
+    animation: star-fill 0.2s ease-out forwards;
+  }
+
+  /* Scroll reveal - fade in gently */
+  .scroll-reveal {
+    animation: fade-in-up 0.4s ease-out forwards;
+  }
+
+  /* Staggered entrance animations for grid/list children */
+  .stagger-children > * {
+    opacity: 0;
+    animation: fade-in-up 0.4s ease-out forwards;
+  }
+  .stagger-children > *:nth-child(1) { animation-delay: 0ms; }
+  .stagger-children > *:nth-child(2) { animation-delay: 50ms; }
+  .stagger-children > *:nth-child(3) { animation-delay: 100ms; }
+  .stagger-children > *:nth-child(4) { animation-delay: 150ms; }
+  .stagger-children > *:nth-child(5) { animation-delay: 200ms; }
+  .stagger-children > *:nth-child(6) { animation-delay: 250ms; }
+  .stagger-children > *:nth-child(n+7) { animation-delay: 300ms; }
+
+  /* Section label entrance */
+  .label-entrance {
+    animation: soft-entrance 0.5s ease-out forwards;
+  }
+
+  /* Link underline animation */
+  .link-underline {
+    @apply relative;
+  }
+  .link-underline::after {
+    @apply absolute bottom-0 left-0 w-0 h-px bg-current;
+    content: '';
+    transition: width 0.25s ease-out;
+  }
+  .link-underline:hover::after {
+    @apply w-full;
+  }
+
+  /* Carousel navigation arrows */
+  .carousel-arrow {
+    /* Hidden by default on touch devices */
+    @apply hidden;
+  }
+}
+
+/* Show carousel arrows only on devices with hover capability (mouse/trackpad) */
+@media (hover: hover) and (pointer: fine) {
+  .carousel-arrow {
+    @apply flex;
+  }
+}
+
+/* Respect user preference for reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .card-hover:hover {
+    transform: none;
+    box-shadow: none;
+  }
+
+  .cover-hover:hover {
+    transform: none;
+  }
+
+  .btn-press:active {
+    transform: none;
+  }
+
+  /* Ensure staggered children are visible immediately */
+  .stagger-children > * {
+    opacity: 1 !important;
+    animation: none !important;
+  }
+
+  /* Carousel arrows - disable press animation */
+  .carousel-arrow:active {
+    transform: translateY(-50%) !important;
+  }
+}

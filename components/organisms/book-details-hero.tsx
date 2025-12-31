@@ -62,11 +62,11 @@ function BookDetailsHero({
 }: BookDetailsHeroProps) {
   return (
     <section
-      className={cn("w-full bg-background py-8 sm:py-12 lg:py-16", className)}
+      className={cn("w-full bg-background pt-6 pb-10 sm:pt-8 sm:pb-12 lg:pt-10 lg:pb-16", className)}
       {...props}
     >
       <PageWrapper>
-        <div className="grid grid-cols-1 md:grid-cols-[280px_1fr] lg:grid-cols-[300px_1fr_320px] gap-6 md:gap-6 lg:gap-8 items-start">
+        <div className="grid grid-cols-1 md:grid-cols-[280px_1fr] lg:grid-cols-[300px_1fr_320px] gap-8 md:gap-8 lg:gap-10 items-start">
           {/* Column 1: Cover + Actions */}
           <BookCoverActions
             bookTitle={details.title}

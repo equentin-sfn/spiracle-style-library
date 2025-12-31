@@ -259,3 +259,80 @@ Sections use consistent vertical spacing:
 □ Placed in correct atomic design folder
 □ Exported from barrel file (index.ts)
 ```
+
+---
+
+## Animation & Interaction Guidelines
+
+The aesthetic is **"premium publishing house"** — not "tech startup." All interactions should feel refined, literary, and sophisticated.
+
+### Core Principles
+
+1. **Subtle and sophisticated** — No bounce effects, no cartoon-like animations, no playful overshoots
+2. **Immediate but not distracting** — Feedback should acknowledge user action without drawing attention away from content
+3. **Never delay or block** — Animations must not prevent interaction or make the user wait
+4. **Respect user preferences** — All animations must honor `prefers-reduced-motion: reduce`
+
+### Timing Guidelines
+
+| Use Case | Duration | Easing |
+|----------|----------|--------|
+| Hover states | 200-300ms | `ease-out` |
+| Press/click feedback | 150ms | `ease-out` |
+| Entrance animations | 300-400ms | `ease-out` |
+| Color transitions | 200ms | `ease-out` |
+
+### Hover States
+
+- **Cards**: Subtle lift (`-translate-y-0.5`) with soft shadow (`box-shadow: 0 4px 12px rgba(0,0,0,0.08)`)
+- **Images**: Very slight scale (`scale-[1.02]` maximum)
+- **Links**: Underline animation or color change, not both
+- **Buttons**: Color/background change only (press state handles scale)
+
+### Interactive Feedback
+
+- **Button press**: Subtle scale down (`scale-[0.98]`)
+- **Icon clicks**: Brief scale pulse (`scale-[1.1]` to `scale-[1]`)
+- **Form inputs**: Focus ring animation (built into shadcn/ui)
+
+### Entrance Animations
+
+Use the `stagger-children` utility class on grid/list containers for elegant card entrances:
+
+```tsx
+<div className="grid grid-cols-3 stagger-children">
+  {items.map(item => <Card key={item.id} />)}
+</div>
+```
+
+- Cards fade in with 50ms stagger between each
+- Animation is `fade-in-up` (8px translate + opacity)
+- Total sequence completes in ~500ms for 6 items
+
+### Available Utility Classes
+
+| Class | Effect |
+|-------|--------|
+| `stagger-children` | Staggered fade-in-up for child elements |
+| `scroll-reveal` | Single element fade-in-up |
+| `color-transition` | Smooth color changes |
+| `link-underline` | Animated underline on hover |
+
+### Accessibility
+
+All animations automatically disable when `prefers-reduced-motion: reduce` is set:
+
+```css
+@media (prefers-reduced-motion: reduce) {
+  /* Animations become instant, transforms are removed */
+}
+```
+
+### What NOT to Do
+
+- No bounce or spring physics
+- No delays before animations start
+- No animations longer than 400ms
+- No scale transforms larger than 1.02 on hover
+- No rotating/spinning elements (except intentional icon feedback)
+- No parallax or scroll-jacking effects

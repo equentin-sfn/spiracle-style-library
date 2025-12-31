@@ -4,6 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { PageWrapper } from "@/components/templates";
+import { Button } from "@/components/atoms";
 
 type BackgroundVariant = "cream" | "dark" | "white" | "blush" | "sage" | "honey";
 
@@ -18,12 +19,12 @@ const backgroundStyles: Record<BackgroundVariant, string> = {
 };
 
 const labelStyles: Record<BackgroundVariant, string> = {
-  cream: "text-foreground",
-  dark: "text-white/60",
-  white: "text-foreground",
-  blush: "text-foreground",
-  sage: "text-foreground",
-  honey: "text-foreground",
+  cream: "text-muted-foreground",
+  dark: "text-white/50",
+  white: "text-muted-foreground",
+  blush: "text-foreground/60",
+  sage: "text-foreground/60",
+  honey: "text-foreground/60",
 };
 
 export interface GridSectionProps extends React.HTMLAttributes<HTMLElement> {
@@ -37,6 +38,10 @@ export interface GridSectionProps extends React.HTMLAttributes<HTMLElement> {
   columns?: 2 | 3 | 4;
   /** Gap between grid items */
   gap?: "sm" | "md" | "lg";
+  /** Optional "See more" link href */
+  seeMoreHref?: string;
+  /** Optional "See more" button label */
+  seeMoreLabel?: string;
 }
 
 const columnStyles = {
@@ -57,14 +62,16 @@ function GridSection({
   background = "cream",
   columns = 3,
   gap = "md",
+  seeMoreHref,
+  seeMoreLabel = "See more →",
   children,
   className,
   ...props
 }: GridSectionProps) {
   const labelClassName = cn(
-    "text-xs sm:text-sm uppercase tracking-[0.2em]",
+    "text-[0.65rem] sm:text-xs uppercase tracking-[0.25em] font-medium",
     labelStyles[background],
-    labelHref && "hover:underline"
+    labelHref && "hover:underline underline-offset-4"
   );
 
   return (
@@ -91,13 +98,33 @@ function GridSection({
         {/* Grid Content */}
         <div
           className={cn(
-            "grid grid-cols-1",
+            "grid grid-cols-1 stagger-children",
             columnStyles[columns],
             gapStyles[gap]
           )}
         >
           {children}
         </div>
+
+        {/* Optional "See more" button */}
+        {seeMoreHref && (
+          <footer className="flex justify-center pt-8">
+            <Button
+              variant="outline"
+              size="sm"
+              asChild
+              className={cn(
+                "bg-white/60 dark:bg-card/60",
+                "border-foreground/20 hover:border-foreground/30",
+                "text-foreground/80 hover:text-foreground",
+                "hover:bg-white dark:hover:bg-card",
+                "transition-all duration-200"
+              )}
+            >
+              <Link href={seeMoreHref}>{seeMoreLabel}</Link>
+            </Button>
+          </footer>
+        )}
       </PageWrapper>
     </section>
   );

@@ -54,57 +54,59 @@ function CriticCard({
   return (
     <article
       className={cn(
-        "flex flex-col bg-white rounded-sm p-5 sm:p-6",
+        "flex flex-col bg-white dark:bg-card rounded-sm p-5 sm:p-6",
+        "transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]",
         className
       )}
       {...props}
     >
-      {/* Publication Logo/Name - light background, always dark text */}
-      <header className="mb-4 sm:mb-5">
+      {/* Publication Logo/Name */}
+      <header className="mb-4">
         {publicationLogo ? (
-          <div className="relative h-6 sm:h-8 w-32">
+          <div className="relative h-5 sm:h-6 w-28">
             <Image
               src={publicationLogo}
               alt={publication}
               fill
               className="object-contain object-left"
-              sizes="128px"
+              sizes="112px"
             />
           </div>
         ) : (
-          <p className="font-serif text-lg sm:text-xl font-bold text-spiracle-ink">
+          <p className="font-serif text-base sm:text-lg font-semibold text-spiracle-ink dark:text-foreground tracking-[-0.01em]">
             {publication}
           </p>
         )}
       </header>
 
       {/* Star Rating */}
-      <StarRating rating={rating} maxRating={maxRating} />
+      <div className="mb-4">
+        <StarRating rating={rating} maxRating={maxRating} />
+      </div>
 
-      {/* Review Content - light background, always dark text */}
-      <div className="mt-4 space-y-2 flex-1">
-        <h3 className="font-medium text-base sm:text-lg text-spiracle-ink">
+      {/* Review Content */}
+      <div className="space-y-2.5 flex-1">
+        <h3 className="font-medium text-sm sm:text-base text-spiracle-ink dark:text-foreground leading-snug">
           {reviewTitle}
         </h3>
-        <p className="text-sm text-spiracle-slate leading-relaxed line-clamp-6">
+        <p className="text-sm text-spiracle-slate dark:text-muted-foreground leading-[1.65] line-clamp-5">
           {reviewExcerpt}
         </p>
       </div>
 
       {/* Footer */}
-      <footer className="mt-4 sm:mt-5">
-        <Separator className="mb-3 bg-spiracle-sand" />
-        <div className="flex items-start justify-between gap-2">
+      <footer className="mt-5 pt-4 border-t border-spiracle-sand/60 dark:border-border/40">
+        <div className="flex items-end justify-between gap-3">
           <div className="space-y-0.5">
-            <p className="text-sm text-spiracle-slate">{journalistName}</p>
-            <p className="text-xs text-spiracle-slate/70">{date}</p>
+            <p className="text-sm text-spiracle-ink dark:text-foreground/80">{journalistName}</p>
+            <p className="text-xs text-spiracle-slate/70 dark:text-muted-foreground">{date}</p>
           </div>
           {reviewUrl && (
             <a
               href={reviewUrl}
-              className="text-sm font-medium text-spiracle-terracotta hover:underline whitespace-nowrap"
+              className="text-xs font-medium text-spiracle-terracotta hover:underline underline-offset-2 whitespace-nowrap transition-colors duration-200"
             >
-              Read full review
+              Read full review →
             </a>
           )}
         </div>

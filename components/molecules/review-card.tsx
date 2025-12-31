@@ -56,50 +56,51 @@ function ReviewCard({
   return (
     <article
       className={cn(
-        "flex flex-col bg-white rounded-sm p-4 sm:p-5",
+        "flex flex-col bg-white dark:bg-card rounded-sm p-4 sm:p-5",
+        "transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]",
         className
       )}
       {...props}
     >
-      {/* Header: Avatar + Name */}
-      <header className="flex items-center gap-3 mb-3">
-        <div className="relative w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
+      {/* Header: Avatar + Name + Rating */}
+      <header className="flex items-start gap-3 mb-3">
+        <div className="relative w-9 h-9 rounded-full overflow-hidden flex-shrink-0 ring-1 ring-spiracle-sand/50">
           <Image
             src={avatarUrl}
             alt={`${reviewerName}'s avatar`}
             fill
             className="object-cover"
-            sizes="40px"
+            sizes="36px"
           />
         </div>
-        <span className="font-medium text-sm text-spiracle-ink">
-          {reviewerName}
-        </span>
+        <div className="flex-1 min-w-0">
+          <span className="font-medium text-sm text-spiracle-ink dark:text-foreground block truncate">
+            {reviewerName}
+          </span>
+          <div className="mt-0.5">
+            <StarRating rating={rating} />
+          </div>
+        </div>
       </header>
-
-      {/* Star Rating */}
-      <div className="mb-3">
-        <StarRating rating={rating} />
-      </div>
 
       {/* Review Content */}
       <div className="flex-1 mb-4">
-        <h3 className="font-serif text-lg font-medium text-spiracle-ink mb-2">
+        <h3 className="font-serif text-base sm:text-lg font-medium text-spiracle-ink dark:text-foreground mb-1.5 leading-snug">
           {title}
         </h3>
-        <p className="text-sm text-spiracle-ink leading-relaxed">
+        <p className="text-sm text-spiracle-ink/80 dark:text-foreground/70 leading-[1.6] line-clamp-4">
           {body}
         </p>
       </div>
 
       {/* Footer: Time + Likes */}
-      <footer className="flex items-center justify-between text-spiracle-slate">
+      <footer className="flex items-center justify-between text-spiracle-slate/70 dark:text-muted-foreground pt-3 border-t border-spiracle-sand/40 dark:border-border/30">
         <div className="flex items-center gap-1.5">
-          <Clock size={16} weight="regular" />
+          <Clock size={14} weight="regular" />
           <span className="text-xs">{timeAgo}</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <Heart size={16} weight="regular" />
+          <Heart size={14} weight="regular" />
           <span className="text-xs">{likes}</span>
         </div>
       </footer>

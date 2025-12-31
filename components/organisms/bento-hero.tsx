@@ -27,21 +27,25 @@ function BentoHero({
   return (
     <section
       className={cn(
-        "w-full bg-spiracle-cream py-12 sm:py-16 lg:py-20",
+        "w-full bg-background py-14 sm:py-18 lg:py-24",
         className
       )}
       {...props}
     >
       <div className="max-w-5xl mx-auto px-6 sm:px-8">
-        {/* Header */}
-        <header className="text-center mb-8 sm:mb-12">
-          <p className="text-xs sm:text-sm uppercase tracking-[0.2em] text-spiracle-terracotta mb-3 sm:mb-4">
-            {sectionLabel}
+        {/* Header - Editorial style */}
+        <header className="text-center mb-10 sm:mb-14">
+          <p className="text-[0.65rem] sm:text-xs uppercase tracking-[0.25em] text-primary mb-4">
+            <span className="inline-flex items-center gap-3">
+              <span className="w-8 h-px bg-primary/40" aria-hidden="true" />
+              {sectionLabel}
+              <span className="w-8 h-px bg-primary/40" aria-hidden="true" />
+            </span>
           </p>
-          <h2 className="font-serif text-2xl sm:text-3xl lg:text-4xl leading-tight text-foreground mb-3 sm:mb-4">
+          <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl leading-tight text-foreground mb-4 tracking-tight">
             {title}
           </h2>
-          <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
+          <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto font-serif">
             {description}
           </p>
         </header>

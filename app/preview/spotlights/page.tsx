@@ -1,6 +1,7 @@
 "use client";
 
 import { CollectionSpotlight, TopNavigation } from "@/components/organisms";
+import { PreviewBar } from "@/components/molecules";
 
 const navItems = [
   { label: "Audiobooks", href: "/audiobooks" },
@@ -101,9 +102,11 @@ const railwayBooks = [
 export default function SpotlightsPage() {
   return (
     <div className="min-h-screen bg-background">
+      <PreviewBar currentPath="/preview/spotlights" />
       {/* Top Navigation */}
       <TopNavigation
         navItems={navItems}
+        logoHref="/preview"
         onSearch={() => console.log("Search clicked")}
         onCart={() => console.log("Cart clicked")}
         loginHref="/login"

@@ -51,3 +51,24 @@ export {
   type AuthorHeroProps,
   type AuthorSocialLink,
 } from "./author-hero";
+export {
+  FeatureSection,
+  type FeatureSectionProps,
+  type FeatureBenefit,
+} from "./feature-section";
+export {
+  PricingGrid,
+  type PricingGridProps,
+  type PricingPlan,
+} from "./pricing-grid";
+export { MembershipHero, type MembershipHeroProps } from "./membership-hero";
+export {
+  GiftSection,
+  type GiftSectionProps,
+  type GiftStep,
+} from "./gift-section";
+export {
+  FAQSection,
+  type FAQSectionProps,
+  type FAQCategory,
+} from "./faq-section";

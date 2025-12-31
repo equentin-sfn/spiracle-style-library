@@ -23,7 +23,11 @@ function CollectionCard({
     <article
       className={cn(
         "group flex aspect-[2/1] overflow-hidden rounded-sm",
-        "transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]",
+        "border border-border/30",
+        "transition-all duration-300 ease-out",
+        "hover:-translate-y-1 hover:border-border/50",
+        "hover:shadow-[0_8px_24px_rgba(45,37,32,0.1),0_2px_8px_rgba(45,37,32,0.06)]",
+        "dark:hover:shadow-[0_8px_24px_rgba(0,0,0,0.25),0_2px_8px_rgba(0,0,0,0.15)]",
         className
       )}
       {...props}
@@ -40,8 +44,8 @@ function CollectionCard({
       </div>
 
       {/* Content */}
-      <div className="flex flex-1 flex-col justify-between bg-spiracle-parchment dark:bg-[#3a332c] p-3 sm:p-4">
-        <h3 className="font-serif text-sm sm:text-base leading-[1.35] text-spiracle-ink dark:text-foreground line-clamp-3 tracking-[-0.01em]">
+      <div className="flex flex-1 flex-col justify-between bg-card dark:bg-[#3a332c] p-3 sm:p-4">
+        <h3 className="font-serif text-sm sm:text-base leading-[1.35] text-foreground line-clamp-3 tracking-[-0.01em] group-hover:text-primary transition-colors duration-200">
           {title}
         </h3>
 

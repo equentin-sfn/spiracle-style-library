@@ -6,6 +6,7 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { ArrowRight, Globe, TwitterLogo, InstagramLogo } from "@phosphor-icons/react";
 import type { Icon as PhosphorIcon } from "@phosphor-icons/react";
+import { AdaptiveIllustration } from "./adaptive-illustration";
 
 export interface AuthorLink {
   icon: PhosphorIcon;
@@ -16,6 +17,8 @@ export interface AuthorLink {
 export interface AuthorBioProps extends React.HTMLAttributes<HTMLElement> {
   /** Author photo URL */
   photoSrc: string;
+  /** Author photo dark mode URL (white lines on transparent) */
+  photoDarkSrc?: string;
   /** Author name */
   name: string;
   /** Author bio/description */
@@ -38,6 +41,7 @@ const defaultLinks: AuthorLink[] = [
 
 function AuthorBio({
   photoSrc,
+  photoDarkSrc,
   name,
   bio,
   authorHref,
@@ -54,7 +58,13 @@ function AuthorBio({
     <article
       className={cn(
         "group",
-        !isInline && "p-5 sm:p-6 bg-card rounded-sm border border-border/50",
+        !isInline && [
+          "p-6 sm:p-8 bg-card rounded-sm border border-border/30",
+          "transition-all duration-300 ease-out",
+          "hover:-translate-y-1 hover:border-border/50",
+          "hover:shadow-[0_8px_24px_rgba(45,37,32,0.1),0_2px_8px_rgba(45,37,32,0.06)]",
+          "dark:hover:shadow-[0_8px_24px_rgba(0,0,0,0.25),0_2px_8px_rgba(0,0,0,0.15)]",
+        ],
         isInline && "flex items-start gap-4 sm:gap-5",
         className
       )}
@@ -71,13 +81,24 @@ function AuthorBio({
             : "w-24 h-24 sm:w-28 sm:h-28 rounded-full overflow-hidden mx-auto mb-5"
         )}
       >
-        <Image
-          src={photoSrc}
-          alt={name}
-          fill
-          className="object-cover"
-          sizes={isInline || isCompact ? "80px" : "112px"}
-        />
+        {photoDarkSrc ? (
+          <AdaptiveIllustration
+            lightSrc={photoSrc}
+            darkSrc={photoDarkSrc}
+            alt={name}
+            fill
+            className="object-cover"
+            sizes={isInline || isCompact ? "80px" : "112px"}
+          />
+        ) : (
+          <Image
+            src={photoSrc}
+            alt={name}
+            fill
+            className="object-cover illustration-adaptive"
+            sizes={isInline || isCompact ? "80px" : "112px"}
+          />
+        )}
       </div>
 
       {/* Content */}
@@ -93,7 +114,7 @@ function AuthorBio({
             <h3
               className={cn(
                 "font-display text-foreground leading-tight",
-                "group-hover/link:text-spiracle-forest transition-colors duration-200",
+                "group-hover/link:text-primary transition-colors duration-200",
                 isCompact || isInline ? "text-lg" : "text-xl sm:text-2xl"
               )}
             >
@@ -126,7 +147,7 @@ function AuthorBio({
         {/* Bio */}
         <p
           className={cn(
-            "text-muted-foreground leading-relaxed text-left",
+            "text-muted-foreground leading-relaxed text-left font-serif",
             isCompact
               ? "text-sm mt-3 line-clamp-3"
               : isInline
@@ -153,8 +174,8 @@ function AuthorBio({
                   href={link.href}
                   className={cn(
                     "flex items-center justify-center w-8 h-8 rounded-full",
-                    "bg-spiracle-sand/50 text-muted-foreground",
-                    "hover:bg-spiracle-sand hover:text-foreground",
+                    "bg-muted text-muted-foreground",
+                    "hover:bg-spiracle-sand/50 dark:hover:bg-muted/80 hover:text-foreground",
                     "transition-colors duration-200"
                   )}
                   aria-label={link.label}
@@ -172,8 +193,8 @@ function AuthorBio({
             href={authorHref}
             className={cn(
               "inline-flex items-center gap-1 mt-4",
-              "text-sm font-medium text-spiracle-forest",
-              "hover:text-spiracle-forest/80 transition-colors duration-200"
+              "text-sm font-medium text-primary",
+              "hover:text-primary/80 transition-colors duration-200"
             )}
           >
             View all titles

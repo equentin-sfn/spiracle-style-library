@@ -96,10 +96,10 @@ function CollectionSpotlight({
             <p className={cn("text-xs sm:text-sm uppercase tracking-[0.2em]", textMuted)}>
               {label}
             </p>
-            <h2 className={cn("font-serif text-3xl sm:text-4xl lg:text-5xl leading-tight", textColor)}>
+            <h2 className={cn("font-display text-3xl sm:text-4xl lg:text-5xl leading-tight tracking-tight", textColor)}>
               {headline}
             </h2>
-            <p className={cn("text-sm sm:text-base leading-relaxed", textMuted)}>
+            <p className={cn("text-sm sm:text-base leading-relaxed font-serif", textMuted)}>
               {description}
             </p>
             <a href={ctaLink}>

@@ -64,6 +64,8 @@ export interface TitleDetailPageProps
   loginHref?: string;
   /** Join page href */
   joinHref?: string;
+  /** Logo link destination */
+  logoHref?: string;
 }
 
 function TitleDetailPage({
@@ -90,6 +92,7 @@ function TitleDetailPage({
   onCart,
   loginHref = "/login",
   joinHref = "/join",
+  logoHref,
   className,
   ...props
 }: TitleDetailPageProps) {
@@ -105,6 +108,7 @@ function TitleDetailPage({
         onCart={onCart}
         loginHref={loginHref}
         joinHref={joinHref}
+        logoHref={logoHref}
       />
 
       {/* 2. BookDetailsHero */}

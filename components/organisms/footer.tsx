@@ -48,8 +48,6 @@ export interface FooterProps extends React.HTMLAttributes<HTMLElement> {
   newsletterHeadline?: string;
   /** Callback for newsletter submission */
   onNewsletterSubmit?: (email: string) => Promise<void>;
-  /** Background variant */
-  variant?: "cream" | "dark";
 }
 
 const defaultColumns: FooterLinkColumn[] = [
@@ -89,27 +87,8 @@ const defaultSocialLinks: SocialLink[] = [
   { icon: SpotifyLogo, href: "#", label: "Spotify" },
 ];
 
-const variantStyles = {
-  cream: {
-    bg: "bg-spiracle-parchment",
-    text: "text-foreground",
-    muted: "text-muted-foreground",
-    border: "border-border/50",
-    hover: "hover:text-spiracle-forest",
-    socialBg: "bg-spiracle-sand/50 hover:bg-spiracle-sand",
-  },
-  dark: {
-    bg: "bg-[#2D2520]",
-    text: "text-white",
-    muted: "text-white/60",
-    border: "border-white/10",
-    hover: "hover:text-spiracle-honey",
-    socialBg: "bg-white/5 hover:bg-white/10",
-  },
-};
-
 function Footer({
-  logoSrc = "/images/spiracle-logo.svg",
+  logoSrc = "/logos/logo-spiracle-spiral-black@3x.png",
   logoAlt = "Spiracle",
   tagline = "Stories worth hearing.",
   columns = defaultColumns,
@@ -118,16 +97,12 @@ function Footer({
   showNewsletter = true,
   newsletterHeadline = "Join our mailing list",
   onNewsletterSubmit,
-  variant = "cream",
   className,
   ...props
 }: FooterProps) {
-  const styles = variantStyles[variant];
-  const isDark = variant === "dark";
-
   return (
     <footer
-      className={cn("pt-16 sm:pt-20 pb-8", styles.bg, className)}
+      className={cn("pt-16 sm:pt-20 pb-8 bg-muted", className)}
       {...props}
     >
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -143,20 +118,12 @@ function Footer({
                   alt={logoAlt}
                   width={140}
                   height={40}
-                  className={cn(
-                    "h-8 w-auto",
-                    isDark && "brightness-0 invert"
-                  )}
+                  className="h-8 w-auto dark:brightness-0 dark:invert"
                 />
               </Link>
 
               {/* Tagline */}
-              <p
-                className={cn(
-                  "mt-4 font-serif text-lg italic",
-                  styles.muted
-                )}
-              >
+              <p className="mt-4 font-serif text-lg italic text-muted-foreground">
                 {tagline}
               </p>
 
@@ -167,10 +134,6 @@ function Footer({
                     headline={newsletterHeadline}
                     onEmailSubmit={onNewsletterSubmit}
                     variant="compact"
-                    className={cn(
-                      isDark &&
-                        "[&_input]:bg-white/5 [&_input]:border-white/20 [&_input]:text-white [&_input]:placeholder:text-white/40 [&_button]:border-white/20 [&_button]:text-white [&_button:hover]:bg-white/10"
-                    )}
                   />
                 </div>
               )}
@@ -186,8 +149,7 @@ function Footer({
                       className={cn(
                         "flex items-center justify-center w-10 h-10 rounded-full",
                         "transition-colors duration-200",
-                        styles.socialBg,
-                        styles.text
+                        "bg-background hover:bg-spiracle-sand/50 dark:hover:bg-muted text-foreground"
                       )}
                       aria-label={social.label}
                     >
@@ -203,12 +165,7 @@ function Footer({
               <div className="grid grid-cols-2 sm:grid-cols-3 gap-8">
                 {columns.map((column, index) => (
                   <nav key={index} aria-label={column.title}>
-                    <h3
-                      className={cn(
-                        "text-xs uppercase tracking-[0.2em] font-semibold mb-4",
-                        styles.text
-                      )}
-                    >
+                    <h3 className="text-xs uppercase tracking-[0.2em] font-semibold mb-4 text-foreground">
                       {column.title}
                     </h3>
                     <ul className="space-y-3">
@@ -216,11 +173,7 @@ function Footer({
                         <li key={linkIndex}>
                           <Link
                             href={link.href}
-                            className={cn(
-                              "text-sm transition-colors duration-200",
-                              styles.muted,
-                              styles.hover
-                            )}
+                            className="text-sm text-muted-foreground link-literary"
                           >
                             {link.label}
                           </Link>
@@ -235,44 +188,32 @@ function Footer({
 
           {/* Divider */}
           <div
-            className={cn("h-px mt-12 sm:mt-16", styles.border, "bg-current opacity-20")}
+            className="h-px mt-12 sm:mt-16 bg-border"
             aria-hidden="true"
           />
 
           {/* Bottom Row */}
           <div className="mt-8 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
             {/* Copyright */}
-            <p className={cn("text-xs", styles.muted)}>{copyright}</p>
+            <p className="text-xs text-muted-foreground">{copyright}</p>
 
             {/* Legal Links */}
             <div className="flex flex-wrap items-center gap-4 sm:gap-6">
               <Link
                 href="/terms"
-                className={cn(
-                  "text-xs transition-colors duration-200",
-                  styles.muted,
-                  styles.hover
-                )}
+                className="text-xs text-muted-foreground link-literary"
               >
                 Terms of Service
               </Link>
               <Link
                 href="/privacy"
-                className={cn(
-                  "text-xs transition-colors duration-200",
-                  styles.muted,
-                  styles.hover
-                )}
+                className="text-xs text-muted-foreground link-literary"
               >
                 Privacy Policy
               </Link>
               <Link
                 href="/cookies"
-                className={cn(
-                  "text-xs transition-colors duration-200",
-                  styles.muted,
-                  styles.hover
-                )}
+                className="text-xs text-muted-foreground link-literary"
               >
                 Cookie Settings
               </Link>

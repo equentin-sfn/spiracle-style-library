@@ -1,6 +1,6 @@
 "use client";
 
-import { CollectionCard } from "@/components/molecules";
+import { CollectionCard, PreviewBar } from "@/components/molecules";
 
 const collections = [
   {
@@ -49,8 +49,9 @@ const collections = [
 
 export default function CollectionsPreviewPage() {
   return (
-    <div className="min-h-screen p-12" style={{ backgroundColor: "#2D2520" }}>
-      <div className="max-w-5xl mx-auto space-y-8">
+    <div className="min-h-screen" style={{ backgroundColor: "#2D2520" }}>
+      <PreviewBar currentPath="/preview/collections" />
+      <div className="max-w-5xl mx-auto space-y-8 p-12">
         {/* Header */}
         <header className="text-center">
           <p className="text-sm uppercase tracking-[0.3em] text-white/60">

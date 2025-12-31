@@ -13,3 +13,6 @@ export { Separator } from "@/components/ui/separator";
 
 // Theme
 export { ThemeToggle, type ThemeToggleProps } from "./theme-toggle";
+
+// Brand elements
+export { WaveDecoration, type WaveDecorationProps } from "./wave-decoration";

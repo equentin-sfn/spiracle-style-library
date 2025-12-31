@@ -33,32 +33,9 @@ export interface FeaturedTitleProps
   secondaryCtaHref?: string;
   /** Section label */
   label?: string;
-  /** Background variant */
-  variant?: "cream" | "white" | "dark";
   /** Layout direction */
   layout?: "default" | "reversed";
 }
-
-const variantStyles = {
-  cream: {
-    bg: "bg-spiracle-cream",
-    text: "text-foreground",
-    muted: "text-muted-foreground",
-    border: "border-border",
-  },
-  white: {
-    bg: "bg-white",
-    text: "text-foreground",
-    muted: "text-muted-foreground",
-    border: "border-border",
-  },
-  dark: {
-    bg: "bg-[#2D2520]",
-    text: "text-white",
-    muted: "text-white/70",
-    border: "border-white/20",
-  },
-};
 
 function FeaturedTitle({
   coverSrc,
@@ -73,29 +50,24 @@ function FeaturedTitle({
   secondaryCtaText = "Learn more",
   secondaryCtaHref,
   label = "Featured title",
-  variant = "cream",
   layout = "default",
   className,
   ...props
 }: FeaturedTitleProps) {
-  const styles = variantStyles[variant];
-  const isDark = variant === "dark";
-
   return (
     <section
-      className={cn("py-16 sm:py-20 lg:py-24", styles.bg, className)}
+      className={cn("py-16 sm:py-20 lg:py-24 bg-background", className)}
       {...props}
     >
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          {/* Section Label */}
-          <p
-            className={cn(
-              "text-xs sm:text-sm uppercase tracking-[0.2em] mb-8 sm:mb-12",
-              styles.muted
-            )}
-          >
-            {label}
+          {/* Section Label - Editorial flourish */}
+          <p className="text-[0.65rem] sm:text-xs uppercase tracking-[0.25em] mb-10 sm:mb-14 text-muted-foreground/70 font-medium">
+            <span className="inline-flex items-center gap-3">
+              <span className="w-8 h-px bg-border" aria-hidden="true" />
+              {label}
+              <span className="w-8 h-px bg-border" aria-hidden="true" />
+            </span>
           </p>
 
           {/* Two-Column Layout */}
@@ -112,23 +84,20 @@ function FeaturedTitle({
                 layout === "reversed" && "lg:col-start-2"
               )}
             >
-              <div className="relative h-full rounded-sm overflow-hidden shadow-2xl">
+              <div className="relative h-full rounded-sm overflow-hidden shadow-[0_25px_50px_-12px_rgba(45,37,32,0.25)] dark:shadow-[0_25px_50px_-12px_rgba(0,0,0,0.5)] transition-all duration-500 hover:shadow-[0_30px_60px_-15px_rgba(45,37,32,0.3)] dark:hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.6)]">
                 <Image
                   src={coverSrc}
                   alt={`${title} by ${author}`}
                   fill
-                  className="object-cover"
+                  className="object-cover transition-transform duration-500 hover:scale-[1.02]"
                   sizes="(max-width: 1024px) 384px, 512px"
                 />
+                {/* Subtle inner shadow for depth */}
+                <div className="absolute inset-0 shadow-[inset_0_0_30px_rgba(0,0,0,0.15)] pointer-events-none rounded-sm" />
               </div>
-              {/* Decorative shadow */}
+              {/* Decorative warm glow */}
               <div
-                className={cn(
-                  "absolute -inset-4 -z-10 rounded-lg",
-                  isDark
-                    ? "bg-gradient-to-br from-spiracle-terracotta/10 to-transparent"
-                    : "bg-gradient-to-br from-spiracle-sand/50 to-transparent"
-                )}
+                className="absolute -inset-6 -z-10 rounded-xl bg-gradient-to-br from-spiracle-honey/20 via-spiracle-blush/15 to-transparent dark:from-accent/10 dark:via-transparent blur-xl"
                 aria-hidden="true"
               />
             </div>
@@ -141,47 +110,32 @@ function FeaturedTitle({
               )}
             >
               {/* Title */}
-              <h2
-                className={cn(
-                  "font-display text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-tight",
-                  styles.text
-                )}
-              >
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-tight text-foreground">
                 {title}
               </h2>
 
               {/* Author */}
-              <p className={cn("mt-3 text-lg", styles.muted)}>
+              <p className="mt-3 text-lg text-muted-foreground">
                 by{" "}
                 {authorHref ? (
                   <Link
                     href={authorHref}
-                    className={cn(
-                      "font-medium underline underline-offset-2 transition-colors duration-200",
-                      isDark
-                        ? "text-white hover:text-spiracle-honey"
-                        : "text-foreground hover:text-spiracle-forest"
-                    )}
+                    className="font-medium text-foreground underline underline-offset-2 transition-colors duration-200 hover:text-primary"
                   >
                     {author}
                   </Link>
                 ) : (
-                  <span className="font-medium">{author}</span>
+                  <span className="font-medium text-foreground">{author}</span>
                 )}
               </p>
 
               {/* Meta Info */}
               {(narrator || duration) && (
-                <div
-                  className={cn(
-                    "flex flex-wrap items-center gap-x-4 gap-y-1 mt-4 text-sm",
-                    styles.muted
-                  )}
-                >
+                <div className="flex flex-wrap items-center gap-x-4 gap-y-1 mt-4 text-sm text-muted-foreground">
                   {narrator && (
                     <span>
                       Narrated by{" "}
-                      <span className={styles.text}>{narrator}</span>
+                      <span className="text-foreground">{narrator}</span>
                     </span>
                   )}
                   {narrator && duration && (
@@ -194,26 +148,13 @@ function FeaturedTitle({
               )}
 
               {/* Synopsis */}
-              <p
-                className={cn(
-                  "mt-6 text-base sm:text-lg leading-relaxed",
-                  styles.muted
-                )}
-              >
+              <p className="mt-6 text-base sm:text-lg leading-relaxed text-muted-foreground text-left font-serif">
                 {synopsis}
               </p>
 
               {/* CTAs */}
               <div className="flex flex-wrap gap-4 mt-8">
-                <Button
-                  asChild
-                  size="lg"
-                  className={cn(
-                    isDark
-                      ? "bg-spiracle-honey text-[#2D2520] hover:bg-spiracle-honey/90"
-                      : "bg-spiracle-forest text-white hover:bg-spiracle-forest/90"
-                  )}
-                >
+                <Button asChild size="lg">
                   <Link href={primaryCtaHref}>
                     <Play className="size-4 mr-2" weight="fill" />
                     {primaryCtaText}
@@ -221,16 +162,7 @@ function FeaturedTitle({
                 </Button>
 
                 {secondaryCtaHref && (
-                  <Button
-                    asChild
-                    variant="outline"
-                    size="lg"
-                    className={cn(
-                      isDark
-                        ? "border-white/30 text-white hover:bg-white/10"
-                        : "border-foreground/20 hover:bg-secondary/50"
-                    )}
-                  >
+                  <Button asChild variant="outline" size="lg">
                     <Link href={secondaryCtaHref}>
                       <BookOpen className="size-4 mr-2" weight="regular" />
                       {secondaryCtaText}

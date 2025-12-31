@@ -49,10 +49,12 @@ function EssayCard({
   return (
     <article
       className={cn(
-        "group relative",
-        "bg-card rounded-sm border border-border/50 overflow-hidden",
-        "transition-all duration-200 ease-out",
-        "hover:border-border hover:shadow-sm",
+        "group relative book-spine",
+        "bg-card rounded-sm border border-border/30 overflow-hidden",
+        "transition-all duration-300 ease-out",
+        "hover:border-border/50 hover:-translate-y-1",
+        "hover:shadow-[0_8px_24px_rgba(45,37,32,0.1),0_2px_8px_rgba(45,37,32,0.06)]",
+        "dark:hover:shadow-[0_8px_24px_rgba(0,0,0,0.25),0_2px_8px_rgba(0,0,0,0.15)]",
         isHorizontal && "flex flex-row",
         isFeatured && "md:flex md:flex-row",
         className
@@ -105,7 +107,7 @@ function EssayCard({
       >
         {/* Label */}
         <div className="flex items-center gap-3 mb-2">
-          <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-spiracle-terracotta font-semibold">
+          <span className="text-[10px] sm:text-xs uppercase tracking-[0.2em] text-primary font-semibold">
             {label}
           </span>
           {readingTime && (
@@ -126,7 +128,7 @@ function EssayCard({
           <h3
             className={cn(
               "font-display text-foreground leading-snug",
-              "group-hover/link:text-spiracle-forest transition-colors duration-200",
+              "group-hover/link:text-primary transition-colors duration-200",
               isHorizontal
                 ? "text-base sm:text-lg line-clamp-2"
                 : isFeatured
@@ -149,7 +151,7 @@ function EssayCard({
           {authorHref ? (
             <Link
               href={authorHref}
-              className="text-foreground hover:text-spiracle-forest transition-colors duration-200"
+              className="text-foreground hover:text-primary transition-colors duration-200"
             >
               {author}
             </Link>
@@ -160,7 +162,7 @@ function EssayCard({
 
         {/* Excerpt (for featured only) */}
         {excerpt && isFeatured && (
-          <p className="mt-3 text-sm sm:text-base text-muted-foreground leading-relaxed line-clamp-3 hidden md:block">
+          <p className="mt-3 text-sm sm:text-base text-muted-foreground leading-relaxed line-clamp-3 hidden md:block font-serif">
             {excerpt}
           </p>
         )}
@@ -178,14 +180,14 @@ function EssayCard({
           <Link
             href={href}
             className={cn(
-              "inline-flex items-center gap-1 text-xs font-medium",
-              "text-spiracle-forest hover:text-spiracle-forest/80",
+              "inline-flex items-center gap-1.5 text-xs font-medium",
+              "text-primary link-underline",
               "transition-colors duration-200"
             )}
           >
             Read essay
             <ArrowRight
-              className="size-3 transition-transform duration-200 group-hover:translate-x-0.5"
+              className="size-3 transition-transform duration-200 group-hover:translate-x-1"
               weight="bold"
             />
           </Link>

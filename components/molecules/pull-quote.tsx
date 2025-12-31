@@ -37,13 +37,13 @@ function PullQuote({
       )}
       {...props}
     >
-      {/* Decorative opening quote */}
+      {/* Decorative opening quote - literary flourish */}
       <span
         className={cn(
-          "absolute font-serif text-spiracle-terracotta/20 select-none pointer-events-none",
+          "absolute font-display text-primary/15 dark:text-primary/10 select-none pointer-events-none",
           isLarge
-            ? "-top-6 -left-2 text-[8rem] leading-none"
-            : "-top-4 -left-1 text-[5rem] leading-none",
+            ? "-top-8 -left-3 text-[10rem] leading-none"
+            : "-top-5 -left-2 text-[6rem] leading-none",
           isCentered && "left-1/2 -translate-x-1/2"
         )}
         aria-hidden="true"
@@ -74,13 +74,13 @@ function PullQuote({
         {/* Decorative line */}
         <span
           className={cn(
-            "block w-12 h-px bg-spiracle-terracotta/40 mb-3",
+            "block w-12 h-px bg-primary/40 mb-3",
             isCentered && "mx-auto"
           )}
           aria-hidden="true"
         />
 
-        <span className="text-sm uppercase tracking-wider text-muted-foreground">
+        <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground font-medium">
           — {attribution}
         </span>
 

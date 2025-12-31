@@ -5,12 +5,12 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { PageWrapper } from "@/components/templates";
 
-type BackgroundVariant = "cream" | "dark" | "white" | "blush" | "sage" | "honey";
+type BackgroundVariant = "cream" | "dark" | "parchment" | "blush" | "sage" | "honey";
 
 const backgroundStyles: Record<BackgroundVariant, string> = {
   cream: "bg-background",
   dark: "bg-[#2D2520]",
-  white: "bg-white dark:bg-card",
+  parchment: "bg-spiracle-parchment dark:bg-card",
   // Subtle tinted backgrounds - light mode uses brand colors, dark mode uses warm tinted browns
   blush: "bg-[#EBDEDB] dark:bg-[#3a2d2a]",
   sage: "bg-[#C0C9C2] dark:bg-[#2d3530]",
@@ -20,7 +20,7 @@ const backgroundStyles: Record<BackgroundVariant, string> = {
 const labelStyles: Record<BackgroundVariant, string> = {
   cream: "text-muted-foreground",
   dark: "text-white/50",
-  white: "text-muted-foreground",
+  parchment: "text-muted-foreground",
   blush: "text-foreground/60",
   sage: "text-foreground/60",
   honey: "text-foreground/60",
@@ -67,14 +67,20 @@ function QuoteSection({
       {...props}
     >
       <PageWrapper>
-        {/* Section Label */}
-        <header className="text-center mb-6 sm:mb-8">
+        {/* Section Label - Editorial flourish */}
+        <header className="text-center mb-8 sm:mb-10">
           {labelHref ? (
-            <Link href={labelHref} className={labelClassName}>
-              {label} →
+            <Link href={labelHref} className={cn(labelClassName, "inline-flex items-center gap-3")}>
+              <span className="w-8 h-px bg-current opacity-30" aria-hidden="true" />
+              {label}
+              <span className="w-8 h-px bg-current opacity-30" aria-hidden="true" />
             </Link>
           ) : (
-            <span className={labelClassName}>{label}</span>
+            <span className={cn(labelClassName, "inline-flex items-center gap-3")}>
+              <span className="w-8 h-px bg-current opacity-30" aria-hidden="true" />
+              {label}
+              <span className="w-8 h-px bg-current opacity-30" aria-hidden="true" />
+            </span>
           )}
         </header>
 

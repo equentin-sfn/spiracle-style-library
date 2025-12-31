@@ -54,8 +54,11 @@ function CriticCard({
   return (
     <article
       className={cn(
-        "flex flex-col bg-white dark:bg-card rounded-sm p-5 sm:p-6",
-        "transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]",
+        "flex flex-col bg-card rounded-sm p-6 sm:p-7 border border-border/30",
+        "transition-all duration-300 ease-out",
+        "hover:-translate-y-1 hover:border-border/50",
+        "hover:shadow-[0_8px_24px_rgba(45,37,32,0.1),0_2px_8px_rgba(45,37,32,0.06)]",
+        "dark:hover:shadow-[0_8px_24px_rgba(0,0,0,0.25),0_2px_8px_rgba(0,0,0,0.15)]",
         className
       )}
       {...props}
@@ -63,13 +66,13 @@ function CriticCard({
       {/* Publication Logo/Name */}
       <header className="mb-4">
         {publicationLogo ? (
-          <div className="relative h-5 sm:h-6 w-28">
+          <div className="relative h-12 sm:h-14 w-full max-w-[180px] sm:max-w-[220px]">
             <Image
               src={publicationLogo}
               alt={publication}
               fill
-              className="object-contain object-left"
-              sizes="112px"
+              className="object-contain object-left dark:brightness-0 dark:invert dark:opacity-80"
+              sizes="220px"
             />
           </div>
         ) : (
@@ -89,7 +92,7 @@ function CriticCard({
         <h3 className="font-medium text-sm sm:text-base text-spiracle-ink dark:text-foreground leading-snug">
           {reviewTitle}
         </h3>
-        <p className="text-sm text-spiracle-slate dark:text-muted-foreground leading-[1.65] line-clamp-5">
+        <p className="text-sm text-spiracle-slate dark:text-muted-foreground leading-[1.65] line-clamp-5 font-serif">
           {reviewExcerpt}
         </p>
       </div>

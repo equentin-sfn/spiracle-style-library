@@ -72,8 +72,8 @@ function NewsletterSignup({
         )}
         {...props}
       >
-        <span className="flex items-center justify-center w-8 h-8 rounded-full bg-spiracle-forest/10">
-          <Check className="size-4 text-spiracle-forest" weight="bold" />
+        <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10">
+          <Check className="size-4 text-primary" weight="bold" />
         </span>
         <p className="font-serif text-sm text-foreground italic">
           {successMessage}
@@ -111,24 +111,25 @@ function NewsletterSignup({
           aria-label="Email address"
           aria-invalid={status === "error"}
           className={cn(
-            "flex-1 px-4 py-2.5 text-sm",
-            "bg-background border border-border rounded-sm",
-            "placeholder:text-muted-foreground/60",
-            "focus:outline-none focus:ring-2 focus:ring-spiracle-forest/20 focus:border-spiracle-forest",
+            "flex-1 px-4 py-3 text-sm font-serif",
+            "bg-background border border-border/50 rounded-sm",
+            "placeholder:text-muted-foreground/50 placeholder:italic",
+            "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50",
             "disabled:opacity-60 disabled:cursor-not-allowed",
-            "transition-colors duration-200",
+            "transition-all duration-200",
             status === "error" && "border-destructive focus:ring-destructive/20"
           )}
         />
 
         <Button
           type="submit"
-          variant="outline"
           disabled={status === "loading"}
           className={cn(
-            "border-foreground/20 hover:bg-secondary/50",
+            "bg-foreground text-background hover:bg-foreground/90",
+            "shadow-sm hover:shadow-md hover:-translate-y-0.5 active:scale-[0.98]",
+            "transition-all duration-200",
             "disabled:opacity-60",
-            isCompact ? "px-4" : "sm:w-auto"
+            isCompact ? "px-5" : "sm:w-auto px-6"
           )}
         >
           {status === "loading" ? (

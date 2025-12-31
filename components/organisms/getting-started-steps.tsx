@@ -28,8 +28,6 @@ export interface GettingStartedStepsProps
   steps?: Step[];
   /** Whether to show step numbers */
   showNumbers?: boolean;
-  /** Background variant */
-  variant?: "default" | "cream" | "white";
 }
 
 const defaultSteps: Step[] = [
@@ -53,35 +51,30 @@ const defaultSteps: Step[] = [
   },
 ];
 
-const variantStyles = {
-  default: "bg-spiracle-cream",
-  cream: "bg-spiracle-parchment",
-  white: "bg-white",
-};
+// Background now uses CSS variables for dark mode support
 
 function GettingStartedSteps({
   heading = "How it works",
   subheading,
   steps = defaultSteps,
   showNumbers = true,
-  variant = "default",
   className,
   ...props
 }: GettingStartedStepsProps) {
   return (
     <section
-      className={cn("py-16 sm:py-20 lg:py-24", variantStyles[variant], className)}
+      className={cn("py-16 sm:py-20 lg:py-24 bg-background", className)}
       {...props}
     >
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
-          {/* Header */}
-          <header className="text-center mb-12 sm:mb-16">
-            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-foreground tracking-tight">
+          {/* Header - Editorial style */}
+          <header className="text-center mb-14 sm:mb-18">
+            <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl text-foreground tracking-tight leading-[1.15]">
               {heading}
             </h2>
             {subheading && (
-              <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto text-left">
+              <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto font-serif italic">
                 {subheading}
               </p>
             )}
@@ -96,18 +89,20 @@ function GettingStartedSteps({
                   key={index}
                   className="relative flex flex-col items-center text-center group"
                 >
-                  {/* Icon Container */}
+                  {/* Icon Container - Warm and inviting */}
                   <div
                     className={cn(
                       "relative flex items-center justify-center",
-                      "w-16 h-16 sm:w-20 sm:h-20 rounded-full",
-                      "bg-spiracle-sand/50 border border-spiracle-terracotta/20",
+                      "w-18 h-18 sm:w-22 sm:h-22 rounded-full",
+                      "bg-card border border-border/50",
+                      "shadow-sm",
                       "transition-all duration-300 ease-out",
-                      "group-hover:bg-spiracle-honey/30 group-hover:border-spiracle-terracotta/40"
+                      "group-hover:bg-spiracle-sand/40 group-hover:border-border group-hover:shadow-md group-hover:-translate-y-1",
+                      "dark:group-hover:bg-muted/80"
                     )}
                   >
                     <Icon
-                      className="size-7 sm:size-8 text-spiracle-forest"
+                      className="size-8 sm:size-9 text-primary"
                       weight="regular"
                       aria-hidden="true"
                     />
@@ -115,11 +110,11 @@ function GettingStartedSteps({
                     {showNumbers && (
                       <span
                         className={cn(
-                          "absolute -top-1 -right-1",
+                          "absolute -top-1.5 -right-1.5",
                           "flex items-center justify-center",
-                          "w-6 h-6 rounded-full",
-                          "bg-spiracle-terracotta text-white",
-                          "text-xs font-semibold"
+                          "w-7 h-7 rounded-full",
+                          "bg-foreground text-background",
+                          "text-xs font-semibold shadow-sm"
                         )}
                         aria-hidden="true"
                       >
@@ -142,7 +137,7 @@ function GettingStartedSteps({
                       className={cn(
                         "hidden md:block absolute top-8 sm:top-10 left-[calc(50%+40px)] sm:left-[calc(50%+48px)]",
                         "w-[calc(100%-80px)] sm:w-[calc(100%-96px)] h-px",
-                        "bg-gradient-to-r from-spiracle-terracotta/30 via-spiracle-terracotta/20 to-spiracle-terracotta/30"
+                        "bg-gradient-to-r from-border via-border/50 to-border"
                       )}
                       aria-hidden="true"
                     />

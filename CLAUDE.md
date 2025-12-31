@@ -167,11 +167,16 @@ interface SectionProps {
 
 ### Background Variants
 
+**IMPORTANT: White (#fff/#ffffff) is NOT a Spiracle brand color. Never use bg-white anywhere.**
+
 | Variant | Color | Use Case |
 |---------|-------|----------|
-| `cream` | `bg-spiracle-cream` | Default, most sections |
+| `cream` | `bg-spiracle-cream` (#F9F7ED) | Default, most sections |
+| `parchment` | `bg-spiracle-parchment` (#F4EEDC) | Alternate light sections, cards |
 | `dark` | `bg-[#2D2520]` | CollectionCards grid, contrast sections |
-| `white` | `bg-white` | Alternate light sections |
+| `blush` | `bg-[#EBDEDB]` | Warm accent sections |
+| `sage` | `bg-[#C0C9C2]` | Soft green accent sections |
+| `honey` | `bg-[#f6eecd]` | Warm yellow accent sections |
 
 ### Usage Examples
 
@@ -318,6 +323,7 @@ Use the `stagger-children` utility class on grid/list containers for elegant car
 | `scroll-reveal` | Single element fade-in-up |
 | `color-transition` | Smooth color changes |
 | `link-underline` | Animated underline on hover |
+| `illustration-adaptive` | Inverts line art illustrations for dark mode (black lines → soft white) |
 
 ### Accessibility
 

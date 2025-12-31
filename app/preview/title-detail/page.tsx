@@ -6,6 +6,7 @@ import {
   CriticCard,
   BookCard,
   ReviewCard,
+  PreviewBar,
 } from "@/components/molecules";
 import {
   Book,
@@ -158,6 +159,7 @@ const showcaseCollection = {
 const criticReviews = [
   {
     publication: "The Guardian",
+    publicationLogo: "/logos/Pro Blocks/Bento Grid/Logos-guardian.png",
     rating: 5,
     reviewTitle: "A feast for the ears",
     reviewExcerpt:
@@ -168,6 +170,7 @@ const criticReviews = [
   },
   {
     publication: "Financial Times",
+    publicationLogo: "/logos/Pro Blocks/Bento Grid/Logos-financial-times.png",
     rating: 4,
     reviewTitle: "Essential listening for foodies",
     reviewExcerpt:
@@ -177,7 +180,8 @@ const criticReviews = [
     reviewUrl: "#",
   },
   {
-    publication: "The Observer",
+    publication: "Los Angeles Times",
+    publicationLogo: "/logos/Pro Blocks/Bento Grid/Logos-la-times.png",
     rating: 4,
     reviewTitle: "Rayner at his irreverent best",
     reviewExcerpt:
@@ -323,8 +327,11 @@ const communityReviews = [
 
 export default function TitleDetailPreviewPage() {
   return (
-    <TitleDetailPage
-      navItems={navItems}
+    <>
+      <PreviewBar currentPath="/preview/title-detail" />
+      <TitleDetailPage
+        navItems={navItems}
+        logoHref="/preview"
       cover={coverData}
       details={detailsData}
       purchase={purchaseData}
@@ -358,6 +365,7 @@ export default function TitleDetailPreviewPage() {
             <CriticCard
               key={index}
               publication={review.publication}
+              publicationLogo={review.publicationLogo}
               rating={review.rating}
               reviewTitle={review.reviewTitle}
               reviewExcerpt={review.reviewExcerpt}
@@ -418,5 +426,6 @@ export default function TitleDetailPreviewPage() {
         </>
       }
     />
+    </>
   );
 }

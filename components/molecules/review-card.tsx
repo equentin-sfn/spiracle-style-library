@@ -56,8 +56,11 @@ function ReviewCard({
   return (
     <article
       className={cn(
-        "flex flex-col bg-white dark:bg-card rounded-sm p-4 sm:p-5",
-        "transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]",
+        "flex flex-col bg-card rounded-sm p-5 sm:p-6 border border-border/30",
+        "transition-all duration-300 ease-out",
+        "hover:-translate-y-1 hover:border-border/50",
+        "hover:shadow-[0_8px_24px_rgba(45,37,32,0.1),0_2px_8px_rgba(45,37,32,0.06)]",
+        "dark:hover:shadow-[0_8px_24px_rgba(0,0,0,0.25),0_2px_8px_rgba(0,0,0,0.15)]",
         className
       )}
       {...props}
@@ -88,7 +91,7 @@ function ReviewCard({
         <h3 className="font-serif text-base sm:text-lg font-medium text-spiracle-ink dark:text-foreground mb-1.5 leading-snug">
           {title}
         </h3>
-        <p className="text-sm text-spiracle-ink/80 dark:text-foreground/70 leading-[1.6] line-clamp-4">
+        <p className="text-sm text-spiracle-ink/80 dark:text-foreground/70 leading-[1.6] line-clamp-4 font-serif">
           {body}
         </p>
       </div>

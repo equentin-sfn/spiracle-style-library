@@ -3,3 +3,4 @@
 
 export { PageWrapper, type PageWrapperProps } from "./page-wrapper";
 export { TitleDetailPage, type TitleDetailPageProps } from "./title-detail-page";
+export { MembershipPage, type MembershipPageProps } from "./membership-page";

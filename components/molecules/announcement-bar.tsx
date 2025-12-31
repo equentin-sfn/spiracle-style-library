@@ -25,9 +25,9 @@ export interface AnnouncementBarProps
 }
 
 const variantStyles = {
-  default: "bg-spiracle-parchment text-foreground border-b border-border/50",
-  subtle: "bg-spiracle-sand/50 text-foreground border-b border-border/30",
-  accent: "bg-spiracle-honey/60 text-foreground border-b border-spiracle-honey",
+  default: "bg-muted text-foreground border-b border-border/50",
+  subtle: "bg-muted/50 text-foreground border-b border-border/30",
+  accent: "bg-spiracle-honey/60 dark:bg-spiracle-honey/20 text-foreground border-b border-spiracle-honey dark:border-spiracle-honey/30",
 };
 
 function AnnouncementBar({
@@ -87,7 +87,7 @@ function AnnouncementBar({
                 {" "}
                 <Link
                   href={linkHref}
-                  className="font-medium text-foreground underline underline-offset-2 hover:text-spiracle-forest transition-colors"
+                  className="font-medium text-foreground underline underline-offset-2 hover:text-primary transition-colors"
                 >
                   {linkText}
                 </Link>

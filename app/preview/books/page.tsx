@@ -10,6 +10,7 @@ import {
   CardDescription,
   CardContent,
   CardFooter,
+  PreviewBar,
 } from "@/components/molecules";
 import { BentoHero, CollectionShowcase } from "@/components/organisms";
 
@@ -203,8 +204,9 @@ const collections = [
 
 export default function BooksPreviewPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground p-8">
-      <div className="max-w-6xl mx-auto space-y-12">
+    <div className="min-h-screen bg-background text-foreground">
+      <PreviewBar currentPath="/preview/books" />
+      <div className="max-w-6xl mx-auto space-y-12 p-8">
         {/* Header */}
         <header className="space-y-2">
           <h1 className="font-display text-4xl">Our Collection</h1>

@@ -132,3 +132,23 @@ export { PodcastCard, type PodcastCardProps } from "./podcast-card";
 export { EssayCard, type EssayCardProps } from "./essay-card";
 export { InterviewCard, type InterviewCardProps } from "./interview-card";
 export { AuthorBio, type AuthorBioProps, type AuthorLink } from "./author-bio";
+export {
+  AdaptiveIllustration,
+  type AdaptiveIllustrationProps,
+} from "./adaptive-illustration";
+export {
+  PlanToggle,
+  type PlanToggleProps,
+  type BillingPeriod,
+} from "./plan-toggle";
+export {
+  PricingCard,
+  type PricingCardProps,
+  type PricingFeature,
+} from "./pricing-card";
+export {
+  FAQAccordion,
+  type FAQAccordionProps,
+  type FAQItem,
+} from "./faq-accordion";
+export { PreviewBar, type PreviewBarProps } from "./preview-bar";

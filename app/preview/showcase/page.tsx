@@ -1,6 +1,6 @@
 "use client";
 
-import { CollectionCard, InfoBar, BookCoverActions, BookDetails, PurchasePanel } from "@/components/molecules";
+import { CollectionCard, InfoBar, BookCoverActions, BookDetails, PurchasePanel, PreviewBar } from "@/components/molecules";
 import {
   BentoHero,
   CollectionShowcase,
@@ -47,9 +47,11 @@ const infoBarItems = [
 export default function ShowcasePage() {
   return (
     <div className="min-h-screen">
+      <PreviewBar currentPath="/preview/showcase" />
       {/* Top Navigation */}
       <TopNavigation
         navItems={navItems}
+        logoHref="/preview"
         onSearch={() => console.log("Search clicked")}
         onCart={() => console.log("Cart clicked")}
         loginHref="/login"
@@ -255,6 +257,7 @@ In this rollicking collection of his hilarious columns, the award-winning writer
         reviews={[
           {
             publication: "The Guardian",
+            publicationLogo: "/logos/Pro Blocks/Bento Grid/Logos-guardian.png",
             rating: 4,
             reviewTitle: "A masterpiece of modern literature",
             reviewExcerpt:
@@ -265,6 +268,7 @@ In this rollicking collection of his hilarious columns, the award-winning writer
           },
           {
             publication: "Financial Times",
+            publicationLogo: "/logos/Pro Blocks/Bento Grid/Logos-financial-times.png",
             rating: 4,
             reviewTitle: "Exceptional storytelling",
             reviewExcerpt:
@@ -275,6 +279,7 @@ In this rollicking collection of his hilarious columns, the award-winning writer
           },
           {
             publication: "Los Angeles Times",
+            publicationLogo: "/logos/Pro Blocks/Bento Grid/Logos-la-times.png",
             rating: 4,
             reviewTitle: "A triumph of the audiobook form",
             reviewExcerpt:

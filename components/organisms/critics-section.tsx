@@ -27,19 +27,23 @@ function CriticsSection({
 }: CriticsSectionProps) {
   return (
     <section
-      className={cn("w-full bg-spiracle-cream py-12 sm:py-16 lg:py-20", className)}
+      className={cn("w-full bg-background py-14 sm:py-18 lg:py-24", className)}
       {...props}
     >
       <div className="max-w-6xl mx-auto px-6 sm:px-8">
-        {/* Section Header */}
-        <header className="text-center mb-8 sm:mb-10 lg:mb-12">
-          <h2 className="text-xs sm:text-sm uppercase tracking-[0.2em] text-spiracle-slate">
-            {sectionLabel}
-          </h2>
+        {/* Section Header - Editorial style */}
+        <header className="text-center mb-10 sm:mb-12 lg:mb-14">
+          <p className="text-[0.65rem] sm:text-xs uppercase tracking-[0.25em] text-muted-foreground/70 font-medium">
+            <span className="inline-flex items-center gap-3">
+              <span className="w-8 h-px bg-border" aria-hidden="true" />
+              {sectionLabel}
+              <span className="w-8 h-px bg-border" aria-hidden="true" />
+            </span>
+          </p>
         </header>
 
-        {/* Critics Grid - 3 columns on large screens */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        {/* Critics Grid - 3 columns on large screens with stagger animation */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6 lg:gap-8 stagger-children">
           {reviews.map((review, index) => (
             <CriticCard
               key={index}

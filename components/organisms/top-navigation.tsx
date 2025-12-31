@@ -19,6 +19,8 @@ export interface TopNavigationProps extends React.HTMLAttributes<HTMLElement> {
   onCart?: () => void;
   loginHref?: string;
   joinHref?: string;
+  /** Logo link destination (defaults to "/") */
+  logoHref?: string;
 }
 
 function TopNavigation({
@@ -27,6 +29,7 @@ function TopNavigation({
   onCart,
   loginHref = "/login",
   joinHref = "/join",
+  logoHref = "/",
   className,
   ...props
 }: TopNavigationProps) {
@@ -48,7 +51,7 @@ function TopNavigation({
         >
         {/* Left: Logo */}
         <Link
-          href="/"
+          href={logoHref}
           className="shrink-0"
           aria-label="Spiracle home"
         >
@@ -68,7 +71,7 @@ function TopNavigation({
             <li key={item.href}>
               <Link
                 href={item.href}
-                className="text-xs xl:text-sm uppercase tracking-[0.15em] text-foreground hover:text-muted-foreground transition-colors"
+                className="text-xs xl:text-sm uppercase tracking-[0.15em] text-foreground link-literary"
               >
                 {item.label}
               </Link>
@@ -104,7 +107,7 @@ function TopNavigation({
           {/* Log In Link - Desktop only */}
           <Link
             href={loginHref}
-            className="hidden lg:block text-xs xl:text-sm uppercase tracking-[0.15em] text-foreground hover:text-muted-foreground transition-colors px-2"
+            className="hidden lg:block text-xs xl:text-sm uppercase tracking-[0.15em] text-foreground link-literary px-2"
           >
             Log In
           </Link>

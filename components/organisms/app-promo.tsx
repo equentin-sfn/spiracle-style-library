@@ -35,8 +35,6 @@ export interface AppPromoProps extends React.HTMLAttributes<HTMLElement> {
   playStoreHref?: string;
   /** Feature list */
   features?: AppFeature[];
-  /** Background variant */
-  variant?: "cream" | "white" | "dark";
   /** Layout direction */
   layout?: "default" | "reversed";
 }
@@ -59,27 +57,6 @@ const defaultFeatures: AppFeature[] = [
   },
 ];
 
-const variantStyles = {
-  cream: {
-    bg: "bg-spiracle-cream",
-    text: "text-foreground",
-    muted: "text-muted-foreground",
-    featureBg: "bg-spiracle-sand/30",
-  },
-  white: {
-    bg: "bg-white",
-    text: "text-foreground",
-    muted: "text-muted-foreground",
-    featureBg: "bg-spiracle-cream/50",
-  },
-  dark: {
-    bg: "bg-[#2D2520]",
-    text: "text-white",
-    muted: "text-white/70",
-    featureBg: "bg-white/5",
-  },
-};
-
 function AppPromo({
   heading = "Listen on the Spiracle app",
   description = "Download the Spiracle app and take your library with you. Available on iOS and Android.",
@@ -87,17 +64,13 @@ function AppPromo({
   appStoreHref = "#",
   playStoreHref = "#",
   features = defaultFeatures,
-  variant = "cream",
   layout = "default",
   className,
   ...props
 }: AppPromoProps) {
-  const styles = variantStyles[variant];
-  const isDark = variant === "dark";
-
   return (
     <section
-      className={cn("py-16 sm:py-20 lg:py-24 overflow-hidden", styles.bg, className)}
+      className={cn("py-16 sm:py-20 lg:py-24 overflow-hidden bg-background", className)}
       {...props}
     >
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -125,7 +98,7 @@ function AppPromo({
                   )}
                 >
                   {/* Screen */}
-                  <div className="relative h-full rounded-[2rem] overflow-hidden bg-spiracle-cream">
+                  <div className="relative h-full rounded-[2rem] overflow-hidden bg-muted">
                     <Image
                       src={phoneMockupSrc}
                       alt="Spiracle app interface"
@@ -142,12 +115,7 @@ function AppPromo({
                 </div>
                 {/* Decorative glow */}
                 <div
-                  className={cn(
-                    "absolute -inset-8 -z-10 blur-3xl opacity-30",
-                    isDark
-                      ? "bg-spiracle-terracotta"
-                      : "bg-spiracle-honey"
-                  )}
+                  className="absolute -inset-8 -z-10 blur-3xl opacity-30 bg-primary"
                   aria-hidden="true"
                 />
               </div>
@@ -161,17 +129,12 @@ function AppPromo({
               )}
             >
               {/* Heading */}
-              <h2
-                className={cn(
-                  "font-display text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-tight",
-                  styles.text
-                )}
-              >
+              <h2 className="font-display text-3xl sm:text-4xl lg:text-5xl tracking-tight leading-tight text-foreground">
                 {heading}
               </h2>
 
               {/* Description */}
-              <p className={cn("mt-4 text-lg leading-relaxed", styles.muted)}>
+              <p className="mt-4 text-lg leading-relaxed text-muted-foreground font-serif">
                 {description}
               </p>
 
@@ -182,9 +145,7 @@ function AppPromo({
                   className={cn(
                     "flex items-center gap-3 px-5 py-3 rounded-lg",
                     "transition-all duration-200",
-                    isDark
-                      ? "bg-white text-[#1a1a1a] hover:bg-white/90"
-                      : "bg-[#1a1a1a] text-white hover:bg-[#1a1a1a]/90"
+                    "bg-foreground text-background hover:bg-foreground/90"
                   )}
                   aria-label="Download on the App Store"
                 >
@@ -204,9 +165,7 @@ function AppPromo({
                   className={cn(
                     "flex items-center gap-3 px-5 py-3 rounded-lg",
                     "transition-all duration-200",
-                    isDark
-                      ? "bg-white text-[#1a1a1a] hover:bg-white/90"
-                      : "bg-[#1a1a1a] text-white hover:bg-[#1a1a1a]/90"
+                    "bg-foreground text-background hover:bg-foreground/90"
                   )}
                   aria-label="Get it on Google Play"
                 >
@@ -231,44 +190,23 @@ function AppPromo({
                       <div
                         key={index}
                         className={cn(
-                          "flex items-start gap-4 p-4 rounded-lg",
-                          styles.featureBg
+                          "flex items-start gap-4 p-4 rounded-sm",
+                          "bg-card border border-border/30",
+                          "transition-all duration-200 ease-out",
+                          "hover:border-border/50 hover:shadow-sm"
                         )}
                       >
-                        <div
-                          className={cn(
-                            "flex-shrink-0 flex items-center justify-center",
-                            "w-10 h-10 rounded-full",
-                            isDark
-                              ? "bg-spiracle-terracotta/20"
-                              : "bg-spiracle-forest/10"
-                          )}
-                        >
+                        <div className="flex-shrink-0 flex items-center justify-center w-10 h-10 rounded-full bg-spiracle-sand/50 dark:bg-muted">
                           <Icon
-                            className={cn(
-                              "size-5",
-                              isDark
-                                ? "text-spiracle-honey"
-                                : "text-spiracle-forest"
-                            )}
+                            className="size-5 text-primary"
                             weight="regular"
                           />
                         </div>
                         <div>
-                          <h3
-                            className={cn(
-                              "font-medium text-base",
-                              styles.text
-                            )}
-                          >
+                          <h3 className="font-medium text-base text-foreground">
                             {feature.title}
                           </h3>
-                          <p
-                            className={cn(
-                              "mt-0.5 text-sm leading-relaxed",
-                              styles.muted
-                            )}
-                          >
+                          <p className="mt-0.5 text-sm leading-relaxed text-muted-foreground font-serif">
                             {feature.description}
                           </p>
                         </div>

@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 
 // Atoms
 import { Button } from "@/components/atoms";
@@ -57,6 +58,7 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+  PreviewBar,
 } from "@/components/molecules";
 
 function Section({
@@ -106,8 +108,9 @@ export default function PreviewPage() {
   const [inputValue, setInputValue] = useState("");
 
   return (
-    <div className="min-h-screen bg-background text-foreground p-8">
-      <div className="max-w-4xl mx-auto space-y-12">
+    <div className="min-h-screen bg-background text-foreground">
+      <PreviewBar currentPath="/preview" />
+      <div className="max-w-4xl mx-auto space-y-12 p-8">
         {/* Header with Spiracle branding */}
         <header className="text-center space-y-4">
           <h1 className="font-display text-6xl">Spiracle</h1>
@@ -123,6 +126,31 @@ export default function PreviewPage() {
             <Badge variant="outline">Surprising</Badge>
           </div>
         </header>
+
+        {/* Preview Navigation */}
+        <nav className="flex flex-wrap justify-center gap-2">
+          <Button asChild variant="outline" size="sm">
+            <Link href="/preview">Base Components</Link>
+          </Button>
+          <Button asChild variant="outline" size="sm">
+            <Link href="/preview/home">Homepage Components</Link>
+          </Button>
+          <Button asChild variant="outline" size="sm">
+            <Link href="/preview/books">Book Cards</Link>
+          </Button>
+          <Button asChild variant="outline" size="sm">
+            <Link href="/preview/collections">Collections</Link>
+          </Button>
+          <Button asChild variant="outline" size="sm">
+            <Link href="/preview/spotlights">Spotlights</Link>
+          </Button>
+          <Button asChild variant="outline" size="sm">
+            <Link href="/preview/showcase">Showcase</Link>
+          </Button>
+          <Button asChild variant="outline" size="sm">
+            <Link href="/preview/membership">Membership</Link>
+          </Button>
+        </nav>
 
         <Separator />
 

@@ -11,6 +11,7 @@ import {
   Books,
 } from "@phosphor-icons/react";
 import type { Icon as PhosphorIcon } from "@phosphor-icons/react";
+import { AdaptiveIllustration } from "@/components/molecules/adaptive-illustration";
 
 export interface AuthorSocialLink {
   icon: PhosphorIcon;
@@ -21,6 +22,8 @@ export interface AuthorSocialLink {
 export interface AuthorHeroProps extends React.HTMLAttributes<HTMLElement> {
   /** Author photo URL */
   photoSrc: string;
+  /** Author photo dark mode URL (white lines on transparent) */
+  photoDarkSrc?: string;
   /** Author name */
   name: string;
   /** Author bio/description */
@@ -35,8 +38,6 @@ export interface AuthorHeroProps extends React.HTMLAttributes<HTMLElement> {
   totalDuration?: string;
   /** Social/external links */
   socialLinks?: AuthorSocialLink[];
-  /** Background variant */
-  variant?: "cream" | "dark" | "white";
   /** Layout variant */
   layout?: "centered" | "split";
 }
@@ -47,32 +48,9 @@ const defaultSocialLinks: AuthorSocialLink[] = [
   { icon: InstagramLogo, href: "#", label: "Instagram" },
 ];
 
-const variantStyles = {
-  cream: {
-    bg: "bg-spiracle-cream",
-    text: "text-foreground",
-    muted: "text-muted-foreground",
-    socialBg: "bg-spiracle-sand/50 hover:bg-spiracle-sand",
-    statBg: "bg-spiracle-sand/30",
-  },
-  dark: {
-    bg: "bg-[#2D2520]",
-    text: "text-white",
-    muted: "text-white/70",
-    socialBg: "bg-white/10 hover:bg-white/20",
-    statBg: "bg-white/5",
-  },
-  white: {
-    bg: "bg-white",
-    text: "text-foreground",
-    muted: "text-muted-foreground",
-    socialBg: "bg-spiracle-cream hover:bg-spiracle-sand/50",
-    statBg: "bg-spiracle-cream/50",
-  },
-};
-
 function AuthorHero({
   photoSrc,
+  photoDarkSrc,
   name,
   bio,
   lifespan,
@@ -80,17 +58,15 @@ function AuthorHero({
   titleCount,
   totalDuration,
   socialLinks = defaultSocialLinks,
-  variant = "cream",
   layout = "centered",
   className,
   ...props
 }: AuthorHeroProps) {
-  const styles = variantStyles[variant];
   const isCentered = layout === "centered";
 
   return (
     <section
-      className={cn("py-16 sm:py-20 lg:py-24", styles.bg, className)}
+      className={cn("py-16 sm:py-20 lg:py-24 bg-background", className)}
       {...props}
     >
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
@@ -118,19 +94,31 @@ function AuthorHero({
                       : "w-48 h-48 sm:w-56 sm:h-56 lg:w-64 lg:h-64 rounded-sm"
                   )}
                 >
-                  <Image
-                    src={photoSrc}
-                    alt={name}
-                    fill
-                    className="object-cover"
-                    sizes="(max-width: 1024px) 224px, 256px"
-                    priority
-                  />
+                  {photoDarkSrc ? (
+                    <AdaptiveIllustration
+                      lightSrc={photoSrc}
+                      darkSrc={photoDarkSrc}
+                      alt={name}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 224px, 256px"
+                      priority
+                    />
+                  ) : (
+                    <Image
+                      src={photoSrc}
+                      alt={name}
+                      fill
+                      className="object-cover illustration-adaptive"
+                      sizes="(max-width: 1024px) 224px, 256px"
+                      priority
+                    />
+                  )}
                 </div>
                 {/* Decorative ring for centered layout */}
                 {isCentered && (
                   <div
-                    className="absolute -inset-2 rounded-full border-2 border-spiracle-terracotta/20"
+                    className="absolute -inset-2 rounded-full border-2 border-primary/20"
                     aria-hidden="true"
                   />
                 )}
@@ -154,27 +142,17 @@ function AuthorHero({
                   )}
                 >
                   {nationality && (
-                    <span
-                      className={cn(
-                        "text-xs uppercase tracking-[0.2em]",
-                        styles.muted
-                      )}
-                    >
+                    <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
                       {nationality}
                     </span>
                   )}
                   {nationality && lifespan && (
-                    <span className={styles.muted} aria-hidden="true">
+                    <span className="text-muted-foreground" aria-hidden="true">
                       ·
                     </span>
                   )}
                   {lifespan && (
-                    <span
-                      className={cn(
-                        "text-xs uppercase tracking-[0.2em]",
-                        styles.muted
-                      )}
-                    >
+                    <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground">
                       {lifespan}
                     </span>
                   )}
@@ -184,11 +162,10 @@ function AuthorHero({
               {/* Name */}
               <h1
                 className={cn(
-                  "font-display tracking-tight leading-tight",
+                  "font-display tracking-tight leading-tight text-foreground",
                   isCentered
                     ? "text-4xl sm:text-5xl lg:text-6xl"
-                    : "text-3xl sm:text-4xl lg:text-5xl",
-                  styles.text
+                    : "text-3xl sm:text-4xl lg:text-5xl"
                 )}
               >
                 {name}
@@ -203,29 +180,19 @@ function AuthorHero({
                   )}
                 >
                   {titleCount !== undefined && (
-                    <div
-                      className={cn(
-                        "flex items-center gap-2 px-4 py-2 rounded-full",
-                        styles.statBg
-                      )}
-                    >
+                    <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-spiracle-sand/40 dark:bg-muted border border-border/30">
                       <Books
-                        className={cn("size-4", styles.muted)}
+                        className="size-4 text-primary"
                         weight="regular"
                       />
-                      <span className={cn("text-sm", styles.text)}>
+                      <span className="text-sm text-foreground">
                         {titleCount} {titleCount === 1 ? "title" : "titles"}
                       </span>
                     </div>
                   )}
                   {totalDuration && (
-                    <div
-                      className={cn(
-                        "px-4 py-2 rounded-full",
-                        styles.statBg
-                      )}
-                    >
-                      <span className={cn("text-sm", styles.text)}>
+                    <div className="px-4 py-2 rounded-full bg-spiracle-sand/40 dark:bg-muted border border-border/30">
+                      <span className="text-sm text-foreground">
                         {totalDuration} of content
                       </span>
                     </div>
@@ -236,8 +203,7 @@ function AuthorHero({
               {/* Bio */}
               <p
                 className={cn(
-                  "text-base sm:text-lg leading-relaxed mt-6 text-left",
-                  styles.muted,
+                  "text-base sm:text-lg leading-relaxed mt-6 text-left text-muted-foreground font-serif",
                   isCentered ? "max-w-xl mx-auto" : "max-w-2xl"
                 )}
               >
@@ -261,8 +227,7 @@ function AuthorHero({
                         className={cn(
                           "flex items-center justify-center w-10 h-10 rounded-full",
                           "transition-colors duration-200",
-                          styles.socialBg,
-                          styles.text
+                          "bg-muted hover:bg-spiracle-sand/50 dark:hover:bg-muted/80 text-foreground"
                         )}
                         aria-label={link.label}
                       >

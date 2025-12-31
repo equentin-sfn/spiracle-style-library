@@ -222,8 +222,9 @@
 }
 
 /* ============================================
-   SUBTLE DELIGHT ANIMATIONS
-   Premium publishing house aesthetic
+   SPIRACLE DELIGHT ANIMATIONS
+   Cosy indie bookshop aesthetic
+   "Daunt Books meets vinyl shop meets literary festival"
    ============================================ */
 
 /* Keyframes for subtle animations */
@@ -253,23 +254,52 @@
   to { opacity: 1; }
 }
 
+/* Literary page turn effect */
+@keyframes page-turn {
+  0% { transform: perspective(600px) rotateY(0deg); }
+  50% { transform: perspective(600px) rotateY(-5deg); }
+  100% { transform: perspective(600px) rotateY(0deg); }
+}
+
+/* Gentle wave drift for audio elements */
+@keyframes wave-drift {
+  0%, 100% { transform: translateX(0); }
+  50% { transform: translateX(3px); }
+}
+
+/* Warm glow pulse for featured items */
+@keyframes warm-glow {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(159, 67, 0, 0); }
+  50% { box-shadow: 0 0 20px 2px rgba(159, 67, 0, 0.08); }
+}
+
+/* Typewriter cursor blink for literary touch */
+@keyframes cursor-blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+
 /* Utility classes for animations */
 @layer utilities {
-  /* Card hover effect - subtle lift and shadow */
+  /* Card hover effect - subtle lift with warm shadow */
   .card-hover {
     @apply transition-all duration-300 ease-out;
   }
   .card-hover:hover {
-    @apply -translate-y-0.5;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    @apply -translate-y-1;
+    box-shadow: 0 8px 24px rgba(45, 37, 32, 0.12), 0 2px 8px rgba(45, 37, 32, 0.08);
+  }
+  .dark .card-hover:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2);
   }
 
-  /* Cover image hover - very subtle scale */
+  /* Book cover hover - gentle tilt like picking up a book */
   .cover-hover {
     @apply transition-transform duration-300 ease-out;
+    transform-origin: center bottom;
   }
   .cover-hover:hover {
-    transform: scale(1.02);
+    transform: scale(1.02) rotate(-0.5deg);
   }
 
   /* Button press state */
@@ -318,7 +348,21 @@
     animation: soft-entrance 0.5s ease-out forwards;
   }
 
-  /* Link underline animation */
+  /* Literary link style - elegant underline that grows */
+  .link-literary {
+    @apply relative text-foreground no-underline;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.3s ease-out, color 0.2s ease-out;
+  }
+  .link-literary:hover {
+    @apply text-primary;
+    background-size: 100% 1px;
+  }
+
+  /* Classic underline animation for links */
   .link-underline {
     @apply relative;
   }
@@ -331,10 +375,84 @@
     @apply w-full;
   }
 
+  /* Decorative flourish for section labels */
+  .flourish-label {
+    @apply relative inline-flex items-center gap-3;
+  }
+  .flourish-label::before,
+  .flourish-label::after {
+    content: '';
+    @apply h-px bg-border flex-1 min-w-[2rem];
+  }
+
+  /* Warm glow effect for featured items */
+  .warm-glow {
+    animation: warm-glow 3s ease-in-out infinite;
+  }
+
+  /* Audio wave animation */
+  .wave-drift {
+    animation: wave-drift 4s ease-in-out infinite;
+  }
+
+  /* Book spine texture hint on cards */
+  .book-spine {
+    position: relative;
+  }
+  .book-spine::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(
+      to right,
+      rgba(45, 37, 32, 0.15),
+      rgba(45, 37, 32, 0.05),
+      transparent
+    );
+    border-radius: 2px 0 0 2px;
+  }
+  .dark .book-spine::before {
+    background: linear-gradient(
+      to right,
+      rgba(249, 247, 237, 0.1),
+      rgba(249, 247, 237, 0.03),
+      transparent
+    );
+  }
+
   /* Carousel navigation arrows */
   .carousel-arrow {
     /* Hidden by default on touch devices */
     @apply hidden;
+  }
+
+  /* Adaptive line art illustrations - inverts black lines to white in dark mode */
+  .illustration-adaptive {
+    @apply transition-all duration-200;
+  }
+  .dark .illustration-adaptive {
+    filter: invert(0.9) brightness(0.95) sepia(0.05);
+  }
+
+  /* Editorial section divider with wave */
+  .section-divider {
+    @apply relative h-8 overflow-hidden;
+  }
+  .section-divider::after {
+    content: '';
+    @apply absolute inset-0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1705 223' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1705 1C1620.82 1 1613.45 222 1550.76 222H1551.44C1488.76 222 1516.02 1 1428.17 1H1427C1339.15 1 1379.71 222 1295.24 222H1296.15C1211.66 222 1201.76 1 1088.3 1H1086.99C973.544 1 963.625 222 879.157 222H880.064C795.615 222 785.697 1 672.248 1H670.717C557.269 1 547.35 222 462.882 222H463.789C379.34 222 369.422 1 255.973 1C142.505 1 141.485 137.807 0 137.807' stroke='%23E8E1CF' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 100% 100%;
+    opacity: 0.6;
+  }
+  .dark .section-divider::after {
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 1705 223' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M1705 1C1620.82 1 1613.45 222 1550.76 222H1551.44C1488.76 222 1516.02 1 1428.17 1H1427C1339.15 1 1379.71 222 1295.24 222H1296.15C1211.66 222 1201.76 1 1088.3 1H1086.99C973.544 1 963.625 222 879.157 222H880.064C795.615 222 785.697 1 672.248 1H670.717C557.269 1 547.35 222 462.882 222H463.789C379.34 222 369.422 1 255.973 1C142.505 1 141.485 137.807 0 137.807' stroke='%234a423a' stroke-width='2' fill='none'/%3E%3C/svg%3E");
+    opacity: 0.4;
   }
 }
 

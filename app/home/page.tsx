@@ -5,10 +5,16 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { isAuthenticated, logout } from "@/lib/auth";
 import { Button } from "@/components/atoms";
-import { List, X, SignOut, Book, Swatches, Layout, Star, Books, GridFour } from "@phosphor-icons/react";
+import { List, X, SignOut, Book, Swatches, Layout, Star, Books, GridFour, House } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
+  {
+    label: "Homepage Components",
+    href: "/preview/home",
+    description: "New homepage & layout components",
+    icon: House,
+  },
   {
     label: "Title Detail Page",
     href: "/preview/title-detail",
@@ -81,7 +87,7 @@ export default function HomePage() {
           {/* Hamburger */}
           <button
             onClick={() => setMenuOpen(true)}
-            className="p-2 -ml-2 text-foreground hover:bg-accent rounded-md transition-colors"
+            className="p-2 -ml-2 text-foreground hover:bg-spiracle-sand/50 rounded-md transition-colors"
             aria-label="Open menu"
           >
             <List size={24} weight="light" />
@@ -95,7 +101,7 @@ export default function HomePage() {
           {/* Logout */}
           <button
             onClick={handleLogout}
-            className="p-2 -mr-2 text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-colors"
+            className="p-2 -mr-2 text-muted-foreground hover:text-foreground hover:bg-spiracle-sand/50 rounded-md transition-colors"
             aria-label="Logout"
           >
             <SignOut size={20} weight="light" />
@@ -128,7 +134,7 @@ export default function HomePage() {
             <span className="font-display text-lg text-foreground">Menu</span>
             <button
               onClick={() => setMenuOpen(false)}
-              className="p-2 -mr-2 text-muted-foreground hover:text-foreground hover:bg-accent rounded-md transition-colors"
+              className="p-2 -mr-2 text-muted-foreground hover:text-foreground hover:bg-spiracle-sand/50 rounded-md transition-colors"
               aria-label="Close menu"
             >
               <X size={20} weight="light" />
@@ -142,7 +148,7 @@ export default function HomePage() {
                 key={item.href}
                 href={item.href}
                 onClick={() => setMenuOpen(false)}
-                className="flex items-start gap-3 px-4 py-3 hover:bg-accent transition-colors"
+                className="flex items-start gap-3 px-4 py-3 hover:bg-spiracle-sand/50 transition-colors"
               >
                 <item.icon size={20} weight="light" className="text-muted-foreground mt-0.5 flex-shrink-0" />
                 <div>

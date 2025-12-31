@@ -1,0 +1,41 @@
+"use client";
+
+import * as React from "react";
+import { cn } from "@/lib/utils";
+
+export interface WaveDecorationProps extends React.SVGAttributes<SVGSVGElement> {
+  /** Opacity of the wave (0-1). Default is very subtle at 0.08 */
+  opacity?: number;
+}
+
+/**
+ * Spiracle brand sound wave decoration for audio-related cards.
+ * Uses currentColor to automatically adapt to light/dark mode.
+ * Designed to be a "discovered detail" - subtle and sophisticated.
+ */
+function WaveDecoration({
+  opacity = 0.08,
+  className,
+  ...props
+}: WaveDecorationProps) {
+  return (
+    <svg
+      viewBox="0 0 1705 223"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={cn("pointer-events-none", className)}
+      style={{ opacity }}
+      aria-hidden="true"
+      {...props}
+    >
+      <path
+        d="M1705 1C1620.82 1 1613.45 222 1550.76 222H1551.44C1488.76 222 1516.02 1 1428.17 1H1427C1339.15 1 1379.71 222 1295.24 222H1296.15C1211.66 222 1201.76 1 1088.3 1H1086.99C973.544 1 963.625 222 879.157 222H880.064C795.615 222 785.697 1 672.248 1H670.717C557.269 1 547.35 222 462.882 222H463.789C379.34 222 369.422 1 255.973 1C142.505 1 141.485 137.807 0 137.807"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeMiterlimit="10"
+      />
+    </svg>
+  );
+}
+
+export { WaveDecoration };

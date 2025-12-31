@@ -1,7 +1,7 @@
 "use client";
 
 import { TopNavigation, BookDetailsHero } from "@/components/organisms";
-import { InfoBar } from "@/components/molecules";
+import { InfoBar, PreviewBar } from "@/components/molecules";
 import {
   Book,
   Timer,
@@ -95,9 +95,11 @@ In this rollicking collection of his hilarious columns, the award-winning writer
 export default function BookDetailsPage() {
   return (
     <div className="min-h-screen bg-spiracle-cream">
+      <PreviewBar currentPath="/preview/book-details" />
       {/* Top Navigation */}
       <TopNavigation
         navItems={navItems}
+        logoHref="/preview"
         onSearch={() => console.log("Search clicked")}
         onCart={() => console.log("Cart clicked")}
         loginHref="/login"

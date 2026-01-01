@@ -7,6 +7,7 @@ import {
   BookCard,
   ReviewCard,
   PreviewBar,
+  type PurchaseFormat,
 } from "@/components/molecules";
 import {
   Book,
@@ -31,9 +32,20 @@ const navItems = [
   { label: "Membership", href: "/membership" },
 ];
 
+// Available formats for this title
+const formatsData: PurchaseFormat[] = [
+  { type: "audiobook", price: 12.99, memberPrice: 9.99, available: true },
+  { type: "aiac", price: 12.99, available: true },
+  { type: "ebook", price: 6.99, available: true },
+];
+
 // Book cover and actions
 const coverData = {
   image: "/images/covers/cover-med-01.png",
+  // Image variants for different formats
+  formatImages: {
+    aiac: "/images/aiac/treasure-island-card.jpg", // AIAC card design
+  },
   tags: [
     { label: "Food & Drink", href: "/tags/food-drink" },
     { label: "Memoir", href: "/tags/memoir" },
@@ -332,10 +344,12 @@ export default function TitleDetailPreviewPage() {
       <TitleDetailPage
         navItems={navItems}
         logoHref="/preview"
-      cover={coverData}
-      details={detailsData}
-      purchase={purchaseData}
-      metadataItems={metadataItems}
+        cover={coverData}
+        details={detailsData}
+        purchase={purchaseData}
+        formats={formatsData}
+        defaultFormat="audiobook"
+        metadataItems={metadataItems}
       onSearch={() => console.log("Search clicked")}
       onCart={() => console.log("Cart clicked")}
       // Collections Grid (below info bar)

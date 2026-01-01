@@ -14,7 +14,7 @@ import {
   type BookDetailsHeroDetails,
   type BookDetailsHeroPurchase,
 } from "@/components/organisms";
-import { InfoBar, type InfoBarItem } from "@/components/molecules";
+import { InfoBar, type InfoBarItem, type PurchaseFormat, type FormatType } from "@/components/molecules";
 
 export interface TitleDetailPageProps
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -26,6 +26,10 @@ export interface TitleDetailPageProps
   details: BookDetailsHeroDetails;
   /** Purchase options data */
   purchase: BookDetailsHeroPurchase;
+  /** Available formats for this title */
+  formats?: PurchaseFormat[];
+  /** Default selected format */
+  defaultFormat?: FormatType;
   /** Metadata items for InfoBar */
   metadataItems: InfoBarItem[];
   /** Collections section label */
@@ -73,6 +77,8 @@ function TitleDetailPage({
   cover,
   details,
   purchase,
+  formats,
+  defaultFormat,
   metadataItems,
   collectionsLabel = "FOUND IN THE FOLLOWING COLLECTIONS",
   collectionsContent,
@@ -116,6 +122,8 @@ function TitleDetailPage({
         cover={cover}
         details={details}
         purchase={purchase}
+        formats={formats}
+        defaultFormat={defaultFormat}
       />
 
       {/* 3. MetadataBar (InfoBar) - subtle warm tint */}

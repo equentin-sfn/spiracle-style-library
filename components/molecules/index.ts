@@ -119,7 +119,11 @@ export {
   type LinkedValue,
   type BookSeries,
 } from "./book-details";
-export { PurchasePanel, type PurchasePanelProps } from "./purchase-panel";
+export {
+  PurchasePanel,
+  type PurchasePanelProps,
+  type PurchaseFormat,
+} from "./purchase-panel";
 export { ScrollCarousel, type ScrollCarouselProps } from "./scroll-carousel";
 export {
   NewsletterSignup,
@@ -163,5 +167,7 @@ export {
   type Format,
   type FormatType,
   getFormatDescription,
-  getFormatTagline,
+  getFormatCtaText,
+  formatPrice,
+  getPriceNote,
 } from "./format-selector";

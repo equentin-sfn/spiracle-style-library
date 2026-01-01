@@ -6,15 +6,15 @@ import {
   BookCoverActions,
   BookDetails,
   PurchasePanel,
-  FormatSelector,
-  getFormatDescription,
   type BookTag,
   type LinkedValue,
   type BookSeries,
-  type Format,
-  type FormatType,
+  type PurchaseFormat,
 } from "@/components/molecules";
 import { PageWrapper } from "@/components/templates";
+
+// Re-export FormatType for consumers
+export type FormatType = "audiobook" | "aiac" | "ebook" | "hardback" | "paperback";
 
 export interface BookDetailsHeroCover {
   image: string;
@@ -42,14 +42,24 @@ export interface BookDetailsHeroDetails {
 }
 
 export interface BookDetailsHeroPurchase {
+  /** Trial message (audiobook only) */
   trialMessage: string;
+  /** Trial price display (audiobook only) */
   trialPrice: string;
+  /** Trial CTA text (audiobook only) */
   trialCtaText: string;
+  /** Trial/purchase href */
   trialCtaHref: string;
+  /** Benefits list (audiobook trial) */
   benefits: string[];
+  /** Buy price for non-members */
   buyPrice: string;
+  /** Member price */
   memberPrice: string;
+  /** Buy CTA href */
   buyCtaHref: string;
+  /** Checkout href for physical/ebook formats */
+  checkoutHref?: string;
 }
 
 export interface BookDetailsHeroProps
@@ -57,8 +67,8 @@ export interface BookDetailsHeroProps
   cover: BookDetailsHeroCover;
   details: BookDetailsHeroDetails;
   purchase: BookDetailsHeroPurchase;
-  /** Available formats for this title (if empty/single, selector hidden) */
-  formats?: Format[];
+  /** Available formats for this title */
+  formats?: PurchaseFormat[];
   /** Default selected format */
   defaultFormat?: FormatType;
   /** Controlled selected format */
@@ -78,10 +88,10 @@ function BookDetailsHero({
   className,
   ...props
 }: BookDetailsHeroProps) {
-  // Internal state for uncontrolled mode
+  // Internal state for format selection
   const [internalFormat, setInternalFormat] = React.useState<FormatType>(defaultFormat);
 
-  // Use controlled value if provided, otherwise use internal state
+  // Use controlled value if provided
   const currentFormat = controlledFormat ?? internalFormat;
 
   const handleFormatChange = (format: FormatType) => {
@@ -91,27 +101,9 @@ function BookDetailsHero({
     onFormatChange?.(format);
   };
 
-  // Get format-specific data
-  const selectedFormatData = formats.find((f) => f.type === currentFormat);
+  // Get format-specific image
   const isPhysicalProduct = currentFormat === "aiac" || currentFormat === "hardback" || currentFormat === "paperback";
   const formatImage = cover.formatImages?.[currentFormat];
-
-  // Get format-specific pricing
-  const formatPrice = selectedFormatData?.price;
-  const formatMemberPrice = selectedFormatData?.memberPrice;
-  const formatDescription = getFormatDescription(currentFormat);
-
-  // Build purchase panel props based on format
-  const purchaseProps = {
-    ...purchase,
-    // Override prices if format has specific pricing
-    ...(formatPrice !== undefined && {
-      buyPrice: `£${formatPrice.toFixed(2)}`,
-    }),
-    ...(formatMemberPrice !== undefined && {
-      memberPrice: `£${formatMemberPrice.toFixed(2)}`,
-    }),
-  };
 
   return (
     <section
@@ -148,36 +140,22 @@ function BookDetailsHero({
             maxDescriptionLength={details.maxDescriptionLength}
           />
 
-          {/* Column 3: Format Selector + Purchase Panel */}
-          <div className="md:col-span-2 lg:col-span-1 flex flex-col gap-4">
-            {/* Format Selector - only shows if 2+ formats */}
-            {formats.length > 1 && (
-              <div className="flex flex-col gap-2">
-                <FormatSelector
-                  formats={formats}
-                  selectedFormat={currentFormat}
-                  onFormatChange={handleFormatChange}
-                />
-                {/* Format description */}
-                {formatDescription && (
-                  <p className="text-xs text-muted-foreground leading-relaxed">
-                    {formatDescription}
-                  </p>
-                )}
-              </div>
-            )}
-
-            <PurchasePanel
-              trialMessage={purchaseProps.trialMessage}
-              trialPrice={purchaseProps.trialPrice}
-              trialCtaText={purchaseProps.trialCtaText}
-              trialCtaHref={purchaseProps.trialCtaHref}
-              benefits={purchaseProps.benefits}
-              buyPrice={purchaseProps.buyPrice}
-              memberPrice={purchaseProps.memberPrice}
-              buyCtaHref={purchaseProps.buyCtaHref}
-            />
-          </div>
+          {/* Column 3: Unified Purchase Panel with Format Tabs */}
+          <PurchasePanel
+            formats={formats}
+            selectedFormat={currentFormat}
+            onFormatChange={handleFormatChange}
+            trialMessage={purchase.trialMessage}
+            trialPrice={purchase.trialPrice}
+            trialCtaText={purchase.trialCtaText}
+            trialCtaHref={purchase.trialCtaHref}
+            benefits={purchase.benefits}
+            buyPrice={purchase.buyPrice}
+            memberPrice={purchase.memberPrice}
+            buyCtaHref={purchase.buyCtaHref}
+            checkoutHref={purchase.checkoutHref}
+            className="md:col-span-2 lg:col-span-1"
+          />
         </div>
       </PageWrapper>
     </section>

@@ -7,6 +7,7 @@ import { Headphones, Plus, Star, Tag } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import { AddToCollectionModal, type Collection } from "./add-to-collection-modal";
+import { SamplePlayer } from "./sample-player";
 
 /**
  * BookCoverActions - Multi-Platform Excellence
@@ -29,7 +30,14 @@ export interface BookCoverActionsProps
   coverImageOverride?: string;
   /** Whether the current image represents a physical product (shows with shadow/angle) */
   isPhysicalProduct?: boolean;
-  onSample?: () => void;
+  /** Author name (for sample player) */
+  author?: string;
+  /** Narrator name (for sample player) */
+  narrator?: string;
+  /** Sample audio duration (e.g., "4:43") */
+  sampleDuration?: string;
+  /** Sample audio URL */
+  sampleUrl?: string;
   /** Whether the book is in any collection */
   isInCollection?: boolean;
   /** Whether the book is in the user's library (alias for isInCollection) */
@@ -56,7 +64,10 @@ function BookCoverActions({
   coverImage,
   coverImageOverride,
   isPhysicalProduct = false,
-  onSample,
+  author,
+  narrator,
+  sampleDuration,
+  sampleUrl,
   isInCollection,
   isInLibrary = false,
   isFavorited: controlledFavorited,
@@ -72,6 +83,7 @@ function BookCoverActions({
 }: BookCoverActionsProps) {
   // Modal state
   const [isModalOpen, setIsModalOpen] = React.useState(false);
+  const [isSampleOpen, setIsSampleOpen] = React.useState(false);
 
   // Favorite state (controlled or uncontrolled)
   const [internalFavorited, setInternalFavorited] = React.useState(defaultFavorited);
@@ -151,7 +163,7 @@ function BookCoverActions({
         <Button
           variant="outline"
           size="sm"
-          onClick={onSample}
+          onClick={() => setIsSampleOpen(true)}
           data-slot="sample-button"
           className="gap-1.5 uppercase tracking-[0.1em] text-xs font-medium"
         >
@@ -264,6 +276,18 @@ function BookCoverActions({
         onSave={handleSaveCollections}
         onCreateCollection={onCreateCollection}
         bookTitle={bookTitle}
+      />
+
+      {/* Sample Player Modal */}
+      <SamplePlayer
+        open={isSampleOpen}
+        onOpenChange={setIsSampleOpen}
+        coverImage={coverImage}
+        title={bookTitle}
+        author={author || ""}
+        narrator={narrator || ""}
+        duration={sampleDuration}
+        sampleUrl={sampleUrl}
       />
     </article>
   );

@@ -62,7 +62,10 @@ const baseCoverData = {
     { label: "Essays", href: "/tags/essays" },
     { label: "Non-Fiction", href: "/tags/non-fiction" },
   ],
-  onSample: () => console.log("Sample clicked"),
+  // Sample player data
+  author: "Jay Rayner",
+  narrator: "Jay Rayner",
+  sampleDuration: "4:43",
   favoriteHref: "/favorites/add/chewing-the-fat",
 };
 

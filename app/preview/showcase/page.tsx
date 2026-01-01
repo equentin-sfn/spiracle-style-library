@@ -129,9 +129,9 @@ export default function ShowcasePage() {
             <BookCoverActions
               bookTitle="Chewing the Fat"
               coverImage="/images/covers/cover-med-01.png"
-              onSample={() => console.log("Sample clicked")}
-              addToLibraryHref="/library/add"
-              favoriteHref="/favorites/add"
+              author="Jay Rayner"
+              narrator="Jay Rayner"
+              sampleDuration="4:43"
               tags={[
                 { label: "Tagline", href: "/tags/tagline" },
                 { label: "Tagline", href: "/tags/tagline" },

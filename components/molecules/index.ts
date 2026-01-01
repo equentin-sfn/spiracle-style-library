@@ -176,3 +176,4 @@ export {
   type AddToCollectionModalProps,
   type Collection,
 } from "./add-to-collection-modal";
+export { SamplePlayer, type SamplePlayerProps } from "./sample-player";

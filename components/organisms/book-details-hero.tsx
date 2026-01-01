@@ -22,9 +22,16 @@ export interface BookDetailsHeroCover {
   /** Image variants for different formats (e.g., AIAC card image) */
   formatImages?: Partial<Record<FormatType, string>>;
   tags: BookTag[];
-  onSample?: () => void;
   addToLibraryHref?: string;
   favoriteHref?: string;
+  /** Author name (for sample player) */
+  author?: string;
+  /** Narrator name (for sample player) */
+  narrator?: string;
+  /** Sample duration e.g. "4:43" (for sample player) */
+  sampleDuration?: string;
+  /** Sample audio URL (for sample player) */
+  sampleUrl?: string;
   /** User's collections for Add to Collection modal */
   collections?: Collection[];
   /** IDs of collections this book is already in */
@@ -127,8 +134,10 @@ function BookDetailsHero({
             coverImage={cover.image}
             coverImageOverride={formatImage}
             isPhysicalProduct={isPhysicalProduct}
-            onSample={cover.onSample}
-            favoriteHref={cover.favoriteHref}
+            author={cover.author}
+            narrator={cover.narrator}
+            sampleDuration={cover.sampleDuration}
+            sampleUrl={cover.sampleUrl}
             tags={cover.tags}
             collections={cover.collections}
             selectedCollectionIds={cover.selectedCollectionIds}

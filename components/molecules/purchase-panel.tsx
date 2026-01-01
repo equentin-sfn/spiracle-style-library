@@ -203,10 +203,16 @@ function PurchasePanel({
             <Button
               asChild
               size="lg"
-              className="w-full bg-spiracle-burgundy hover:bg-spiracle-burgundy/90 text-spiracle-cream border-spiracle-burgundy mb-5"
+              className="w-full bg-spiracle-burgundy hover:bg-spiracle-burgundy/90 text-spiracle-cream border-spiracle-burgundy"
             >
               <Link href={trialCtaHref}>{trialCtaText}</Link>
             </Button>
+
+            {/* Gift hint - subtle, friendly note */}
+            <p className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground/70 italic mt-3 mb-5">
+              <Gift className="size-3.5" strokeWidth={1.5} />
+              <span>Gift a membership at checkout</span>
+            </p>
 
             {/* Benefits List */}
             <ul className="text-sm text-muted-foreground space-y-2.5 mb-6">
@@ -264,12 +270,18 @@ function PurchasePanel({
             <Button
               asChild
               size="lg"
-              className="w-full bg-spiracle-burgundy hover:bg-spiracle-burgundy/90 text-spiracle-cream mb-5"
+              className="w-full bg-spiracle-burgundy hover:bg-spiracle-burgundy/90 text-spiracle-cream"
             >
               <Link href={checkoutHref || buyCtaHref}>
                 Buy Card Edition
               </Link>
             </Button>
+
+            {/* Gift hint - more prominent for Card Edition */}
+            <p className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground/70 italic mt-3 mb-5">
+              <Gift className="size-3.5" strokeWidth={1.5} />
+              <span>Send directly to someone special</span>
+            </p>
 
             {/* Card Edition Benefits */}
             <ul className="text-sm text-muted-foreground space-y-2.5">
@@ -342,12 +354,18 @@ function PurchasePanel({
             <Button
               asChild
               size="lg"
-              className="w-full bg-spiracle-burgundy hover:bg-spiracle-burgundy/90 text-spiracle-cream mb-5"
+              className="w-full bg-spiracle-burgundy hover:bg-spiracle-burgundy/90 text-spiracle-cream"
             >
               <Link href={checkoutHref || buyCtaHref}>
                 Buy {currentFormat === "hardback" ? "Hardback" : "Paperback"} — {formatPrice(selectedFormatData.price)}
               </Link>
             </Button>
+
+            {/* Gift hint */}
+            <p className="flex items-center justify-center gap-1.5 text-xs text-muted-foreground/70 italic mt-3 mb-5">
+              <Gift className="size-3.5" strokeWidth={1.5} />
+              <span>Send as a gift at checkout</span>
+            </p>
 
             <ul className="text-sm text-muted-foreground space-y-2.5">
               <li className="leading-relaxed pl-4 relative before:content-[''] before:absolute before:left-0 before:top-[0.6em] before:w-1.5 before:h-1.5 before:bg-spiracle-terracotta/40 before:rounded-full">

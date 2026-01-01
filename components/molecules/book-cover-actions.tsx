@@ -30,15 +30,16 @@ export interface BookCoverActionsProps
   /** Whether the current image represents a physical product (shows with shadow/angle) */
   isPhysicalProduct?: boolean;
   onSample?: () => void;
-  /** @deprecated Use onAddToCollection instead */
-  addToLibraryHref?: string;
-  favoriteHref?: string;
   /** Whether the book is in any collection */
   isInCollection?: boolean;
   /** Whether the book is in the user's library (alias for isInCollection) */
   isInLibrary?: boolean;
-  /** Whether the book is favorited */
+  /** Whether the book is favorited (controlled) */
   isFavorited?: boolean;
+  /** Default favorite state (uncontrolled) */
+  defaultFavorited?: boolean;
+  /** Callback when favorite state changes */
+  onFavoriteChange?: (isFavorited: boolean) => void;
   tags?: BookTag[];
   /** User's collections for the modal */
   collections?: Collection[];
@@ -56,11 +57,11 @@ function BookCoverActions({
   coverImageOverride,
   isPhysicalProduct = false,
   onSample,
-  addToLibraryHref,
-  favoriteHref = "#",
   isInCollection,
   isInLibrary = false,
-  isFavorited = false,
+  isFavorited: controlledFavorited,
+  defaultFavorited = false,
+  onFavoriteChange,
   tags = [],
   collections = [],
   selectedCollectionIds = [],
@@ -71,6 +72,18 @@ function BookCoverActions({
 }: BookCoverActionsProps) {
   // Modal state
   const [isModalOpen, setIsModalOpen] = React.useState(false);
+
+  // Favorite state (controlled or uncontrolled)
+  const [internalFavorited, setInternalFavorited] = React.useState(defaultFavorited);
+  const isFavorited = controlledFavorited ?? internalFavorited;
+
+  const handleFavoriteToggle = () => {
+    const newValue = !isFavorited;
+    if (controlledFavorited === undefined) {
+      setInternalFavorited(newValue);
+    }
+    onFavoriteChange?.(newValue);
+  };
 
   // Use override image if provided (e.g., AIAC card design)
   const displayImage = coverImageOverride || coverImage;
@@ -186,29 +199,37 @@ function BookCoverActions({
         </button>
 
         {/* Favorite Button - 44px touch target */}
-        <Link
-          href={favoriteHref}
+        <button
+          type="button"
+          onClick={handleFavoriteToggle}
           data-slot="favorite-button"
           data-active={isFavorited ? "true" : undefined}
           className={cn(
             "flex items-center justify-center",
             // 44px touch target
             "w-11 h-11 min-w-[44px] min-h-[44px]",
-            "transition-colors duration-200",
+            "transition-colors duration-200 ease-out",
             // Active state (favorited)
             isFavorited && "text-spiracle-terracotta",
             // Default state
-            !isFavorited && "text-foreground/60"
+            !isFavorited && "text-foreground/60 hover:text-spiracle-terracotta/70"
           )}
           aria-label={isFavorited ? "Remove from favorites" : "Add to favorites"}
+          aria-pressed={isFavorited}
         >
           <Star
             data-slot="favorite-icon"
-            className="size-5 transition-all duration-150 ease-out"
+            className={cn(
+              "size-5",
+              "transition-all duration-200 ease-out",
+              // Subtle scale animation on state change
+              "motion-safe:active:scale-90",
+              isFavorited && "motion-safe:animate-[pulse_0.2s_ease-out]"
+            )}
             fill={isFavorited ? "currentColor" : "none"}
             strokeWidth={1.5}
           />
-        </Link>
+        </button>
       </div>
 
       {/* Tag Pills - 44px touch targets */}

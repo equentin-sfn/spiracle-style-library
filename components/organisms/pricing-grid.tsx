@@ -8,10 +8,12 @@ import type { PricingFeature } from "@/components/molecules/pricing-card";
 
 export interface PricingPlan {
   name: string;
+  description?: string;
   audienceLabel?: string;
   monthlyPrice: number | "Free";
   annualPrice?: number;
   features: PricingFeature[];
+  footerNote?: string;
   ctaText?: string;
   ctaHref: string;
   highlighted?: boolean;
@@ -88,11 +90,13 @@ function PricingGrid({
               <PricingCard
                 key={index}
                 name={plan.name}
+                description={plan.description}
                 audienceLabel={plan.audienceLabel}
                 price={plan.monthlyPrice}
                 annualPrice={plan.annualPrice}
                 isAnnual={billingPeriod === "annually"}
                 features={plan.features}
+                footerNote={plan.footerNote}
                 ctaText={plan.ctaText}
                 ctaHref={plan.ctaHref}
                 highlighted={plan.highlighted}

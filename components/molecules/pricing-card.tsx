@@ -14,7 +14,9 @@ export interface PricingFeature {
 export interface PricingCardProps extends React.HTMLAttributes<HTMLElement> {
   /** Plan name */
   name: string;
-  /** Audience label (e.g., "GRAZER", "REGULAR LISTENER") */
+  /** Short description below plan name */
+  description?: string;
+  /** Audience label (e.g., "GRAZER", "REGULAR LISTENER") - shows above features */
   audienceLabel?: string;
   /** Price amount */
   price: number | "Free";
@@ -26,6 +28,8 @@ export interface PricingCardProps extends React.HTMLAttributes<HTMLElement> {
   isAnnual?: boolean;
   /** List of features */
   features: PricingFeature[];
+  /** Footer note (e.g., tree planting message) */
+  footerNote?: string;
   /** CTA text */
   ctaText?: string;
   /** CTA href */
@@ -40,12 +44,14 @@ export interface PricingCardProps extends React.HTMLAttributes<HTMLElement> {
 
 function PricingCard({
   name,
+  description,
   audienceLabel,
   price,
   priceSuffix = "/month",
   annualPrice,
   isAnnual = false,
   features,
+  footerNote,
   ctaText = "Get started",
   ctaHref,
   highlighted = false,
@@ -88,43 +94,38 @@ function PricingCard({
       )}
       {...props}
     >
-      {/* Badge */}
-      {badge && (
-        <div className="absolute top-0 right-0">
-          <div
-            className={cn(
-              "px-3 py-1.5 text-[10px] uppercase tracking-[0.15em] font-semibold",
-              "bg-primary text-primary-foreground",
-              "rounded-bl-sm"
-            )}
-          >
-            {badge}
-          </div>
-        </div>
-      )}
 
       {/* Card Content */}
       <div className="flex flex-col flex-1 p-6 sm:p-7">
-        {/* Audience Label */}
-        {audienceLabel && (
-          <p
-            className={cn(
-              "text-[10px] uppercase tracking-[0.2em] font-medium mb-2",
-              highlighted ? "text-primary" : "text-muted-foreground"
-            )}
-          >
-            {audienceLabel}
-          </p>
-        )}
-
         {/* Plan Name */}
-        <h3 className="font-display text-xl sm:text-2xl text-foreground">
+        <h3 className="font-display text-2xl sm:text-3xl text-foreground italic">
           {name}
         </h3>
 
+        {/* Description */}
+        {description && (
+          <p className="text-sm text-muted-foreground mt-1 font-serif">
+            {description}
+          </p>
+        )}
+
+        {/* Badge - inline with price area */}
+        {badge && (
+          <span
+            className={cn(
+              "inline-flex self-start mt-3 px-2.5 py-1 text-[10px] uppercase tracking-[0.12em] font-medium",
+              "bg-spiracle-honey/20 text-spiracle-terracotta",
+              "dark:bg-spiracle-honey/20 dark:text-spiracle-honey",
+              "border border-spiracle-honey/30 dark:border-spiracle-honey/40 rounded-sm"
+            )}
+          >
+            {badge}
+          </span>
+        )}
+
         {/* Price */}
-        <div className="mt-4 mb-6">
-          <div className="flex items-baseline gap-1">
+        <div className="mt-4 mb-5">
+          <div className="flex items-baseline gap-1.5">
             {displayPrice === "Free" || displayPrice === 0 ? (
               <span className="font-display text-3xl sm:text-4xl text-foreground">
                 Free
@@ -160,8 +161,17 @@ function PricingCard({
           <Link href={ctaHref}>{ctaText}</Link>
         </Button>
 
-        {/* Divider */}
-        <div className="my-6 h-px bg-border/50" aria-hidden="true" />
+        {/* Audience Label - above features */}
+        {audienceLabel && (
+          <p
+            className={cn(
+              "text-[10px] uppercase tracking-[0.2em] font-medium mt-6 mb-4",
+              highlighted ? "text-primary" : "text-muted-foreground"
+            )}
+          >
+            {audienceLabel}
+          </p>
+        )}
 
         {/* Features List */}
         <ul className="space-y-3 flex-1">
@@ -190,6 +200,13 @@ function PricingCard({
             </li>
           ))}
         </ul>
+
+        {/* Footer Note */}
+        {footerNote && (
+          <p className="mt-6 text-xs text-muted-foreground font-serif italic leading-relaxed">
+            {footerNote}
+          </p>
+        )}
       </div>
     </article>
   );

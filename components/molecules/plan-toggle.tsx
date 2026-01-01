@@ -31,18 +31,18 @@ function PlanToggle({
       <div
         className={cn(
           "relative inline-flex items-center p-1",
-          "bg-spiracle-sand/50 dark:bg-muted rounded-full",
-          "border border-border/30"
+          "bg-spiracle-cream dark:bg-muted rounded-full",
+          "border border-spiracle-slate/20 dark:border-border/30"
         )}
         role="radiogroup"
         aria-label="Billing period"
       >
-        {/* Sliding Background */}
+        {/* Sliding Background - Blue (spiracle-slate) */}
         <motion.div
           className={cn(
             "absolute top-1 bottom-1 rounded-full",
-            "bg-card dark:bg-card",
-            "shadow-sm border border-border/50"
+            "bg-spiracle-slate dark:bg-spiracle-slate",
+            "shadow-sm"
           )}
           initial={false}
           animate={{
@@ -67,8 +67,8 @@ function PlanToggle({
             "text-sm font-medium rounded-full",
             "transition-colors duration-200",
             value === "monthly"
-              ? "text-foreground"
-              : "text-muted-foreground hover:text-foreground/80"
+              ? "text-white"
+              : "text-spiracle-slate/70 dark:text-muted-foreground hover:text-spiracle-slate dark:hover:text-foreground/80"
           )}
         >
           Monthly
@@ -85,33 +85,32 @@ function PlanToggle({
             "text-sm font-medium rounded-full",
             "transition-colors duration-200",
             value === "annually"
-              ? "text-foreground"
-              : "text-muted-foreground hover:text-foreground/80"
+              ? "text-white"
+              : "text-spiracle-slate/70 dark:text-muted-foreground hover:text-spiracle-slate dark:hover:text-foreground/80"
           )}
         >
           Annually
         </button>
       </div>
 
-      {/* Savings Badge */}
+      {/* Savings Badge - Only visible when annually is selected */}
       {savingsBadge && (
         <motion.span
-          initial={{ opacity: 0, y: -5 }}
+          initial={{ opacity: 0, y: -5, scale: 0.9 }}
           animate={{
-            opacity: value === "annually" ? 1 : 0.5,
-            y: 0,
-            scale: value === "annually" ? 1 : 0.95,
+            opacity: value === "annually" ? 1 : 0,
+            y: value === "annually" ? 0 : -5,
+            scale: value === "annually" ? 1 : 0.9,
           }}
           transition={{ duration: 0.2 }}
           className={cn(
-            "inline-flex items-center gap-1.5 px-3 py-1",
+            "inline-flex items-center px-3 py-1.5",
             "text-xs font-medium rounded-full",
-            value === "annually"
-              ? "bg-primary/10 text-primary"
-              : "bg-muted text-muted-foreground"
+            "bg-spiracle-parchment dark:bg-muted",
+            "text-muted-foreground",
+            "border border-border/50"
           )}
         >
-          <span className="inline-block w-1.5 h-1.5 rounded-full bg-current" />
           {savingsBadge}
         </motion.span>
       )}

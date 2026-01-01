@@ -7,11 +7,24 @@ import { cn } from "@/lib/utils";
 import { NewsletterSignup } from "@/components/molecules";
 import {
   InstagramLogo,
-  TwitterLogo,
+  TiktokLogo,
+  LinkedinLogo,
   FacebookLogo,
-  SpotifyLogo,
 } from "@phosphor-icons/react";
 import type { Icon as PhosphorIcon } from "@phosphor-icons/react";
+
+// Custom Bluesky icon component
+const BlueskyLogo = ({ className, ...props }: { className?: string; weight?: string; [key: string]: unknown }) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 256 256"
+    className={className}
+    fill="currentColor"
+    {...props}
+  >
+    <path d="M128 80c-30 24-60 72-60 100 0 20 12 32 32 32 16 0 24-8 28-16 4 8 12 16 28 16 20 0 32-12 32-32 0-28-30-76-60-100zm0 24c20 16 40 52 40 76 0 8-4 12-12 12s-12-4-16-16l-12-24-12 24c-4 12-8 16-16 16s-12-4-12-12c0-24 20-60 40-76z"/>
+  </svg>
+);
 
 export interface FooterLink {
   label: string;
@@ -24,7 +37,7 @@ export interface FooterLinkColumn {
 }
 
 export interface SocialLink {
-  icon: PhosphorIcon;
+  icon: PhosphorIcon | React.ComponentType<{ className?: string; weight?: string }>;
   href: string;
   label: string;
 }
@@ -81,10 +94,11 @@ const defaultColumns: FooterLinkColumn[] = [
 ];
 
 const defaultSocialLinks: SocialLink[] = [
-  { icon: InstagramLogo, href: "#", label: "Instagram" },
-  { icon: TwitterLogo, href: "#", label: "Twitter" },
-  { icon: FacebookLogo, href: "#", label: "Facebook" },
-  { icon: SpotifyLogo, href: "#", label: "Spotify" },
+  { icon: InstagramLogo, href: "https://instagram.com/spiracleaudiobooks", label: "Instagram" },
+  { icon: TiktokLogo, href: "https://tiktok.com/@spiracleaudiobooks", label: "TikTok" },
+  { icon: BlueskyLogo, href: "https://bsky.app/profile/spiracle.bsky.social", label: "Bluesky" },
+  { icon: LinkedinLogo, href: "https://linkedin.com/company/spiracle", label: "LinkedIn" },
+  { icon: FacebookLogo, href: "https://facebook.com/spiracleaudiobooks", label: "Facebook" },
 ];
 
 function Footer({

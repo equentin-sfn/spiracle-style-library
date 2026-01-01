@@ -150,6 +150,9 @@ export default function PreviewPage() {
           <Button asChild variant="outline" size="sm">
             <Link href="/preview/membership">Membership</Link>
           </Button>
+          <Button asChild variant="outline" size="sm">
+            <Link href="/preview/discovery-machine">Discovery Machine</Link>
+          </Button>
         </nav>
 
         <Separator />

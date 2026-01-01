@@ -16,3 +16,14 @@ export { ThemeToggle, type ThemeToggleProps } from "./theme-toggle";
 
 // Brand elements
 export { WaveDecoration, type WaveDecorationProps } from "./wave-decoration";
+
+// Tags & Labels
+export {
+  Tag,
+  TagRibbon,
+  type TagProps,
+  type TagVariant,
+  type TagStyle,
+  type TagSize,
+  type FlagDirection,
+} from "./tag";

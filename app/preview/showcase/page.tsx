@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { CollectionCard, InfoBar, BookCoverActions, BookDetails, PurchasePanel, PreviewBar, SerendipityPills, type SerendipityPill } from "@/components/molecules";
+import { Tag, TagRibbon } from "@/components/atoms";
 import {
   BentoHero,
   CollectionShowcase,
@@ -74,7 +75,7 @@ export default function ShowcasePage() {
   const [isGenerating, setIsGenerating] = React.useState(false);
   const [showResults, setShowResults] = React.useState(false);
 
-  const handleGenerate = (prompt: string) => {
+  const handleGenerate = (_prompt: string) => {
     setIsGenerating(true);
     // Simulate API call
     setTimeout(() => {
@@ -348,6 +349,222 @@ In this rollicking collection of his hilarious columns, the award-winning writer
         isGenerating={isGenerating}
         results={showResults ? sampleDiscoveryResults : null}
       />
+
+      {/* Section 7: Tag System Preview */}
+      <section className="py-16 sm:py-20 bg-spiracle-parchment dark:bg-[#2D2520]">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8">
+          <header className="text-center mb-12">
+            <p className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-spiracle-terracotta dark:text-spiracle-honey font-medium mb-3">
+              Component System
+            </p>
+            <h2 className="font-display text-3xl sm:text-4xl text-foreground">
+              Tags & Labels
+            </h2>
+            <p className="mt-3 font-serif text-muted-foreground max-w-lg mx-auto">
+              Promotional and status labels for books, collections, and editorial content.
+            </p>
+          </header>
+
+          {/* PILL STYLE - All Variants */}
+          <div className="mb-16">
+            <h3 className="font-display text-xl text-foreground mb-6 border-b border-border pb-2">
+              Pill Style
+            </h3>
+
+            {/* Promotional Tags */}
+            <div className="mb-8">
+              <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-3">
+                Promotional
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <Tag variant="offer" />
+                <Tag variant="offer">2 for 1</Tag>
+                <Tag variant="free" />
+                <Tag variant="best-value" />
+                <Tag variant="limited" />
+              </div>
+            </div>
+
+            {/* Editorial Tags */}
+            <div className="mb-8">
+              <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-3">
+                Editorial
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <Tag variant="staff-pick" />
+                <Tag variant="pick-of-week" />
+                <Tag variant="pick-of-month" />
+                <Tag variant="editors-choice" />
+              </div>
+            </div>
+
+            {/* Product Tags */}
+            <div className="mb-8">
+              <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-3">
+                Product
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <Tag variant="spiracle-special" />
+                <Tag variant="spiracle-edition" />
+                <Tag variant="new" />
+                <Tag variant="new-release" />
+                <Tag variant="exclusive" />
+              </div>
+            </div>
+
+            {/* Status Tags */}
+            <div className="mb-8">
+              <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-3">
+                Status
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <Tag variant="included" />
+                <Tag variant="coming-soon" />
+                <Tag variant="preorder" />
+              </div>
+            </div>
+
+            {/* Sizes */}
+            <div>
+              <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-3">
+                Sizes
+              </p>
+              <div className="flex flex-wrap items-center gap-3">
+                <Tag variant="new" size="sm" />
+                <Tag variant="new" size="md" />
+                <span className="text-xs text-muted-foreground ml-2">sm / md</span>
+              </div>
+            </div>
+          </div>
+
+          {/* FLAG STYLE */}
+          <div className="mb-16">
+            <h3 className="font-display text-xl text-foreground mb-6 border-b border-border pb-2">
+              Flag Style
+            </h3>
+
+            <div className="mb-8">
+              <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-3">
+                Direction: Right (default)
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Tag variant="spiracle-special" tagStyle="flag" />
+                <Tag variant="new-release" tagStyle="flag" />
+                <Tag variant="best-value" tagStyle="flag" />
+                <Tag variant="offer" tagStyle="flag">2 for 1</Tag>
+              </div>
+            </div>
+
+            <div>
+              <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-3">
+                Direction: Left
+              </p>
+              <div className="flex flex-wrap gap-3">
+                <Tag variant="editors-choice" tagStyle="flag" flagDirection="left" />
+                <Tag variant="staff-pick" tagStyle="flag" flagDirection="left" />
+                <Tag variant="limited" tagStyle="flag" flagDirection="left" />
+              </div>
+            </div>
+          </div>
+
+          {/* RIBBON STYLE - On Sample Cards */}
+          <div>
+            <h3 className="font-display text-xl text-foreground mb-6 border-b border-border pb-2">
+              Ribbon Style (on cards)
+            </h3>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+              {/* Sample Card with Spiracle Special ribbon */}
+              <div className="relative bg-card rounded-sm overflow-hidden border border-border aspect-[3/4]">
+                <TagRibbon variant="spiracle-special" />
+                <div className="absolute inset-0 flex items-end p-4">
+                  <div>
+                    <p className="font-serif text-sm text-foreground">Sample Book</p>
+                    <p className="text-xs text-muted-foreground">Author Name</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Sample Card with New Release ribbon */}
+              <div className="relative bg-card rounded-sm overflow-hidden border border-border aspect-[3/4]">
+                <TagRibbon variant="new-release" />
+                <div className="absolute inset-0 flex items-end p-4">
+                  <div>
+                    <p className="font-serif text-sm text-foreground">Sample Book</p>
+                    <p className="text-xs text-muted-foreground">Author Name</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Sample Card with Best Value ribbon */}
+              <div className="relative bg-card rounded-sm overflow-hidden border border-border aspect-[3/4]">
+                <TagRibbon variant="best-value" />
+                <div className="absolute inset-0 flex items-end p-4">
+                  <div>
+                    <p className="font-serif text-sm text-foreground">Sample Book</p>
+                    <p className="text-xs text-muted-foreground">Author Name</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Sample Card with Offer ribbon */}
+              <div className="relative bg-card rounded-sm overflow-hidden border border-border aspect-[3/4]">
+                <TagRibbon variant="offer">2 for 1</TagRibbon>
+                <div className="absolute inset-0 flex items-end p-4">
+                  <div>
+                    <p className="font-serif text-sm text-foreground">Sample Book</p>
+                    <p className="text-xs text-muted-foreground">Author Name</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Sample Card with Free ribbon */}
+              <div className="relative bg-card rounded-sm overflow-hidden border border-border aspect-[3/4]">
+                <TagRibbon variant="free" />
+                <div className="absolute inset-0 flex items-end p-4">
+                  <div>
+                    <p className="font-serif text-sm text-foreground">Sample Book</p>
+                    <p className="text-xs text-muted-foreground">Author Name</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Sample Card with Editor's Choice ribbon */}
+              <div className="relative bg-card rounded-sm overflow-hidden border border-border aspect-[3/4]">
+                <TagRibbon variant="editors-choice" />
+                <div className="absolute inset-0 flex items-end p-4">
+                  <div>
+                    <p className="font-serif text-sm text-foreground">Sample Book</p>
+                    <p className="text-xs text-muted-foreground">Author Name</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Sample Card with Limited ribbon */}
+              <div className="relative bg-card rounded-sm overflow-hidden border border-border aspect-[3/4]">
+                <TagRibbon variant="limited" />
+                <div className="absolute inset-0 flex items-end p-4">
+                  <div>
+                    <p className="font-serif text-sm text-foreground">Sample Book</p>
+                    <p className="text-xs text-muted-foreground">Author Name</p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Sample Card with Coming Soon ribbon */}
+              <div className="relative bg-card rounded-sm overflow-hidden border border-border aspect-[3/4]">
+                <TagRibbon variant="coming-soon" />
+                <div className="absolute inset-0 flex items-end p-4">
+                  <div>
+                    <p className="font-serif text-sm text-foreground">Sample Book</p>
+                    <p className="text-xs text-muted-foreground">Author Name</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

@@ -3,7 +3,6 @@
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { Star } from "@phosphor-icons/react";
-import { Separator } from "@/components/atoms";
 
 export interface CriticCardProps extends React.HTMLAttributes<HTMLElement> {
   publication: string;

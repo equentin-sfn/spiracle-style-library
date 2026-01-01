@@ -48,7 +48,7 @@ function PullQuote({
         )}
         aria-hidden="true"
       >
-        "
+        &ldquo;
       </span>
 
       {/* Quote text */}

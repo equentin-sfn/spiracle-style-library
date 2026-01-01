@@ -144,7 +144,7 @@ function PricingCard({
           {/* Monthly equivalent for annual */}
           {isAnnual && monthlyEquivalent && (
             <p className="text-xs text-muted-foreground mt-1 font-serif italic">
-              That's just £{monthlyEquivalent.toFixed(2)}/month
+              That&apos;s just £{monthlyEquivalent.toFixed(2)}/month
             </p>
           )}
         </div>

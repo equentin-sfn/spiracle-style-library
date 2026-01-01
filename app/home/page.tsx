@@ -4,7 +4,6 @@ import * as React from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { isAuthenticated, logout } from "@/lib/auth";
-import { Button } from "@/components/atoms";
 import { List, X, SignOut, Book, Swatches, Layout, Star, Books, GridFour, House } from "@phosphor-icons/react";
 import { cn } from "@/lib/utils";
 
@@ -180,7 +179,7 @@ export default function HomePage() {
             Welcome to the Style Library
           </h2>
           <p className="text-muted-foreground mb-12">
-            Explore Spiracle's component library built with shadcn/ui and atomic design principles.
+            Explore Spiracle&apos;s component library built with shadcn/ui and atomic design principles.
           </p>
 
           {/* Quick Links Grid */}

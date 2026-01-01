@@ -91,7 +91,7 @@ function ComponentRow({
   );
 }
 
-function ColorSwatch({ name, color, textColor = "text-foreground" }: { name: string; color: string; textColor?: string }) {
+function ColorSwatch({ name, color }: { name: string; color: string }) {
   return (
     <div className="flex flex-col items-center gap-1">
       <div

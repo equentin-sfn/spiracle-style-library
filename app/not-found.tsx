@@ -104,7 +104,7 @@ export default function NotFound() {
             transition={{ duration: 0.6, delay: 0.3 }}
             className="font-display text-3xl sm:text-4xl md:text-5xl text-foreground leading-[1.15] tracking-tight"
           >
-            Looks like you've taken
+            Looks like you&apos;ve taken
             <br />
             <span className="italic">a wrong turn</span>
           </motion.h1>
@@ -116,7 +116,7 @@ export default function NotFound() {
             transition={{ duration: 0.6, delay: 0.45 }}
             className="mt-5 font-serif text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-md mx-auto"
           >
-            Even the best readers lose their place sometimes. The page you're
+            Even the best readers lose their place sometimes. The page you&apos;re
             looking for has wandered off, but we can help you find your way
             back.
           </motion.p>

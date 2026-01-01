@@ -36,7 +36,6 @@ const navItems = [
 const formatsData: PurchaseFormat[] = [
   { type: "audiobook", price: 12.99, memberPrice: 9.99, available: true },
   { type: "aiac", price: 12.99, available: true },
-  { type: "ebook", price: 6.99, available: true },
 ];
 
 // Book cover and actions

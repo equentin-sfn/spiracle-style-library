@@ -9,7 +9,7 @@ import { cn } from "@/lib/utils";
 
 const navItems = [
   {
-    label: "Homepage Components",
+    label: "Marketing Components",
     href: "/preview/home",
     description: "New homepage & layout components",
     icon: Home,

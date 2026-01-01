@@ -133,7 +133,7 @@ export default function PreviewPage() {
             <Link href="/preview">Base Components</Link>
           </Button>
           <Button asChild variant="outline" size="sm">
-            <Link href="/preview/home">Homepage Components</Link>
+            <Link href="/preview/home">Marketing Components</Link>
           </Button>
           <Button asChild variant="outline" size="sm">
             <Link href="/preview/books">Book Cards</Link>

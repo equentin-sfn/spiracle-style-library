@@ -113,19 +113,21 @@ function PurchasePanel({
       aria-label="Purchase options"
       {...props}
     >
-      {/* Format Tabs - only show when multiple formats available */}
+      {/* Format Tabs - 2-column grid, only show when multiple formats available */}
       {hasMultipleFormats && (
         <div className="p-1.5 border-b border-border/40">
           <div
             role="tablist"
             aria-label="Select format"
-            className="flex items-stretch gap-0.5"
+            className="grid grid-cols-2 gap-0.5"
           >
-            {availableFormats.map((format) => {
+            {availableFormats.map((format, index) => {
               const config = formatTabConfigs[format.type];
               const Icon = config.icon;
               const isSelected = format.type === currentFormat;
               const displayPrice = format.type === "audiobook" ? "£0.00" : formatPrice(format.price);
+              // Last item spans full width if odd number of formats
+              const isLastOdd = index === availableFormats.length - 1 && availableFormats.length % 2 === 1;
 
               return (
                 <button
@@ -135,12 +137,14 @@ function PurchasePanel({
                   aria-selected={isSelected}
                   onClick={() => handleFormatChange(format.type)}
                   className={cn(
-                    "flex-1 flex flex-col items-center justify-center gap-0.5",
+                    "flex flex-col items-center justify-center gap-0.5",
                     "px-2 py-2.5 sm:py-3",
                     "text-xs sm:text-sm",
                     "rounded-[3px]",
                     "transition-all duration-200 ease-out",
                     "min-h-[52px]",
+                    // Last odd item spans both columns
+                    isLastOdd && "col-span-2",
                     isSelected && [
                       "bg-background",
                       "text-foreground",
@@ -162,8 +166,7 @@ function PurchasePanel({
                       )}
                       strokeWidth={1.5}
                     />
-                    <span className="font-medium hidden sm:inline">{config.label}</span>
-                    <span className="font-medium sm:hidden">{config.shortLabel}</span>
+                    <span className="font-medium">{config.label}</span>
                   </span>
                   <span className={cn(
                     "text-[10px] sm:text-xs",

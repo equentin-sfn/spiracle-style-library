@@ -161,17 +161,19 @@ function FormatSelector({
 
   return (
     <div className={cn("flex flex-col gap-3", className)} {...props}>
-      {/* Format Tabs */}
+      {/* Format Tabs - 2-column grid layout */}
       <div
         role="tablist"
         aria-label="Select format"
-        className="inline-flex items-stretch rounded-sm border border-border/60 bg-card/50 p-0.5"
+        className="grid grid-cols-2 gap-0.5 rounded-sm border border-border/60 bg-card/50 p-0.5"
       >
-        {availableFormats.map((format) => {
+        {availableFormats.map((format, index) => {
           const config = formatConfigs[format.type];
           const Icon = config.icon;
           const isSelected = format.type === selectedFormat;
           const displayPrice = format.type === "audiobook" ? "£0.00" : formatPrice(format.price);
+          // Last item spans full width if odd number of formats
+          const isLastOdd = index === availableFormats.length - 1 && availableFormats.length % 2 === 1;
 
           return (
             <button
@@ -188,7 +190,9 @@ function FormatSelector({
                 "rounded-[2px]",
                 "transition-all duration-200 ease-out",
                 // Minimum touch target
-                "min-h-[44px] min-w-[80px] sm:min-w-[100px]",
+                "min-h-[44px]",
+                // Last odd item spans both columns
+                isLastOdd && "col-span-2",
                 // Selected state
                 isSelected && [
                   "bg-background",
@@ -215,10 +219,7 @@ function FormatSelector({
                   strokeWidth={1.5}
                   aria-hidden="true"
                 />
-                <span className="font-medium">
-                  <span className="hidden sm:inline">{config.label}</span>
-                  <span className="sm:hidden">{config.shortLabel}</span>
-                </span>
+                <span className="font-medium">{config.label}</span>
               </span>
 
               {/* Price in tab */}
@@ -231,7 +232,7 @@ function FormatSelector({
                   )}
                 >
                   {displayPrice}
-                  {format.type === "audiobook" && <span className="hidden sm:inline">*</span>}
+                  {format.type === "audiobook" && "*"}
                 </span>
               )}
             </button>

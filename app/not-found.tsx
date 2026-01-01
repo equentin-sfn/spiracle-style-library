@@ -5,7 +5,18 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/atoms";
 import { AdaptiveIllustration } from "@/components/molecules/adaptive-illustration";
-import { Home, Library, Compass } from "lucide-react";
+import { SerendipityPills, type SerendipityPill } from "@/components/molecules";
+import { Home, Library } from "lucide-react";
+
+// Discovery pills for the 404 page
+const discoveryPills: SerendipityPill[] = [
+  { id: "scottish-gothic", label: "Scottish Gothic" },
+  { id: "comfort-reads", label: "Comfort reads" },
+  { id: "under-4-hours", label: "Under 4 hours" },
+  { id: "train-journey", label: "Train journey listens" },
+  { id: "cosy-mysteries", label: "Cosy mysteries" },
+  { id: "award-winners", label: "Award winners I missed" },
+];
 
 export default function NotFound() {
   return (
@@ -18,20 +29,6 @@ export default function NotFound() {
         }}
         aria-hidden="true"
       />
-
-      {/* Decorative compass rose - top right */}
-      <motion.div
-        initial={{ opacity: 0, rotate: -20 }}
-        animate={{ opacity: 1, rotate: 0 }}
-        transition={{ duration: 1.2, delay: 0.6, ease: "easeOut" }}
-        className="absolute top-12 right-8 sm:top-16 sm:right-16 lg:top-24 lg:right-24"
-        aria-hidden="true"
-      >
-        <Compass
-          className="size-12 sm:size-16 lg:size-20 text-spiracle-terracotta/20 dark:text-spiracle-honey/15"
-          strokeWidth={1}
-        />
-      </motion.div>
 
       {/* Decorative dotted path - like a wandering road */}
       <svg
@@ -158,6 +155,32 @@ export default function NotFound() {
             </Link>
             .
           </motion.p>
+
+          {/* Divider */}
+          <motion.div
+            initial={{ opacity: 0, scaleX: 0 }}
+            animate={{ opacity: 1, scaleX: 1 }}
+            transition={{ duration: 0.8, delay: 1.1 }}
+            className="mt-16 w-24 h-px bg-gradient-to-r from-transparent via-spiracle-terracotta/30 dark:via-spiracle-honey/20 to-transparent mx-auto"
+            aria-hidden="true"
+          />
+
+          {/* Serendipity discovery section */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 1.3 }}
+            className="mt-12"
+          >
+            <SerendipityPills
+              pills={discoveryPills}
+              label="I'm in the mood for..."
+              onPillClick={(pill) => {
+                // Navigate to search/discovery with this mood
+                window.location.href = `/search?mood=${pill.id}`;
+              }}
+            />
+          </motion.div>
         </div>
       </div>
 

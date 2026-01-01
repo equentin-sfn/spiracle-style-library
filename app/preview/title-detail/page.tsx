@@ -1,5 +1,6 @@
 "use client";
 
+import * as React from "react";
 import { TitleDetailPage } from "@/components/templates";
 import {
   CollectionCard,
@@ -8,6 +9,7 @@ import {
   ReviewCard,
   PreviewBar,
   type PurchaseFormat,
+  type Collection,
 } from "@/components/molecules";
 import {
   Book,
@@ -38,8 +40,16 @@ const formatsData: PurchaseFormat[] = [
   { type: "aiac", price: 12.99, available: true },
 ];
 
-// Book cover and actions
-const coverData = {
+// User's collections (sample data)
+const userCollections: Collection[] = [
+  { id: "wishlist", name: "Wishlist", bookCount: 12 },
+  { id: "food-writing", name: "Food Writing", bookCount: 8 },
+  { id: "to-listen", name: "To Listen", bookCount: 24 },
+  { id: "favorites", name: "Favourites", bookCount: 6 },
+];
+
+// Book cover and actions (base data, collections added dynamically)
+const baseCoverData = {
   image: "/images/covers/cover-med-01.png",
   // Image variants for different formats
   formatImages: {
@@ -53,7 +63,6 @@ const coverData = {
     { label: "Non-Fiction", href: "/tags/non-fiction" },
   ],
   onSample: () => console.log("Sample clicked"),
-  addToLibraryHref: "/library/add/chewing-the-fat",
   favoriteHref: "/favorites/add/chewing-the-fat",
 };
 
@@ -337,6 +346,38 @@ const communityReviews = [
 ];
 
 export default function TitleDetailPreviewPage() {
+  // State for user's collections this book is in
+  const [selectedCollectionIds, setSelectedCollectionIds] = React.useState<string[]>(["food-writing"]);
+  const [allCollections, setAllCollections] = React.useState<Collection[]>(userCollections);
+
+  // Handle saving collection changes
+  const handleSaveCollections = (collectionIds: string[]) => {
+    setSelectedCollectionIds(collectionIds);
+    console.log("Collections updated:", collectionIds);
+  };
+
+  // Handle creating a new collection
+  const handleCreateCollection = (name: string) => {
+    const newCollection: Collection = {
+      id: `collection-${Date.now()}`,
+      name,
+      bookCount: 0,
+    };
+    setAllCollections((prev) => [...prev, newCollection]);
+    // Auto-select the new collection
+    setSelectedCollectionIds((prev) => [...prev, newCollection.id]);
+    console.log("Created collection:", name);
+  };
+
+  // Build cover data with collection handlers
+  const coverData = {
+    ...baseCoverData,
+    collections: allCollections,
+    selectedCollectionIds,
+    onSaveCollections: handleSaveCollections,
+    onCreateCollection: handleCreateCollection,
+  };
+
   return (
     <>
       <PreviewBar currentPath="/preview/title-detail" />
@@ -349,8 +390,8 @@ export default function TitleDetailPreviewPage() {
         formats={formatsData}
         defaultFormat="audiobook"
         metadataItems={metadataItems}
-      onSearch={() => console.log("Search clicked")}
-      onCart={() => console.log("Cart clicked")}
+        onSearch={() => console.log("Search clicked")}
+        onCart={() => console.log("Cart clicked")}
       // Collections Grid (below info bar)
       collectionsLabel="FOUND IN THE FOLLOWING COLLECTIONS"
       collectionsContent={

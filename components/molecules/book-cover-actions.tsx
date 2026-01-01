@@ -6,6 +6,7 @@ import Link from "next/link";
 import { Headphones, Plus, Star, Tag } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import { AddToCollectionModal, type Collection } from "./add-to-collection-modal";
 
 /**
  * BookCoverActions - Multi-Platform Excellence
@@ -29,13 +30,24 @@ export interface BookCoverActionsProps
   /** Whether the current image represents a physical product (shows with shadow/angle) */
   isPhysicalProduct?: boolean;
   onSample?: () => void;
+  /** @deprecated Use onAddToCollection instead */
   addToLibraryHref?: string;
   favoriteHref?: string;
-  /** Whether the book is in the user's library */
+  /** Whether the book is in any collection */
+  isInCollection?: boolean;
+  /** Whether the book is in the user's library (alias for isInCollection) */
   isInLibrary?: boolean;
   /** Whether the book is favorited */
   isFavorited?: boolean;
   tags?: BookTag[];
+  /** User's collections for the modal */
+  collections?: Collection[];
+  /** IDs of collections this book is already in */
+  selectedCollectionIds?: string[];
+  /** Callback when collections are saved */
+  onSaveCollections?: (collectionIds: string[]) => void;
+  /** Callback when a new collection is created */
+  onCreateCollection?: (name: string) => void;
 }
 
 function BookCoverActions({
@@ -44,19 +56,35 @@ function BookCoverActions({
   coverImageOverride,
   isPhysicalProduct = false,
   onSample,
-  addToLibraryHref = "#",
+  addToLibraryHref,
   favoriteHref = "#",
+  isInCollection,
   isInLibrary = false,
   isFavorited = false,
   tags = [],
+  collections = [],
+  selectedCollectionIds = [],
+  onSaveCollections,
+  onCreateCollection,
   className,
   ...props
 }: BookCoverActionsProps) {
+  // Modal state
+  const [isModalOpen, setIsModalOpen] = React.useState(false);
+
   // Use override image if provided (e.g., AIAC card design)
   const displayImage = coverImageOverride || coverImage;
   const altText = coverImageOverride
     ? `${bookTitle} - Card Edition`
     : `Cover of ${bookTitle}`;
+
+  // Determine if book is in any collection
+  const inAnyCollection = isInCollection || isInLibrary || selectedCollectionIds.length > 0;
+
+  // Handle modal save
+  const handleSaveCollections = (collectionIds: string[]) => {
+    onSaveCollections?.(collectionIds);
+  };
 
   return (
     <article
@@ -118,34 +146,44 @@ function BookCoverActions({
           Sample
         </Button>
 
-        {/* Add to Library Button - 44px touch target */}
-        <Link
-          href={addToLibraryHref}
-          data-slot="library-button"
-          data-active={isInLibrary ? "true" : undefined}
+        {/* Add to Collection Button - 44px touch target */}
+        <button
+          type="button"
+          onClick={() => setIsModalOpen(true)}
+          data-slot="collection-button"
+          data-active={inAnyCollection ? "true" : undefined}
           className={cn(
             "flex items-center justify-center",
             // 44px touch target
             "w-11 h-11 min-w-[44px] min-h-[44px]",
             "rounded-[4px]",
-            "border border-foreground/30",
-            "transition-colors duration-200",
-            // Active state (in library)
-            isInLibrary && "border-spiracle-forest bg-spiracle-forest/10 text-spiracle-forest",
+            "border",
+            "transition-all duration-300 ease-out",
+            // Active state (in collection) - more prominent styling
+            inAnyCollection && [
+              "border-spiracle-forest",
+              "bg-spiracle-forest",
+              "text-spiracle-cream",
+            ],
             // Default state
-            !isInLibrary && "text-foreground/60"
+            !inAnyCollection && [
+              "border-foreground/30",
+              "text-foreground/60",
+              "hover:border-spiracle-forest/60",
+              "hover:text-spiracle-forest/80",
+            ]
           )}
-          aria-label={isInLibrary ? "Remove from library" : "Add to library"}
+          aria-label={inAnyCollection ? "Manage collections" : "Add to collection"}
         >
           <Plus
-            data-slot="library-icon"
+            data-slot="collection-icon"
             className={cn(
-              "size-4 transition-transform duration-200 ease-out",
-              isInLibrary && "rotate-45"
+              "size-4 transition-transform duration-300 ease-out",
+              inAnyCollection && "rotate-45"
             )}
             strokeWidth={2.5}
           />
-        </Link>
+        </button>
 
         {/* Favorite Button - 44px touch target */}
         <Link
@@ -195,6 +233,17 @@ function BookCoverActions({
           ))}
         </div>
       )}
+
+      {/* Add to Collection Modal */}
+      <AddToCollectionModal
+        open={isModalOpen}
+        onOpenChange={setIsModalOpen}
+        collections={collections}
+        selectedCollectionIds={selectedCollectionIds}
+        onSave={handleSaveCollections}
+        onCreateCollection={onCreateCollection}
+        bookTitle={bookTitle}
+      />
     </article>
   );
 }

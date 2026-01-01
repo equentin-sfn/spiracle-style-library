@@ -10,6 +10,7 @@ import {
   type LinkedValue,
   type BookSeries,
   type PurchaseFormat,
+  type Collection,
 } from "@/components/molecules";
 import { PageWrapper } from "@/components/templates";
 
@@ -24,6 +25,14 @@ export interface BookDetailsHeroCover {
   onSample?: () => void;
   addToLibraryHref?: string;
   favoriteHref?: string;
+  /** User's collections for Add to Collection modal */
+  collections?: Collection[];
+  /** IDs of collections this book is already in */
+  selectedCollectionIds?: string[];
+  /** Callback when collections are saved */
+  onSaveCollections?: (collectionIds: string[]) => void;
+  /** Callback when a new collection is created */
+  onCreateCollection?: (name: string) => void;
 }
 
 export interface BookDetailsHeroDetails {
@@ -119,9 +128,12 @@ function BookDetailsHero({
             coverImageOverride={formatImage}
             isPhysicalProduct={isPhysicalProduct}
             onSample={cover.onSample}
-            addToLibraryHref={cover.addToLibraryHref}
             favoriteHref={cover.favoriteHref}
             tags={cover.tags}
+            collections={cover.collections}
+            selectedCollectionIds={cover.selectedCollectionIds}
+            onSaveCollections={cover.onSaveCollections}
+            onCreateCollection={cover.onCreateCollection}
           />
 
           {/* Column 2: Book Details */}

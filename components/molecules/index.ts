@@ -171,3 +171,8 @@ export {
   formatPrice,
   getPriceNote,
 } from "./format-selector";
+export {
+  AddToCollectionModal,
+  type AddToCollectionModalProps,
+  type Collection,
+} from "./add-to-collection-modal";

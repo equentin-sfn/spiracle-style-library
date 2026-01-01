@@ -4,7 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/atoms";
-import { Check } from "@phosphor-icons/react";
+import { Check } from "lucide-react";
 
 export interface PricingFeature {
   text: string;
@@ -67,6 +67,8 @@ function PricingCard({
 
   return (
     <article
+      data-slot="pricing-card"
+      data-variant={highlighted ? "highlighted" : isFree ? "free" : "default"}
       className={cn(
         "relative flex flex-col rounded-sm overflow-hidden",
         "transition-all duration-300 ease-out",
@@ -75,20 +77,14 @@ function PricingCard({
               "bg-card border-2 border-primary/30",
               "shadow-[0_12px_32px_rgba(45,37,32,0.12),0_4px_12px_rgba(45,37,32,0.08)]",
               "dark:shadow-[0_12px_32px_rgba(0,0,0,0.3),0_4px_12px_rgba(0,0,0,0.2)]",
-              "hover:shadow-[0_16px_40px_rgba(45,37,32,0.15),0_6px_16px_rgba(45,37,32,0.1)]",
-              "dark:hover:shadow-[0_16px_40px_rgba(0,0,0,0.35),0_6px_16px_rgba(0,0,0,0.25)]",
-              "scale-[1.02] hover:scale-[1.03]",
+              "scale-[1.02]",
             ]
           : isFree
           ? [
               "bg-muted/50 dark:bg-muted/30 border border-border/30",
-              "hover:border-border/50",
             ]
           : [
               "bg-card border border-border/30",
-              "hover:border-border/50 hover:-translate-y-1",
-              "hover:shadow-[0_8px_24px_rgba(45,37,32,0.1),0_2px_8px_rgba(45,37,32,0.06)]",
-              "dark:hover:shadow-[0_8px_24px_rgba(0,0,0,0.25),0_2px_8px_rgba(0,0,0,0.15)]",
             ],
         className
       )}
@@ -104,7 +100,7 @@ function PricingCard({
 
         {/* Description */}
         {description && (
-          <p className="text-sm text-muted-foreground mt-1 font-serif">
+          <p className="text-sm text-muted-foreground mt-1">
             {description}
           </p>
         )}
@@ -143,7 +139,7 @@ function PricingCard({
           </div>
           {/* Monthly equivalent for annual */}
           {isAnnual && monthlyEquivalent && (
-            <p className="text-xs text-muted-foreground mt-1 font-serif italic">
+            <p className="text-xs text-muted-foreground mt-1">
               That&apos;s just £{monthlyEquivalent.toFixed(2)}/month
             </p>
           )}
@@ -194,16 +190,16 @@ function PricingCard({
                       : "text-primary/70"
                     : "text-muted-foreground/30"
                 )}
-                weight={feature.included ? "bold" : "regular"}
+                strokeWidth={feature.included ? 2.5 : 1.5}
               />
-              <span className="font-serif">{feature.text}</span>
+              <span>{feature.text}</span>
             </li>
           ))}
         </ul>
 
         {/* Footer Note */}
         {footerNote && (
-          <p className="mt-6 text-xs text-muted-foreground font-serif italic leading-relaxed">
+          <p className="mt-6 text-xs text-muted-foreground leading-relaxed">
             {footerNote}
           </p>
         )}

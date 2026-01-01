@@ -3,7 +3,7 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/atoms";
-import { Check, CircleNotch } from "@phosphor-icons/react";
+import { Check, Loader2 } from "lucide-react";
 
 export type NewsletterSignupStatus = "idle" | "loading" | "success" | "error";
 
@@ -73,7 +73,7 @@ function NewsletterSignup({
         {...props}
       >
         <span className="flex items-center justify-center w-8 h-8 rounded-full bg-primary/10">
-          <Check className="size-4 text-primary" weight="bold" />
+          <Check className="size-4 text-primary" strokeWidth={2.5} />
         </span>
         <p className="font-serif text-sm text-foreground italic">
           {successMessage}
@@ -111,7 +111,7 @@ function NewsletterSignup({
           aria-label="Email address"
           aria-invalid={status === "error"}
           className={cn(
-            "flex-1 px-4 py-3 text-sm font-serif",
+            "flex-1 px-4 py-3 text-sm",
             "bg-background border border-border/50 rounded-sm",
             "placeholder:text-muted-foreground/50 placeholder:italic",
             "focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary/50",
@@ -133,7 +133,7 @@ function NewsletterSignup({
           )}
         >
           {status === "loading" ? (
-            <CircleNotch className="size-4 animate-spin" weight="bold" />
+            <Loader2 className="size-4 animate-spin" strokeWidth={2.5} />
           ) : (
             buttonText
           )}

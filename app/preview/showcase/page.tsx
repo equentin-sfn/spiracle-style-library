@@ -1,8 +1,9 @@
 "use client";
 
 import * as React from "react";
-import { CollectionCard, InfoBar, BookCoverActions, BookDetails, PurchasePanel, PreviewBar, SerendipityPills, type SerendipityPill } from "@/components/molecules";
-import { Tag, TagRibbon } from "@/components/atoms";
+import { CollectionCard, InfoBar, BookCoverActions, BookDetails, PurchasePanel, PreviewBar, SerendipityPills, BookCard, type SerendipityPill } from "@/components/molecules";
+import { Tag, MinimalDotTag, CornerBadge } from "@/components/atoms";
+import Image from "next/image";
 import {
   BentoHero,
   CollectionShowcase,
@@ -15,16 +16,16 @@ import {
 import {
   Book,
   Timer,
-  PencilLine,
-  Microphone,
-  Translate,
+  PenLine,
+  Mic,
+  Languages,
   Calendar,
   Globe,
-  Buildings,
+  Building2,
   Barcode,
-  ListBullets,
+  List,
   Headphones,
-} from "@phosphor-icons/react";
+} from "lucide-react";
 
 const navItems = [
   { label: "Audiobooks", href: "/audiobooks" },
@@ -59,14 +60,14 @@ const sampleDiscoveryResults: DiscoveryMachineResult = {
 const infoBarItems = [
   { icon: Book, label: "Book 1 of 2", value: "The Wire" },
   { icon: Timer, label: "Duration", value: "2hrs and 25mins" },
-  { icon: PencilLine, label: "Author", value: "Tsitsi Dangarembga" },
-  { icon: Microphone, label: "Narrator", value: "Jay Rayner" },
-  { icon: Translate, label: "Translator", value: "Jay Rayner, AN Other" },
+  { icon: PenLine, label: "Author", value: "Tsitsi Dangarembga" },
+  { icon: Mic, label: "Narrator", value: "Jay Rayner" },
+  { icon: Languages, label: "Translator", value: "Jay Rayner, AN Other" },
   { icon: Calendar, label: "First published:", value: "November 2025" },
   { icon: Globe, label: "Language", value: "English" },
-  { icon: Buildings, label: "Publisher", value: "Faber and Faber" },
+  { icon: Building2, label: "Publisher", value: "Faber and Faber" },
   { icon: Barcode, label: "ISBN13", value: "1234567891011" },
-  { icon: ListBullets, label: "Version", value: "Unabridged" },
+  { icon: List, label: "Version", value: "Unabridged" },
   { icon: Headphones, label: "Audiobook", value: "" },
 ];
 
@@ -331,7 +332,7 @@ In this rollicking collection of his hilarious columns, the award-winning writer
       />
 
       {/* Section 5: Serendipity Pills */}
-      <section className="py-12 sm:py-16 bg-spiracle-cream">
+      <section className="py-12 sm:py-16 bg-spiracle-cream dark:bg-[#3a332c]">
         <div className="max-w-5xl mx-auto px-6 sm:px-8">
           <SerendipityPills
             pills={serendipityPillsData}
@@ -360,206 +361,240 @@ In this rollicking collection of his hilarious columns, the award-winning writer
             <h2 className="font-display text-3xl sm:text-4xl text-foreground">
               Tags & Labels
             </h2>
-            <p className="mt-3 font-serif text-muted-foreground max-w-lg mx-auto">
-              Promotional and status labels for books, collections, and editorial content.
+            <p className="mt-3 font-serif text-muted-foreground max-w-lg mx-auto text-left sm:text-center">
+              Three tag styles: Primary (below cover), Secondary (minimal dot), Accent (corner badge).
             </p>
           </header>
 
-          {/* PILL STYLE - All Variants */}
-          <div className="mb-16">
-            <h3 className="font-display text-xl text-foreground mb-6 border-b border-border pb-2">
-              Pill Style
+          {/* All Variants Display */}
+          <div className="mb-16 p-6 bg-spiracle-cream dark:bg-[#1a1815] rounded-sm">
+            <h3 className="font-display text-xl text-foreground mb-6">
+              All Tag Variants
             </h3>
 
-            {/* Promotional Tags */}
-            <div className="mb-8">
-              <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-3">
-                Promotional
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <Tag variant="offer" />
-                <Tag variant="offer">2 for 1</Tag>
-                <Tag variant="free" />
-                <Tag variant="best-value" />
-                <Tag variant="limited" />
+            <div className="space-y-6">
+              <div>
+                <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-3">
+                  Primary (Tag / BelowCoverTag)
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  <Tag variant="staff-pick" />
+                  <Tag variant="spiracle-special" />
+                  <Tag variant="new-release" />
+                  <Tag variant="free" />
+                  <Tag variant="editors-choice" />
+                  <Tag variant="limited" />
+                  <Tag variant="included" />
+                  <Tag variant="offer" />
+                </div>
               </div>
-            </div>
 
-            {/* Editorial Tags */}
-            <div className="mb-8">
-              <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-3">
-                Editorial
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <Tag variant="staff-pick" />
-                <Tag variant="pick-of-week" />
-                <Tag variant="pick-of-month" />
-                <Tag variant="editors-choice" />
+              <div>
+                <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-3">
+                  Secondary (MinimalDotTag)
+                </p>
+                <div className="flex flex-wrap gap-4">
+                  <MinimalDotTag variant="staff-pick" />
+                  <MinimalDotTag variant="spiracle-special" />
+                  <MinimalDotTag variant="new-release" />
+                  <MinimalDotTag variant="free" />
+                  <MinimalDotTag variant="editors-choice" />
+                </div>
               </div>
-            </div>
 
-            {/* Product Tags */}
-            <div className="mb-8">
-              <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-3">
-                Product
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <Tag variant="spiracle-special" />
-                <Tag variant="spiracle-edition" />
-                <Tag variant="new" />
-                <Tag variant="new-release" />
-                <Tag variant="exclusive" />
-              </div>
-            </div>
-
-            {/* Status Tags */}
-            <div className="mb-8">
-              <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-3">
-                Status
-              </p>
-              <div className="flex flex-wrap gap-2">
-                <Tag variant="included" />
-                <Tag variant="coming-soon" />
-                <Tag variant="preorder" />
-              </div>
-            </div>
-
-            {/* Sizes */}
-            <div>
-              <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-3">
-                Sizes
-              </p>
-              <div className="flex flex-wrap items-center gap-3">
-                <Tag variant="new" size="sm" />
-                <Tag variant="new" size="md" />
-                <span className="text-xs text-muted-foreground ml-2">sm / md</span>
+              <div className="relative p-4 bg-[#2D2520] dark:bg-[#1a1815] rounded-sm">
+                <p className="text-xs uppercase tracking-[0.15em] text-[#F4EEDC]/70 mb-3">
+                  Accent (CornerBadge) — for strong promotions only
+                </p>
+                <div className="flex flex-wrap gap-6">
+                  <span className="relative inline-block px-6 py-3">
+                    <CornerBadge variant="free" className="!relative !top-0 !left-0" />
+                  </span>
+                  <span className="relative inline-block px-6 py-3">
+                    <CornerBadge variant="offer" className="!relative !top-0 !left-0" />
+                  </span>
+                  <span className="relative inline-block px-6 py-3">
+                    <CornerBadge variant="limited" className="!relative !top-0 !left-0" />
+                  </span>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* FLAG STYLE */}
+          {/* MinimalDotTag - Default Style */}
           <div className="mb-16">
-            <h3 className="font-display text-xl text-foreground mb-6 border-b border-border pb-2">
-              Flag Style
+            <h3 className="font-display text-xl text-foreground mb-2 border-b border-border pb-2">
+              MinimalDotTag — Default Style
             </h3>
+            <p className="text-sm text-muted-foreground mb-6 font-serif text-left">
+              The default tag style. Clean, editorial, never competes with cover art.
+              Just use <code className="text-xs bg-muted px-1 py-0.5 rounded">tag=&quot;variant&quot;</code> on BookCard.
+            </p>
 
-            <div className="mb-8">
-              <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-3">
-                Direction: Right (default)
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <Tag variant="spiracle-special" tagStyle="flag" />
-                <Tag variant="new-release" tagStyle="flag" />
-                <Tag variant="best-value" tagStyle="flag" />
-                <Tag variant="offer" tagStyle="flag">2 for 1</Tag>
-              </div>
+            <div className="grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-6">
+              <BookCard
+                title="The Night Watch"
+                author="Sarah Waters"
+                coverImage="/images/covers/cover-med-01.png"
+                tag="staff-pick"
+                hidePremiumLabel
+              />
+              <BookCard
+                title="White Teeth"
+                author="Zadie Smith"
+                coverImage="/images/covers/cover-med-08.png"
+                tag="spiracle-special"
+                hidePremiumLabel
+              />
+              <BookCard
+                title="The Overstory"
+                author="Richard Powers"
+                coverImage="/images/covers/cover-med-03.png"
+                tag="new-release"
+                hidePremiumLabel
+              />
+              <BookCard
+                title="Shuggie Bain"
+                author="Douglas Stuart"
+                coverImage="/images/covers/cover-med-02.png"
+                tag="free"
+                hidePremiumLabel
+              />
+              <BookCard
+                title="Wolf Hall"
+                author="Hilary Mantel"
+                coverImage="/images/covers/cover-med-04.png"
+                tag="editors-choice"
+                hidePremiumLabel
+              />
             </div>
+          </div>
 
-            <div>
-              <p className="text-xs uppercase tracking-[0.15em] text-muted-foreground mb-3">
-                Direction: Left
-              </p>
-              <div className="flex flex-wrap gap-3">
-                <Tag variant="editors-choice" tagStyle="flag" flagDirection="left" />
-                <Tag variant="staff-pick" tagStyle="flag" flagDirection="left" />
-                <Tag variant="limited" tagStyle="flag" flagDirection="left" />
+          {/* Bold Tag Style */}
+          <div className="mb-16">
+            <h3 className="font-display text-xl text-foreground mb-2 border-b border-border pb-2">
+              BelowCoverTag (Bold) — For Emphasis
+            </h3>
+            <p className="text-sm text-muted-foreground mb-6 font-serif text-left">
+              Use <code className="text-xs bg-muted px-1 py-0.5 rounded">tagStyle=&quot;bold&quot;</code> when you need the tag to stand out more.
+            </p>
+
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-6">
+              <BookCard
+                title="The Night Watch"
+                author="Sarah Waters"
+                coverImage="/images/covers/cover-med-01.png"
+                tag="staff-pick"
+                tagStyle="bold"
+                hidePremiumLabel
+              />
+              <BookCard
+                title="White Teeth"
+                author="Zadie Smith"
+                coverImage="/images/covers/cover-med-08.png"
+                tag="spiracle-special"
+                tagStyle="bold"
+                hidePremiumLabel
+              />
+              <BookCard
+                title="The Overstory"
+                author="Richard Powers"
+                coverImage="/images/covers/cover-med-03.png"
+                tag="new-release"
+                tagStyle="bold"
+                hidePremiumLabel
+              />
+              <BookCard
+                title="Shuggie Bain"
+                author="Douglas Stuart"
+                coverImage="/images/covers/cover-med-02.png"
+                badge="free"
+                hidePremiumLabel
+              />
+            </div>
+          </div>
+
+          {/* Corner Badge on Covers */}
+          <div className="mb-16">
+            <h3 className="font-display text-xl text-foreground mb-2 border-b border-border pb-2">
+              CornerBadge (Accent) — Use Sparingly
+            </h3>
+            <p className="text-sm text-muted-foreground mb-6 font-serif text-left">
+              Only for high-impact promotions like &ldquo;Free&rdquo;, &ldquo;50% Off&rdquo;, or &ldquo;Limited Edition&rdquo;.
+            </p>
+
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+              <div className="relative rounded-sm overflow-hidden shadow-md aspect-square">
+                <Image
+                  src="/images/covers/cover-med-04.png"
+                  alt="Free badge test"
+                  fill
+                  className="object-cover"
+                />
+                <CornerBadge variant="free" position="top-left" />
+              </div>
+              <div className="relative rounded-sm overflow-hidden shadow-md aspect-square">
+                <Image
+                  src="/images/covers/cover-med-05.png"
+                  alt="Offer badge test"
+                  fill
+                  className="object-cover"
+                />
+                <CornerBadge variant="offer" position="top-left">50% Off</CornerBadge>
+              </div>
+              <div className="relative rounded-sm overflow-hidden shadow-md aspect-square">
+                <Image
+                  src="/images/covers/cover-med-06.png"
+                  alt="Limited badge test"
+                  fill
+                  className="object-cover"
+                />
+                <CornerBadge variant="limited" position="top-right" />
+              </div>
+              <div className="relative rounded-sm overflow-hidden shadow-md aspect-square">
+                <Image
+                  src="/images/covers/cover-med-07.png"
+                  alt="New release badge test"
+                  fill
+                  className="object-cover"
+                />
+                <CornerBadge variant="new-release" position="top-right" />
               </div>
             </div>
           </div>
 
-          {/* RIBBON STYLE - On Sample Cards */}
-          <div>
-            <h3 className="font-display text-xl text-foreground mb-6 border-b border-border pb-2">
-              Ribbon Style (on cards)
+          {/* Usage Guidelines */}
+          <div className="py-8 border-t border-border">
+            <h3 className="font-display text-xl text-foreground mb-6">
+              Usage Guidelines
             </h3>
-
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-              {/* Sample Card with Spiracle Special ribbon */}
-              <div className="relative bg-card rounded-sm overflow-hidden border border-border aspect-[3/4]">
-                <TagRibbon variant="spiracle-special" />
-                <div className="absolute inset-0 flex items-end p-4">
-                  <div>
-                    <p className="font-serif text-sm text-foreground">Sample Book</p>
-                    <p className="text-xs text-muted-foreground">Author Name</p>
-                  </div>
-                </div>
+            <div className="grid sm:grid-cols-3 gap-8">
+              <div>
+                <p className="font-medium text-foreground mb-2">Tag (Primary)</p>
+                <p className="font-serif text-sm text-muted-foreground text-left mb-2">
+                  Default for BookCards. Appears in footer below cover.
+                </p>
+                <code className="block text-xs bg-muted p-2 rounded-sm">
+                  {`<Tag variant="staff-pick" />`}
+                </code>
               </div>
-
-              {/* Sample Card with New Release ribbon */}
-              <div className="relative bg-card rounded-sm overflow-hidden border border-border aspect-[3/4]">
-                <TagRibbon variant="new-release" />
-                <div className="absolute inset-0 flex items-end p-4">
-                  <div>
-                    <p className="font-serif text-sm text-foreground">Sample Book</p>
-                    <p className="text-xs text-muted-foreground">Author Name</p>
-                  </div>
-                </div>
+              <div>
+                <p className="font-medium text-foreground mb-2">MinimalDotTag (Secondary)</p>
+                <p className="font-serif text-sm text-muted-foreground text-left mb-2">
+                  Subtle contexts — lists, sidebars, multiple tags.
+                </p>
+                <code className="block text-xs bg-muted p-2 rounded-sm">
+                  {`<MinimalDotTag variant="new" />`}
+                </code>
               </div>
-
-              {/* Sample Card with Best Value ribbon */}
-              <div className="relative bg-card rounded-sm overflow-hidden border border-border aspect-[3/4]">
-                <TagRibbon variant="best-value" />
-                <div className="absolute inset-0 flex items-end p-4">
-                  <div>
-                    <p className="font-serif text-sm text-foreground">Sample Book</p>
-                    <p className="text-xs text-muted-foreground">Author Name</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Sample Card with Offer ribbon */}
-              <div className="relative bg-card rounded-sm overflow-hidden border border-border aspect-[3/4]">
-                <TagRibbon variant="offer">2 for 1</TagRibbon>
-                <div className="absolute inset-0 flex items-end p-4">
-                  <div>
-                    <p className="font-serif text-sm text-foreground">Sample Book</p>
-                    <p className="text-xs text-muted-foreground">Author Name</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Sample Card with Free ribbon */}
-              <div className="relative bg-card rounded-sm overflow-hidden border border-border aspect-[3/4]">
-                <TagRibbon variant="free" />
-                <div className="absolute inset-0 flex items-end p-4">
-                  <div>
-                    <p className="font-serif text-sm text-foreground">Sample Book</p>
-                    <p className="text-xs text-muted-foreground">Author Name</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Sample Card with Editor's Choice ribbon */}
-              <div className="relative bg-card rounded-sm overflow-hidden border border-border aspect-[3/4]">
-                <TagRibbon variant="editors-choice" />
-                <div className="absolute inset-0 flex items-end p-4">
-                  <div>
-                    <p className="font-serif text-sm text-foreground">Sample Book</p>
-                    <p className="text-xs text-muted-foreground">Author Name</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Sample Card with Limited ribbon */}
-              <div className="relative bg-card rounded-sm overflow-hidden border border-border aspect-[3/4]">
-                <TagRibbon variant="limited" />
-                <div className="absolute inset-0 flex items-end p-4">
-                  <div>
-                    <p className="font-serif text-sm text-foreground">Sample Book</p>
-                    <p className="text-xs text-muted-foreground">Author Name</p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Sample Card with Coming Soon ribbon */}
-              <div className="relative bg-card rounded-sm overflow-hidden border border-border aspect-[3/4]">
-                <TagRibbon variant="coming-soon" />
-                <div className="absolute inset-0 flex items-end p-4">
-                  <div>
-                    <p className="font-serif text-sm text-foreground">Sample Book</p>
-                    <p className="text-xs text-muted-foreground">Author Name</p>
-                  </div>
-                </div>
+              <div>
+                <p className="font-medium text-foreground mb-2">CornerBadge (Accent)</p>
+                <p className="font-serif text-sm text-muted-foreground text-left mb-2">
+                  High-impact promotions only. On cover.
+                </p>
+                <code className="block text-xs bg-muted p-2 rounded-sm">
+                  {`<CornerBadge variant="free" />`}
+                </code>
               </div>
             </div>
           </div>

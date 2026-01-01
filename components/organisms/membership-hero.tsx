@@ -66,7 +66,7 @@ function MembershipHero({
               </h1>
 
               {/* Description */}
-              <p className="mt-6 text-lg sm:text-xl text-muted-foreground leading-relaxed font-serif max-w-xl mx-auto lg:mx-0">
+              <p className="mt-6 text-lg sm:text-xl text-muted-foreground leading-relaxed max-w-xl mx-auto lg:mx-0">
                 {description}
               </p>
 

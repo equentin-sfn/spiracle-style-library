@@ -4,7 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
 import { BookCard } from "@/components/molecules";
-import { Gear, Lightning, MagnifyingGlass } from "@phosphor-icons/react";
+import { Loader2, Zap, Search, Sparkles } from "lucide-react";
 
 export interface DiscoveryMachineBook {
   id: string;
@@ -43,32 +43,6 @@ export interface DiscoveryMachineProps
   illustrationSrc?: string;
   /** Dark mode illustration */
   illustrationDarkSrc?: string;
-}
-
-// Decorative cog SVG component
-function DecorativeCog({
-  className,
-  animate = false,
-}: {
-  className?: string;
-  animate?: boolean;
-}) {
-  return (
-    <svg
-      viewBox="0 0 100 100"
-      className={cn(
-        "text-[#b8956c] dark:text-[#8b7355]",
-        animate && "animate-[spin_20s_linear_infinite]",
-        className
-      )}
-      aria-hidden="true"
-    >
-      <path
-        fill="currentColor"
-        d="M50 20c-1.5 0-3 .1-4.5.3l-2-8.5c-.2-1-.9-1.8-1.9-1.8h-8.2c-1 0-1.7.8-1.9 1.8l-2 8.5c-3 .8-5.8 2-8.4 3.5l-7-5c-.8-.6-1.9-.5-2.6.3l-5.8 5.8c-.8.8-.9 1.9-.3 2.6l5 7c-1.5 2.6-2.7 5.4-3.5 8.4l-8.5 2c-1 .2-1.8.9-1.8 1.9v8.2c0 1 .8 1.7 1.8 1.9l8.5 2c.8 3 2 5.8 3.5 8.4l-5 7c-.6.8-.5 1.9.3 2.6l5.8 5.8c.8.8 1.9.9 2.6.3l7-5c2.6 1.5 5.4 2.7 8.4 3.5l2 8.5c.2 1 .9 1.8 1.9 1.8h8.2c1 0 1.7-.8 1.9-1.8l2-8.5c3-.8 5.8-2 8.4-3.5l7 5c.8.6 1.9.5 2.6-.3l5.8-5.8c.8-.8.9-1.9.3-2.6l-5-7c1.5-2.6 2.7-5.4 3.5-8.4l8.5-2c1-.2 1.8-.9 1.8-1.9v-8.2c0-1-.8-1.7-1.8-1.9l-8.5-2c-.8-3-2-5.8-3.5-8.4l5-7c.6-.8.5-1.9-.3-2.6l-5.8-5.8c-.8-.8-1.9-.9-2.6-.3l-7 5c-2.6-1.5-5.4-2.7-8.4-3.5l-2-8.5c-.2-1-.9-1.8-1.9-1.8h-4c-1.5-.2-3-.3-4.5-.3zM50 35c8.3 0 15 6.7 15 15s-6.7 15-15 15-15-6.7-15-15 6.7-15 15-15z"
-      />
-    </svg>
-  );
 }
 
 // Victorian ornate corner
@@ -186,20 +160,6 @@ function DiscoveryMachine({
           backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E")`,
         }}
         aria-hidden="true"
-      />
-
-      {/* Decorative cogs - positioned subtly in corners */}
-      <DecorativeCog
-        className="absolute -top-6 -left-6 w-24 h-24 opacity-20"
-        animate
-      />
-      <DecorativeCog
-        className="absolute -bottom-8 -right-8 w-32 h-32 opacity-15"
-        animate
-      />
-      <DecorativeCog
-        className="absolute top-1/3 -right-12 w-20 h-20 opacity-10"
-        animate
       />
 
       <div className="relative max-w-4xl mx-auto px-6 sm:px-8">
@@ -331,8 +291,8 @@ function DiscoveryMachine({
                 />
 
                 <div className="flex items-start gap-3 p-4">
-                  <MagnifyingGlass
-                    weight="regular"
+                  <Search
+                    strokeWidth={1.5}
                     className="w-5 h-5 mt-1 text-[#8b7355] dark:text-[#a89880] flex-shrink-0"
                   />
                   <textarea
@@ -415,8 +375,7 @@ function DiscoveryMachine({
                 <span className="flex items-center gap-3">
                   {isGenerating ? (
                     <>
-                      <Gear
-                        weight="fill"
+                      <Loader2
                         className="w-5 h-5 animate-spin"
                         aria-hidden="true"
                       />
@@ -424,7 +383,7 @@ function DiscoveryMachine({
                     </>
                   ) : (
                     <>
-                      <Lightning weight="fill" className="w-5 h-5" />
+                      <Zap fill="currentColor" strokeWidth={0} className="w-5 h-5" />
                       <span>Generate Collection</span>
                     </>
                   )}
@@ -450,8 +409,7 @@ function DiscoveryMachine({
                 aria-hidden="true"
               >
                 <span className="h-px w-16 bg-gradient-to-r from-transparent to-[#c4a97a] dark:to-[#6b5d4d]" />
-                <Gear
-                  weight="fill"
+                <Sparkles
                   className="w-6 h-6 text-[#c4a97a] dark:text-[#6b5d4d]"
                 />
                 <span className="h-px w-16 bg-gradient-to-l from-transparent to-[#c4a97a] dark:to-[#6b5d4d]" />

@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { Button } from "@/components/atoms";
 import { BookCard } from "@/components/molecules";
 import { PageWrapper } from "@/components/templates";
-import { CaretLeft, CaretRight } from "@phosphor-icons/react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 export interface CollectionSpotlightBook {
   title: string;
@@ -99,7 +99,7 @@ function CollectionSpotlight({
             <h2 className={cn("font-display text-3xl sm:text-4xl lg:text-5xl leading-tight tracking-tight", textColor)}>
               {headline}
             </h2>
-            <p className={cn("text-sm sm:text-base leading-relaxed font-serif", textMuted)}>
+            <p className={cn("text-sm sm:text-base leading-relaxed", textMuted)}>
               {description}
             </p>
             <a href={ctaLink}>
@@ -128,7 +128,7 @@ function CollectionSpotlight({
             )}
             aria-label="Scroll left"
           >
-            <CaretLeft size={20} />
+            <ChevronLeft size={20} />
           </button>
           <button
             onClick={() => scroll("right")}
@@ -139,7 +139,7 @@ function CollectionSpotlight({
             )}
             aria-label="Scroll right"
           >
-            <CaretRight size={20} />
+            <ChevronRight size={20} />
           </button>
 
           {/* Scrollable Carousel */}

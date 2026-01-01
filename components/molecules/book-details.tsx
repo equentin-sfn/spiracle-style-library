@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Star, Book, Users } from "@phosphor-icons/react";
+import { Star, Book, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export interface LinkedValue {
@@ -105,16 +105,16 @@ function BookDetails({
       {/* Stats Row */}
       <div className="flex items-center gap-5 text-sm text-foreground mb-5">
         <span className="inline-flex items-center gap-1.5">
-          <Star className="size-4 text-spiracle-terracotta" weight="fill" aria-hidden="true" />
+          <Star className="size-4 text-spiracle-terracotta" fill="currentColor" strokeWidth={0} aria-hidden="true" />
           <span className="font-medium">{rating.score}</span>
           <span className="text-muted-foreground">({rating.count})</span>
         </span>
         <span className="inline-flex items-center gap-1.5 text-muted-foreground">
-          <Book className="size-4" weight="regular" aria-hidden="true" />
+          <Book className="size-4" strokeWidth={1.5} aria-hidden="true" />
           <span>{bookCount}</span>
         </span>
         <span className="inline-flex items-center gap-1.5 text-muted-foreground">
-          <Users className="size-4" weight="regular" aria-hidden="true" />
+          <Users className="size-4" strokeWidth={1.5} aria-hidden="true" />
           <span>{userCount}</span>
         </span>
       </div>

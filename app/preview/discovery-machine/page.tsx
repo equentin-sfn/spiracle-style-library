@@ -9,21 +9,37 @@ import {
   type DiscoveryMachineResult,
   type SocialLink,
 } from "@/components/organisms";
-import {
-  InstagramLogo,
-  TiktokLogo,
-  LinkedinLogo,
-  FacebookLogo,
-} from "@phosphor-icons/react";
-// Custom Bluesky icon component
-const BlueskyLogo = ({ className, ...props }: { className?: string; [key: string]: unknown }) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 256 256"
-    className={className}
-    fill="currentColor"
-    {...props}
-  >
+// Social media icon components (Lucide doesn't include brand logos)
+const InstagramLogo = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+  </svg>
+);
+
+const TiktokLogo = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor">
+    <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+  </svg>
+);
+
+const LinkedinLogo = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+    <rect width="4" height="12" x="2" y="9"/>
+    <circle cx="4" cy="4" r="2"/>
+  </svg>
+);
+
+const FacebookLogo = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+  </svg>
+);
+
+const BlueskyLogo = ({ className }: { className?: string }) => (
+  <svg className={className} viewBox="0 0 256 256" fill="currentColor">
     <path d="M128 80c-30 24-60 72-60 100 0 20 12 32 32 32 16 0 24-8 28-16 4 8 12 16 28 16 20 0 32-12 32-32 0-28-30-76-60-100zm0 24c20 16 40 52 40 76 0 8-4 12-12 12s-12-4-16-16l-12-24-12 24c-4 12-8 16-16 16s-12-4-12-12c0-24 20-60 40-76z"/>
   </svg>
 );

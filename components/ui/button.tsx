@@ -4,29 +4,62 @@ import { Slot } from "radix-ui"
 
 import { cn } from "@/lib/utils"
 
+/**
+ * Button Component - Multi-Platform Excellence
+ *
+ * Touch targets: All sizes meet 44px minimum for accessibility
+ * Hover states: Scoped to desktop via CSS @media (hover: hover) in globals.css
+ *
+ * The hover effects are delightful on desktop but don't interfere with touch.
+ */
 const buttonVariants = cva(
-  "focus-visible:border-ring focus-visible:ring-ring/50 aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 rounded-sm border border-transparent bg-clip-padding text-sm font-medium tracking-wide focus-visible:ring-[3px] aria-invalid:ring-[3px] [&_svg:not([class*='size-'])]:size-4 inline-flex items-center justify-center whitespace-nowrap transition-all duration-200 ease-out active:scale-[0.98] disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none shrink-0 [&_svg]:shrink-0 outline-none group/button select-none",
+  // Base styles: work everywhere, no hover dependency
+  [
+    // Layout & sizing
+    "inline-flex items-center justify-center whitespace-nowrap shrink-0",
+    // Typography
+    "text-sm font-medium tracking-wide",
+    // Border & shape
+    "rounded-sm border border-transparent bg-clip-padding",
+    // Focus states (accessible on all devices)
+    "focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
+    // Invalid states
+    "aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive dark:aria-invalid:border-destructive/50 aria-invalid:ring-[3px]",
+    // Transition (applies to color changes, hover handled in CSS)
+    "transition-colors duration-200 ease-out",
+    // Active/press state (works on touch AND desktop)
+    "active:scale-[0.98] transition-transform",
+    // Disabled state
+    "disabled:pointer-events-none disabled:opacity-50",
+    // Icon handling
+    "[&_svg:not([class*='size-'])]:size-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+    // Misc
+    "outline-none group/button select-none",
+  ],
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground hover:bg-primary/90 shadow-sm hover:shadow-md",
-        outline: "border-border bg-transparent hover:bg-muted/50 hover:text-foreground aria-expanded:bg-muted aria-expanded:text-foreground",
-        secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80 aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
-        ghost: "hover:bg-muted hover:text-foreground dark:hover:bg-muted/50 aria-expanded:bg-muted aria-expanded:text-foreground",
-        destructive: "bg-destructive/10 hover:bg-destructive/20 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/20 text-destructive focus-visible:border-destructive/40 dark:hover:bg-destructive/30",
-        link: "text-primary underline underline-offset-4 decoration-primary/40 hover:decoration-primary",
+        // Base colors only - hover states handled in globals.css
+        default: "bg-primary text-primary-foreground shadow-sm",
+        outline: "border-border bg-transparent aria-expanded:bg-muted aria-expanded:text-foreground",
+        secondary: "bg-secondary text-secondary-foreground aria-expanded:bg-secondary aria-expanded:text-secondary-foreground",
+        ghost: "aria-expanded:bg-muted aria-expanded:text-foreground",
+        destructive: "bg-destructive/10 text-destructive focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/20 focus-visible:border-destructive/40",
+        link: "text-primary underline underline-offset-4 decoration-primary/40",
         // Literary style - elegant with subtle warmth
-        literary: "bg-foreground text-background hover:bg-foreground/90 shadow-sm hover:shadow-md font-serif",
+        literary: "bg-foreground text-background shadow-sm font-serif",
       },
       size: {
-        default: "h-10 gap-2 px-5 has-data-[icon=inline-end]:pr-4 has-data-[icon=inline-start]:pl-4",
-        xs: "h-7 gap-1 px-3 text-xs has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2 [&_svg:not([class*='size-'])]:size-3",
-        sm: "h-9 gap-1.5 px-4 has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3",
-        lg: "h-12 gap-2 px-6 text-base has-data-[icon=inline-end]:pr-5 has-data-[icon=inline-start]:pl-5",
-        icon: "size-10",
-        "icon-xs": "size-7 [&_svg:not([class*='size-'])]:size-3",
-        "icon-sm": "size-9",
-        "icon-lg": "size-12",
+        // All sizes now meet 44px minimum touch target
+        default: "h-11 min-h-[44px] gap-2 px-5 has-data-[icon=inline-end]:pr-4 has-data-[icon=inline-start]:pl-4",
+        xs: "h-11 min-h-[44px] gap-1 px-3 text-xs has-data-[icon=inline-end]:pr-2 has-data-[icon=inline-start]:pl-2 [&_svg:not([class*='size-'])]:size-3",
+        sm: "h-11 min-h-[44px] gap-1.5 px-4 has-data-[icon=inline-end]:pr-3 has-data-[icon=inline-start]:pl-3",
+        lg: "h-12 min-h-[48px] gap-2 px-6 text-base has-data-[icon=inline-end]:pr-5 has-data-[icon=inline-start]:pl-5",
+        // Icon buttons: 44px minimum touch target
+        icon: "size-11 min-w-[44px] min-h-[44px]",
+        "icon-xs": "size-11 min-w-[44px] min-h-[44px] [&_svg:not([class*='size-'])]:size-3",
+        "icon-sm": "size-11 min-w-[44px] min-h-[44px]",
+        "icon-lg": "size-12 min-w-[48px] min-h-[48px]",
       },
     },
     defaultVariants: {

@@ -4,7 +4,7 @@ import * as React from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { isAuthenticated, logout } from "@/lib/auth";
-import { List, X, SignOut, Book, Swatches, Layout, Star, Books, GridFour, House } from "@phosphor-icons/react";
+import { Menu, X, LogOut, Book, Palette, LayoutDashboard, Star, Library, LayoutGrid, Home } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
@@ -12,7 +12,7 @@ const navItems = [
     label: "Homepage Components",
     href: "/preview/home",
     description: "New homepage & layout components",
-    icon: House,
+    icon: Home,
   },
   {
     label: "Title Detail Page",
@@ -24,13 +24,13 @@ const navItems = [
     label: "Component Library",
     href: "/preview",
     description: "All components showcase",
-    icon: Swatches,
+    icon: Palette,
   },
   {
     label: "Book Details Hero",
     href: "/preview/book-details",
     description: "Book details hero section",
-    icon: Layout,
+    icon: LayoutDashboard,
   },
   {
     label: "Showcase",
@@ -42,13 +42,13 @@ const navItems = [
     label: "Books Grid",
     href: "/preview/books",
     description: "BookCard grid layout",
-    icon: Books,
+    icon: Library,
   },
   {
     label: "Collections",
     href: "/preview/collections",
     description: "CollectionCard examples",
-    icon: GridFour,
+    icon: LayoutGrid,
   },
 ];
 
@@ -89,7 +89,7 @@ export default function HomePage() {
             className="p-2 -ml-2 text-foreground hover:bg-spiracle-sand/50 rounded-md transition-colors"
             aria-label="Open menu"
           >
-            <List size={24} weight="light" />
+            <Menu size={24} strokeWidth={1} />
           </button>
 
           {/* Logo */}
@@ -103,7 +103,7 @@ export default function HomePage() {
             className="p-2 -mr-2 text-muted-foreground hover:text-foreground hover:bg-spiracle-sand/50 rounded-md transition-colors"
             aria-label="Logout"
           >
-            <SignOut size={20} weight="light" />
+            <LogOut size={20} strokeWidth={1} />
           </button>
         </div>
       </header>
@@ -136,7 +136,7 @@ export default function HomePage() {
               className="p-2 -mr-2 text-muted-foreground hover:text-foreground hover:bg-spiracle-sand/50 rounded-md transition-colors"
               aria-label="Close menu"
             >
-              <X size={20} weight="light" />
+              <X size={20} strokeWidth={1} />
             </button>
           </div>
 
@@ -149,7 +149,7 @@ export default function HomePage() {
                 onClick={() => setMenuOpen(false)}
                 className="flex items-start gap-3 px-4 py-3 hover:bg-spiracle-sand/50 transition-colors"
               >
-                <item.icon size={20} weight="light" className="text-muted-foreground mt-0.5 flex-shrink-0" />
+                <item.icon size={20} strokeWidth={1} className="text-muted-foreground mt-0.5 flex-shrink-0" />
                 <div>
                   <div className="text-sm font-medium text-foreground">{item.label}</div>
                   <div className="text-xs text-muted-foreground">{item.description}</div>
@@ -164,7 +164,7 @@ export default function HomePage() {
               onClick={handleLogout}
               className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground transition-colors"
             >
-              <SignOut size={16} weight="light" />
+              <LogOut size={16} strokeWidth={1} />
               Sign out
             </button>
           </div>
@@ -190,7 +190,7 @@ export default function HomePage() {
                 href={item.href}
                 className="group p-4 bg-card border border-border rounded-sm hover:border-foreground/20 transition-colors"
               >
-                <item.icon size={24} weight="light" className="text-muted-foreground mb-3 group-hover:text-foreground transition-colors" />
+                <item.icon size={24} strokeWidth={1} className="text-muted-foreground mb-3 group-hover:text-foreground transition-colors" />
                 <div className="font-medium text-foreground mb-1">{item.label}</div>
                 <div className="text-sm text-muted-foreground">{item.description}</div>
               </Link>

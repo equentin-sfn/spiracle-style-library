@@ -5,7 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/atoms";
-import { Play, BookOpen } from "@phosphor-icons/react";
+import { Play, BookOpen } from "lucide-react";
 
 export interface FeaturedTitleProps
   extends React.HTMLAttributes<HTMLElement> {
@@ -148,7 +148,7 @@ function FeaturedTitle({
               )}
 
               {/* Synopsis */}
-              <p className="mt-6 text-base sm:text-lg leading-relaxed text-muted-foreground text-left font-serif">
+              <p className="mt-6 text-base sm:text-lg leading-relaxed text-muted-foreground text-left">
                 {synopsis}
               </p>
 
@@ -156,7 +156,7 @@ function FeaturedTitle({
               <div className="flex flex-wrap gap-4 mt-8">
                 <Button asChild size="lg">
                   <Link href={primaryCtaHref}>
-                    <Play className="size-4 mr-2" weight="fill" />
+                    <Play className="size-4 mr-2" fill="currentColor" strokeWidth={0} />
                     {primaryCtaText}
                   </Link>
                 </Button>
@@ -164,7 +164,7 @@ function FeaturedTitle({
                 {secondaryCtaHref && (
                   <Button asChild variant="outline" size="lg">
                     <Link href={secondaryCtaHref}>
-                      <BookOpen className="size-4 mr-2" weight="regular" />
+                      <BookOpen className="size-4 mr-2" strokeWidth={1.5} />
                       {secondaryCtaText}
                     </Link>
                   </Button>

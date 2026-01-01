@@ -1,8 +1,15 @@
 "use client";
 
 import * as React from "react";
-import { Sun, Moon } from "@phosphor-icons/react";
+import { Sun, Moon } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+/**
+ * ThemeToggle - Multi-Platform Excellence
+ *
+ * Touch targets: 44px minimum
+ * Hover states: Scoped to desktop via CSS @media (hover: hover) in globals.css
+ */
 
 type Theme = "light" | "dark";
 
@@ -52,12 +59,12 @@ function ThemeToggle({
   const getIcon = () => {
     if (!mounted) {
       // Render a placeholder during SSR to avoid hydration mismatch
-      return <Sun size={iconSize} weight="regular" />;
+      return <Sun size={iconSize} strokeWidth={1.5} />;
     }
     return theme === "light" ? (
-      <Sun size={iconSize} weight="regular" />
+      <Sun size={iconSize} strokeWidth={1.5} />
     ) : (
-      <Moon size={iconSize} weight="regular" />
+      <Moon size={iconSize} strokeWidth={1.5} />
     );
   };
 
@@ -69,8 +76,12 @@ function ThemeToggle({
     <button
       type="button"
       onClick={toggleTheme}
+      data-slot="theme-toggle"
       className={cn(
-        "p-2 rounded-md text-foreground hover:bg-secondary transition-colors",
+        // 44px minimum touch target
+        "min-w-[44px] min-h-[44px] flex items-center justify-center",
+        "rounded-md text-foreground transition-colors",
+        // Focus states (work on all devices)
         "focus:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
         className
       )}

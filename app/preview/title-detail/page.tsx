@@ -11,16 +11,16 @@ import {
 import {
   Book,
   Timer,
-  PencilLine,
-  Microphone,
-  Translate,
+  PenLine,
+  Mic,
+  Languages,
   Calendar,
   Globe,
-  Buildings,
+  Building2,
   Barcode,
-  ListBullets,
+  List,
   Headphones,
-} from "@phosphor-icons/react";
+} from "lucide-react";
 
 // Navigation items
 const navItems = [
@@ -91,14 +91,14 @@ const purchaseData = {
 const metadataItems = [
   { icon: Book, label: "Book 1 of 2", value: "The Wire" },
   { icon: Timer, label: "Duration", value: "3hrs and 52mins" },
-  { icon: PencilLine, label: "Author", value: "Jay Rayner" },
-  { icon: Microphone, label: "Narrator", value: "Jay Rayner" },
-  { icon: Translate, label: "Translator", value: "N/A" },
+  { icon: PenLine, label: "Author", value: "Jay Rayner" },
+  { icon: Mic, label: "Narrator", value: "Jay Rayner" },
+  { icon: Languages, label: "Translator", value: "N/A" },
   { icon: Calendar, label: "First published:", value: "November 2024" },
   { icon: Globe, label: "Language", value: "English" },
-  { icon: Buildings, label: "Publisher", value: "Faber and Faber" },
+  { icon: Building2, label: "Publisher", value: "Faber and Faber" },
   { icon: Barcode, label: "ISBN13", value: "9780571376521" },
-  { icon: ListBullets, label: "Version", value: "Unabridged" },
+  { icon: List, label: "Version", value: "Unabridged" },
   { icon: Headphones, label: "Audiobook", value: "" },
 ];
 

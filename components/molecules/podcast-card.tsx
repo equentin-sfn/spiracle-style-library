@@ -4,7 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { Play, Pause } from "@phosphor-icons/react";
+import { Play, Pause } from "lucide-react";
 import { AdaptiveIllustration } from "./adaptive-illustration";
 import { WaveDecoration } from "@/components/atoms";
 
@@ -109,9 +109,9 @@ function PodcastCard({
               )}
             >
               {isPlaying ? (
-                <Pause className="size-5" weight="fill" />
+                <Pause className="size-5" fill="currentColor" strokeWidth={0} />
               ) : (
-                <Play className="size-5 ml-0.5" weight="fill" />
+                <Play className="size-5 ml-0.5" fill="currentColor" strokeWidth={0} />
               )}
             </span>
           </button>
@@ -136,7 +136,7 @@ function PodcastCard({
 
         {/* Description */}
         {description && (
-          <p className="mt-2 text-sm text-muted-foreground leading-relaxed line-clamp-2 font-serif">
+          <p className="mt-2 text-sm text-muted-foreground leading-relaxed line-clamp-2">
             {description}
           </p>
         )}

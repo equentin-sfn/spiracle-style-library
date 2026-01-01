@@ -5,11 +5,11 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/atoms";
 import { AdaptiveIllustration } from "@/components/molecules/adaptive-illustration";
-import { Gift, UserPlus, PencilSimple } from "@phosphor-icons/react";
-import type { Icon as PhosphorIcon } from "@phosphor-icons/react";
+import { Gift, UserPlus, Pencil } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 export interface GiftStep {
-  icon: PhosphorIcon;
+  icon: LucideIcon;
   title: string;
   description: string;
 }
@@ -45,7 +45,7 @@ const defaultSteps: GiftStep[] = [
     description: "Enter their email and choose a delivery date",
   },
   {
-    icon: PencilSimple,
+    icon: Pencil,
     title: "Personalise",
     description: "Add a heartfelt message to make it special",
   },
@@ -114,7 +114,7 @@ function GiftSection({
               </h2>
 
               {/* Description */}
-              <p className="mt-5 text-base sm:text-lg text-muted-foreground leading-relaxed font-serif max-w-lg">
+              <p className="mt-5 text-base sm:text-lg text-muted-foreground leading-relaxed max-w-lg">
                 {description}
               </p>
 
@@ -133,14 +133,14 @@ function GiftSection({
                     >
                       {/* Step Number & Icon */}
                       <div className="flex items-center justify-center w-10 h-10 rounded-full bg-spiracle-terracotta/10 dark:bg-spiracle-honey/20 text-spiracle-terracotta dark:text-spiracle-honey flex-shrink-0">
-                        <Icon className="size-5" weight="regular" />
+                        <Icon className="size-5" strokeWidth={1.5} />
                       </div>
                       {/* Content */}
                       <div>
                         <h3 className="font-medium text-foreground text-sm sm:text-base">
                           {step.title}
                         </h3>
-                        <p className="text-sm text-muted-foreground mt-0.5 font-serif">
+                        <p className="text-sm text-muted-foreground mt-0.5">
                           {step.description}
                         </p>
                       </div>
@@ -161,7 +161,7 @@ function GiftSection({
                   className="bg-spiracle-terracotta dark:bg-spiracle-honey text-white dark:text-[#2D2520] hover:bg-spiracle-terracotta/90 dark:hover:bg-spiracle-honey/90"
                 >
                   <Link href={ctaHref}>
-                    <Gift className="size-4 mr-2" weight="regular" />
+                    <Gift className="size-4 mr-2" strokeWidth={1.5} />
                     {ctaText}
                   </Link>
                 </Button>

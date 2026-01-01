@@ -58,7 +58,7 @@ function PricingGrid({
               {heading}
             </h2>
             {subheading && (
-              <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto font-serif">
+              <p className="mt-4 text-lg text-muted-foreground max-w-2xl mx-auto">
                 {subheading}
               </p>
             )}
@@ -107,7 +107,7 @@ function PricingGrid({
           </div>
 
           {/* Trust Message */}
-          <p className="text-center text-sm text-muted-foreground mt-10 font-serif italic">
+          <p className="text-center text-sm text-muted-foreground mt-10">
             Cancel anytime. No questions asked.
           </p>
         </div>

@@ -6,15 +6,15 @@ import Link from "next/link";
 import { cn } from "@/lib/utils";
 import {
   Globe,
-  TwitterLogo,
-  InstagramLogo,
-  Books,
-} from "@phosphor-icons/react";
-import type { Icon as PhosphorIcon } from "@phosphor-icons/react";
+  Twitter,
+  Instagram,
+  Library,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { AdaptiveIllustration } from "@/components/molecules/adaptive-illustration";
 
 export interface AuthorSocialLink {
-  icon: PhosphorIcon;
+  icon: LucideIcon;
   href: string;
   label: string;
 }
@@ -44,8 +44,8 @@ export interface AuthorHeroProps extends React.HTMLAttributes<HTMLElement> {
 
 const defaultSocialLinks: AuthorSocialLink[] = [
   { icon: Globe, href: "#", label: "Website" },
-  { icon: TwitterLogo, href: "#", label: "Twitter" },
-  { icon: InstagramLogo, href: "#", label: "Instagram" },
+  { icon: Twitter, href: "#", label: "Twitter" },
+  { icon: Instagram, href: "#", label: "Instagram" },
 ];
 
 function AuthorHero({
@@ -181,9 +181,9 @@ function AuthorHero({
                 >
                   {titleCount !== undefined && (
                     <div className="flex items-center gap-2 px-4 py-2 rounded-full bg-spiracle-sand/40 dark:bg-muted border border-border/30">
-                      <Books
+                      <Library
                         className="size-4 text-primary"
-                        weight="regular"
+                        strokeWidth={1.5}
                       />
                       <span className="text-sm text-foreground">
                         {titleCount} {titleCount === 1 ? "title" : "titles"}
@@ -203,7 +203,7 @@ function AuthorHero({
               {/* Bio */}
               <p
                 className={cn(
-                  "text-base sm:text-lg leading-relaxed mt-6 text-left text-muted-foreground font-serif",
+                  "text-base sm:text-lg leading-relaxed mt-6 text-left text-muted-foreground",
                   isCentered ? "max-w-xl mx-auto" : "max-w-2xl"
                 )}
               >
@@ -231,7 +231,7 @@ function AuthorHero({
                         )}
                         aria-label={link.label}
                       >
-                        <Icon className="size-5" weight="regular" />
+                        <Icon className="size-5" strokeWidth={1.5} />
                       </Link>
                     );
                   })}

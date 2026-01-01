@@ -4,7 +4,16 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { Clock, ArrowRight } from "@phosphor-icons/react";
+import { Clock, ArrowRight } from "lucide-react";
+
+/**
+ * EssayCard - Multi-Platform Excellence
+ *
+ * Touch: Clean, functional card with clear tap target
+ * Desktop: Hover brings subtle lift, shadow, image scale, and title color change
+ *
+ * Hover states are scoped to desktop via CSS @media (hover: hover) in globals.css
+ */
 
 export interface EssayCardProps extends React.HTMLAttributes<HTMLElement> {
   /** Essay thumbnail/featured image URL */
@@ -48,13 +57,12 @@ function EssayCard({
 
   return (
     <article
+      data-slot="essay-card"
       className={cn(
         "group relative book-spine",
         "bg-card rounded-sm border border-border/30 overflow-hidden",
+        // Transitions for hover effects (applied via CSS media query)
         "transition-all duration-300 ease-out",
-        "hover:border-border/50 hover:-translate-y-1",
-        "hover:shadow-[0_8px_24px_rgba(45,37,32,0.1),0_2px_8px_rgba(45,37,32,0.06)]",
-        "dark:hover:shadow-[0_8px_24px_rgba(0,0,0,0.25),0_2px_8px_rgba(0,0,0,0.15)]",
         isHorizontal && "flex flex-row",
         isFeatured && "md:flex md:flex-row",
         className
@@ -76,7 +84,8 @@ function EssayCard({
           src={imageSrc}
           alt={title}
           fill
-          className="object-cover transition-transform duration-300 group-hover:scale-[1.02]"
+          data-slot="essay-card-image"
+          className="object-cover transition-transform duration-300"
           sizes={
             isHorizontal
               ? "192px"
@@ -116,7 +125,7 @@ function EssayCard({
                 ·
               </span>
               <span className="flex items-center gap-1 text-xs text-muted-foreground">
-                <Clock className="size-3" weight="regular" />
+                <Clock className="size-3" strokeWidth={1.5} />
                 {readingTime}
               </span>
             </>
@@ -124,11 +133,12 @@ function EssayCard({
         </div>
 
         {/* Title */}
-        <Link href={href} className="group/link">
+        <Link href={href} data-slot="essay-card-title-link">
           <h3
+            data-slot="essay-card-title"
             className={cn(
               "font-display text-foreground leading-snug",
-              "group-hover/link:text-primary transition-colors duration-200",
+              "transition-colors duration-200",
               isHorizontal
                 ? "text-base sm:text-lg line-clamp-2"
                 : isFeatured
@@ -151,7 +161,8 @@ function EssayCard({
           {authorHref ? (
             <Link
               href={authorHref}
-              className="text-foreground hover:text-primary transition-colors duration-200"
+              data-slot="essay-card-author-link"
+              className="text-foreground transition-colors duration-200"
             >
               {author}
             </Link>
@@ -162,7 +173,7 @@ function EssayCard({
 
         {/* Excerpt (for featured only) */}
         {excerpt && isFeatured && (
-          <p className="mt-3 text-sm sm:text-base text-muted-foreground leading-relaxed line-clamp-3 hidden md:block font-serif">
+          <p className="mt-3 text-sm sm:text-base text-muted-foreground leading-relaxed line-clamp-3 hidden md:block">
             {excerpt}
           </p>
         )}
@@ -179,16 +190,20 @@ function EssayCard({
           )}
           <Link
             href={href}
+            data-slot="essay-card-read-link"
             className={cn(
               "inline-flex items-center gap-1.5 text-xs font-medium",
               "text-primary link-underline",
+              // 44px touch target
+              "min-h-[44px] items-center",
               "transition-colors duration-200"
             )}
           >
             Read essay
             <ArrowRight
-              className="size-3 transition-transform duration-200 group-hover:translate-x-1"
-              weight="bold"
+              data-slot="essay-card-arrow"
+              className="size-3 transition-transform duration-200"
+              strokeWidth={2.5}
             />
           </Link>
         </div>

@@ -2,12 +2,12 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import type { Icon as PhosphorIcon } from "@phosphor-icons/react";
+import type { LucideIcon } from "lucide-react";
 import { ScrollCarousel } from "./scroll-carousel";
 import { PageWrapper } from "@/components/templates";
 
 export interface InfoBarItem {
-  icon: PhosphorIcon;
+  icon: LucideIcon;
   label: string;
   value: string;
 }
@@ -46,7 +46,7 @@ function InfoBar({ items, variant = "subtle", className, ...props }: InfoBarProp
                 >
                   <IconComponent
                     className="size-4 text-muted-foreground/70 mb-0.5"
-                    weight="regular"
+                    strokeWidth={1.5}
                     aria-hidden="true"
                   />
                   <span className="text-[0.65rem] uppercase tracking-wider text-muted-foreground/70 whitespace-nowrap">

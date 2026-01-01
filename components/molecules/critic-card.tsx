@@ -2,7 +2,16 @@
 
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { Star } from "@phosphor-icons/react";
+import { Star } from "lucide-react";
+
+/**
+ * CriticCard - Multi-Platform Excellence
+ *
+ * Touch: Clean, functional card with clear tap target
+ * Desktop: Hover brings subtle lift and shadow
+ *
+ * Hover states are scoped to desktop via CSS @media (hover: hover) in globals.css
+ */
 
 export interface CriticCardProps extends React.HTMLAttributes<HTMLElement> {
   publication: string;
@@ -29,7 +38,8 @@ function StarRating({
         <Star
           key={i}
           size={18}
-          weight={i < rating ? "fill" : "regular"}
+          fill={i < rating ? "currentColor" : "none"}
+          strokeWidth={1.5}
           className={i < rating ? "text-spiracle-terracotta" : "text-spiracle-sand"}
         />
       ))}
@@ -52,12 +62,11 @@ function CriticCard({
 }: CriticCardProps) {
   return (
     <article
+      data-slot="critic-card"
       className={cn(
         "flex flex-col bg-card rounded-sm p-6 sm:p-7 border border-border/30",
+        // Transitions for hover effects (applied via CSS media query)
         "transition-all duration-300 ease-out",
-        "hover:-translate-y-1 hover:border-border/50",
-        "hover:shadow-[0_8px_24px_rgba(45,37,32,0.1),0_2px_8px_rgba(45,37,32,0.06)]",
-        "dark:hover:shadow-[0_8px_24px_rgba(0,0,0,0.25),0_2px_8px_rgba(0,0,0,0.15)]",
         className
       )}
       {...props}
@@ -91,7 +100,7 @@ function CriticCard({
         <h3 className="font-medium text-sm sm:text-base text-spiracle-ink dark:text-foreground leading-snug">
           {reviewTitle}
         </h3>
-        <p className="text-sm text-spiracle-slate dark:text-muted-foreground leading-[1.65] line-clamp-5 font-serif">
+        <p className="text-sm text-spiracle-slate dark:text-muted-foreground leading-[1.65] line-clamp-5">
           {reviewExcerpt}
         </p>
       </div>
@@ -106,7 +115,14 @@ function CriticCard({
           {reviewUrl && (
             <a
               href={reviewUrl}
-              className="text-xs font-medium text-spiracle-terracotta hover:underline underline-offset-2 whitespace-nowrap transition-colors duration-200"
+              data-slot="critic-card-link"
+              className={cn(
+                "text-xs font-medium text-spiracle-terracotta",
+                "underline-offset-2 whitespace-nowrap",
+                // 44px touch target
+                "min-h-[44px] flex items-center",
+                "transition-colors duration-200"
+              )}
             >
               Read full review →
             </a>

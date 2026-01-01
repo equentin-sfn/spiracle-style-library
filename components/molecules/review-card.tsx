@@ -2,7 +2,16 @@
 
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import { Star, Clock, Heart } from "@phosphor-icons/react";
+import { Star, Clock, Heart } from "lucide-react";
+
+/**
+ * ReviewCard - Multi-Platform Excellence
+ *
+ * Touch: Clean, functional card with clear tap target
+ * Desktop: Hover brings subtle lift and shadow
+ *
+ * Hover states are scoped to desktop via CSS @media (hover: hover) in globals.css
+ */
 
 export interface ReviewCardProps extends React.HTMLAttributes<HTMLElement> {
   /** URL to reviewer's avatar image */
@@ -34,7 +43,8 @@ function StarRating({
         <Star
           key={i}
           size={18}
-          weight={i < rating ? "fill" : "regular"}
+          fill={i < rating ? "currentColor" : "none"}
+          strokeWidth={1.5}
           className={i < rating ? "text-spiracle-terracotta" : "text-spiracle-sand"}
         />
       ))}
@@ -55,12 +65,11 @@ function ReviewCard({
 }: ReviewCardProps) {
   return (
     <article
+      data-slot="review-card"
       className={cn(
         "flex flex-col bg-card rounded-sm p-5 sm:p-6 border border-border/30",
+        // Transitions for hover effects (applied via CSS media query)
         "transition-all duration-300 ease-out",
-        "hover:-translate-y-1 hover:border-border/50",
-        "hover:shadow-[0_8px_24px_rgba(45,37,32,0.1),0_2px_8px_rgba(45,37,32,0.06)]",
-        "dark:hover:shadow-[0_8px_24px_rgba(0,0,0,0.25),0_2px_8px_rgba(0,0,0,0.15)]",
         className
       )}
       {...props}
@@ -91,7 +100,7 @@ function ReviewCard({
         <h3 className="font-serif text-base sm:text-lg font-medium text-spiracle-ink dark:text-foreground mb-1.5 leading-snug">
           {title}
         </h3>
-        <p className="text-sm text-spiracle-ink/80 dark:text-foreground/70 leading-[1.6] line-clamp-4 font-serif">
+        <p className="text-sm text-spiracle-ink/80 dark:text-foreground/70 leading-[1.6] line-clamp-4">
           {body}
         </p>
       </div>
@@ -99,11 +108,11 @@ function ReviewCard({
       {/* Footer: Time + Likes */}
       <footer className="flex items-center justify-between text-spiracle-slate/70 dark:text-muted-foreground pt-3 border-t border-spiracle-sand/40 dark:border-border/30">
         <div className="flex items-center gap-1.5">
-          <Clock size={14} weight="regular" />
+          <Clock size={14} strokeWidth={1.5} />
           <span className="text-xs">{timeAgo}</span>
         </div>
         <div className="flex items-center gap-1.5">
-          <Heart size={14} weight="regular" />
+          <Heart size={14} strokeWidth={1.5} />
           <span className="text-xs">{likes}</span>
         </div>
       </footer>

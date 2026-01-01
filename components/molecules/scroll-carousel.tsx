@@ -1,8 +1,18 @@
 "use client";
 
 import * as React from "react";
-import { CaretLeft, CaretRight } from "@phosphor-icons/react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
+
+/**
+ * ScrollCarousel - Multi-Platform Excellence
+ *
+ * Touch: Native horizontal swipe scrolling (no arrows needed)
+ * Desktop: Navigation arrows appear on hover (44px touch targets for accessibility)
+ *
+ * The `carousel-arrow` class in globals.css handles showing/hiding arrows
+ * based on pointer type via @media (hover: hover) and (pointer: fine)
+ */
 
 export interface ScrollCarouselProps extends React.HTMLAttributes<HTMLDivElement> {
   /** Show/hide right fade (default: true) */
@@ -27,7 +37,6 @@ function ScrollCarousel({
   const scrollRef = React.useRef<HTMLDivElement>(null);
   const [isAtStart, setIsAtStart] = React.useState(true);
   const [isAtEnd, setIsAtEnd] = React.useState(false);
-  const [isHovered, setIsHovered] = React.useState(false);
 
   const handleScroll = React.useCallback(() => {
     const el = scrollRef.current;
@@ -73,8 +82,7 @@ function ScrollCarousel({
   return (
     <div
       className={cn("relative group/carousel", className)}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      data-slot="scroll-carousel"
       {...props}
     >
       <div
@@ -111,74 +119,80 @@ function ScrollCarousel({
         />
       )}
 
-      {/* Navigation arrows - desktop only */}
+      {/* Navigation arrows - desktop only (hidden on touch via carousel-arrow class) */}
       {showArrows && (
         <>
-          {/* Left arrow */}
+          {/* Left arrow - 44px touch target */}
           <button
             type="button"
             onClick={() => scrollBy("left")}
             disabled={isAtStart}
             aria-label="Scroll to previous items"
+            data-slot="carousel-arrow-left"
+            data-position="left"
             className={cn(
-              // Base styles
-              "carousel-arrow absolute left-2 top-1/2 -translate-y-1/2 z-10",
-              "flex items-center justify-center",
-              "w-10 h-10 rounded-full",
-              // Colors and effects
+              // carousel-arrow: hidden on touch, flex on desktop (see globals.css)
+              "carousel-arrow",
+              // Positioning
+              "absolute left-2 top-1/2 -translate-y-1/2 z-10",
+              // 44px touch target
+              "w-11 h-11 min-w-[44px] min-h-[44px]",
+              "items-center justify-center",
+              "rounded-full",
+              // Base colors (no hover - handled in CSS)
               "bg-background/80 dark:bg-card/80 backdrop-blur-sm",
               "border border-border/50",
               "shadow-sm",
-              // Hover and active states
-              "hover:bg-background dark:hover:bg-card hover:border-border hover:shadow-md",
+              // Active/press state (works everywhere)
               "active:scale-95",
               // Transitions
               "transition-all duration-200 ease-out",
-              // Visibility based on state
+              // Visibility: hidden at start, fade in on carousel hover
               isAtStart
                 ? "opacity-0 pointer-events-none"
-                : isHovered
-                  ? "opacity-100"
-                  : "opacity-0 group-hover/carousel:opacity-100",
+                : "opacity-0 group-hover/carousel:opacity-100"
             )}
           >
-            <CaretLeft
+            <ChevronLeft
               className="size-5 text-foreground/70"
-              weight="bold"
+              strokeWidth={2.5}
             />
           </button>
 
-          {/* Right arrow */}
+          {/* Right arrow - 44px touch target */}
           <button
             type="button"
             onClick={() => scrollBy("right")}
             disabled={isAtEnd}
             aria-label="Scroll to next items"
+            data-slot="carousel-arrow-right"
+            data-position="right"
             className={cn(
-              // Base styles
-              "carousel-arrow absolute right-2 top-1/2 -translate-y-1/2 z-10",
-              "flex items-center justify-center",
-              "w-10 h-10 rounded-full",
-              // Colors and effects
+              // carousel-arrow: hidden on touch, flex on desktop (see globals.css)
+              "carousel-arrow",
+              // Positioning
+              "absolute right-2 top-1/2 -translate-y-1/2 z-10",
+              // 44px touch target
+              "w-11 h-11 min-w-[44px] min-h-[44px]",
+              "items-center justify-center",
+              "rounded-full",
+              // Base colors (no hover - handled in CSS)
               "bg-background/80 dark:bg-card/80 backdrop-blur-sm",
               "border border-border/50",
               "shadow-sm",
-              // Hover and active states
-              "hover:bg-background dark:hover:bg-card hover:border-border hover:shadow-md",
+              // Active/press state (works everywhere)
               "active:scale-95",
               // Transitions
               "transition-all duration-200 ease-out",
-              // Visibility based on state
+              // Visibility: hidden at end, fade in on carousel hover
               isAtEnd
                 ? "opacity-0 pointer-events-none"
-                : isHovered
-                  ? "opacity-100"
-                  : "opacity-0 group-hover/carousel:opacity-100",
+                : "opacity-0 group-hover/carousel:opacity-100"
             )}
           >
-            <CaretRight
+            <ChevronRight
               className="size-5 text-foreground/70"
-              weight="bold"
+              strokeWidth={2.5}
             />
           </button>
         </>

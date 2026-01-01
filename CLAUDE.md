@@ -11,7 +11,9 @@ Spiracle is an independent audiobook service offering curated literary fiction a
 - **Framework**: Next.js 16+ with App Router
 - **UI Components**: shadcn/ui (radix-maia style)
 - **Styling**: Tailwind CSS v4 with CSS variables
-- **Icons**: Phosphor Icons
+- **Icons**: Lucide React (lucide-react)
+  - Import: `import { IconName } from "lucide-react"`
+  - Docs: https://lucide.dev/icons/
 - **Language**: TypeScript
 
 ## Project Structure
@@ -62,6 +64,73 @@ pnpm dlx shadcn@latest add <component-name>
 ## Design Tokens
 
 Design tokens are defined as CSS variables in `app/globals.css`. See `DESIGN_SYSTEM.md` for full documentation.
+
+---
+
+## Typography
+
+Typography is critical for readability and accessibility. We use two font families with strict usage rules.
+
+### Font Families
+
+| Font | Tailwind Class | CSS Variable |
+|------|----------------|--------------|
+| **Jannon** (serif) | `font-serif`, `font-display` | `--font-serif`, `--font-display` |
+| **Nunito Sans** (sans-serif) | `font-sans` | `--font-sans` |
+
+### Usage Rules
+
+**Jannon (serif) — `font-serif` / `font-display`:**
+- Headlines and titles (h1, h2, h3)
+- Book titles
+- Section labels
+- Pull quotes and blockquotes
+- Display text and decorative emphasis
+- Editorial/magazine-style accent text
+
+**Nunito Sans (sans-serif) — `font-sans`:**
+- Body copy and paragraphs
+- Descriptions and excerpts
+- UI text (buttons, labels, navigation, tabs)
+- Form inputs and placeholders
+- Card descriptions
+- Lists and feature items
+- FAQ answers
+- Any text meant to be READ IN QUANTITY
+
+### Why This Matters
+
+- Sans-serif is more readable for body text, especially on screens
+- Serif body text is harder for users with dyslexia or reading difficulties
+- This is an **accessibility consideration**, not just aesthetic preference
+- The rule: if someone needs to READ it (not just glance at it), use sans-serif
+
+### Quick Reference
+
+```tsx
+// ✅ CORRECT: Serif for headline, sans for body
+<h2 className="font-display text-3xl">Featured Collection</h2>
+<p className="text-muted-foreground">Browse our curated selection of literary fiction...</p>
+
+// ✅ CORRECT: Pull quote uses serif (editorial)
+<blockquote className="font-serif text-xl italic">
+  "A masterpiece of modern literature."
+</blockquote>
+
+// ❌ WRONG: Don't use serif for descriptions
+<p className="font-serif text-muted-foreground">This is a description...</p>
+
+// ❌ WRONG: Don't use serif for UI elements
+<input className="font-serif" placeholder="Enter email" />
+```
+
+### Common Mistakes to Avoid
+
+1. Using `font-serif` on card descriptions or excerpts
+2. Using `font-serif` on feature benefit descriptions
+3. Using `font-serif` on FAQ answers or body paragraphs
+4. Using `font-serif` on form inputs or placeholders
+5. Italic serif for body text (italic is fine for quotes/titles only)
 
 ---
 
@@ -343,3 +412,64 @@ All animations automatically disable when `prefers-reduced-motion: reduce` is se
 - No scale transforms larger than 1.02 on hover
 - No rotating/spinning elements (except intentional icon feedback)
 - No parallax or scroll-jacking effects
+
+---
+
+## Multi-Platform Excellence
+
+We design for BOTH mobile AND desktop — optimised for each context. Neither is compromised for the other.
+
+**Core principle: Progressive Enhancement**
+- Base functionality works on touch/mobile
+- Desktop gets ADDITIONAL delight, not the same experience
+- Both feel native to their platform
+
+**Touch (Mobile/Tablet):**
+- Minimum touch targets: 44px × 44px
+- Generous tap spacing
+- All core functionality works without hover
+- Swipe gestures for carousels
+- Bottom-of-screen placement for key actions (thumb-friendly)
+
+**Pointer (Desktop):**
+- Rich hover states — these are a REWARD for desktop users, not removed
+- Micro-interactions on hover (subtle lifts, colour shifts, reveals)
+- Cursor changes to indicate interactivity
+- Hover previews where useful
+- More information density is acceptable
+
+**How to implement both:**
+```css
+/* Base: works everywhere (touch) */
+.card {
+  /* tap-friendly, no hover dependency */
+}
+
+/* Enhancement: desktop delight */
+@media (hover: hover) and (pointer: fine) {
+  .card:hover {
+    /* micro-interactions, hover states */
+    /* this only applies to mouse/trackpad users */
+  }
+}
+```
+
+**Design pattern:**
+- Mobile: clean, functional, clear affordances
+- Desktop: same foundation + hover delight, richer interactions, subtle animations
+
+**Examples:**
+| Element | Mobile | Desktop Enhancement |
+|---------|--------|---------------------|
+| BookCard | Tap to view | Hover: subtle lift, shadow, quick-info reveal |
+| Carousel | Swipe | Hover: show navigation arrows |
+| Buttons | Tap state | Hover: colour shift, subtle animation |
+| Navigation | Hamburger menu | Full nav bar with hover dropdowns |
+| Tags | Visible always | Hover: tooltip with more info? |
+
+**The goal:**
+- Mobile users think "this works perfectly on my phone"
+- Desktop users think "these little details are delightful"
+- Neither thinks "this was designed for the other platform"
+
+Do NOT remove desktop hover interactions. They are part of our "moments of delight" principle. Use `@media (hover: hover)` to add them as enhancements.

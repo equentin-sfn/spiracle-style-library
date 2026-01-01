@@ -3,13 +3,13 @@
 import * as React from "react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-import type { Icon as PhosphorIcon } from "@phosphor-icons/react";
-import { CheckCircle } from "@phosphor-icons/react";
+import type { LucideIcon } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import { AdaptiveIllustration } from "@/components/molecules/adaptive-illustration";
 
 export interface FeatureBenefit {
   /** Benefit icon (optional, defaults to CheckCircle) */
-  icon?: PhosphorIcon;
+  icon?: LucideIcon;
   /** Benefit title */
   title: string;
   /** Benefit description */
@@ -81,7 +81,7 @@ function FeatureSection({
               </h2>
 
               {/* Description */}
-              <p className="mt-6 text-base sm:text-lg leading-relaxed text-muted-foreground text-left font-serif">
+              <p className="mt-6 text-base sm:text-lg leading-relaxed text-muted-foreground text-left">
                 {description}
               </p>
 
@@ -96,7 +96,8 @@ function FeatureSection({
                         <div className="flex-shrink-0 mt-0.5 flex items-center justify-center w-8 h-8 rounded-full bg-spiracle-sand/40 dark:bg-muted transition-colors duration-200 group-hover/benefit:bg-spiracle-sand/60 dark:group-hover/benefit:bg-muted/80">
                           <Icon
                             className="size-4 text-primary"
-                            weight="fill"
+                            fill="currentColor"
+                            strokeWidth={0}
                             aria-hidden="true"
                           />
                         </div>
@@ -105,7 +106,7 @@ function FeatureSection({
                           <h3 className="font-semibold text-base text-foreground">
                             {benefit.title}
                           </h3>
-                          <p className="mt-1 text-sm sm:text-base text-muted-foreground leading-relaxed text-left font-serif">
+                          <p className="mt-1 text-sm sm:text-base text-muted-foreground leading-relaxed text-left">
                             {benefit.description}
                           </p>
                         </div>

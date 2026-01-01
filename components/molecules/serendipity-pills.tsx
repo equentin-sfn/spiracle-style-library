@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { ArrowsClockwise } from "@phosphor-icons/react";
+import { RefreshCw } from "lucide-react";
 
 export interface SerendipityPill {
   /** Unique identifier */
@@ -110,7 +110,7 @@ function SerendipityPills({
               className={cn(
                 // Base styles - aged paper/index card aesthetic
                 "relative px-4 py-2 sm:px-5 sm:py-2.5",
-                "font-serif text-sm sm:text-base text-foreground/90",
+                "text-sm sm:text-base text-foreground/90",
                 "bg-[#faf8f0] dark:bg-[#4a423a]",
                 "border border-[#d4c9b8] dark:border-[#5a524a]",
                 "rounded-sm shadow-sm",
@@ -169,16 +169,16 @@ function SerendipityPills({
         disabled={isShuffling}
         className={cn(
           "group flex items-center gap-2 px-4 py-2",
-          "font-sans text-xs sm:text-sm text-muted-foreground",
+          "font-sans text-xs sm:text-sm text-[#6b5d4d] dark:text-[#b8a890]",
           "transition-all duration-200 ease-out",
-          "hover:text-foreground",
-          "focus:outline-none focus-visible:text-foreground",
+          "hover:text-[#4a3f35] dark:hover:text-[#e8dfd0]",
+          "focus:outline-none focus-visible:text-[#4a3f35] dark:focus-visible:text-[#e8dfd0]",
           "disabled:opacity-50 disabled:cursor-not-allowed"
         )}
         aria-label="Shuffle suggestions"
       >
-        <ArrowsClockwise
-          weight="regular"
+        <RefreshCw
+          strokeWidth={1.5}
           className={cn(
             "w-4 h-4 transition-transform duration-300",
             "group-hover:rotate-180",

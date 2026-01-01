@@ -3,13 +3,13 @@
 import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { List, X } from "@phosphor-icons/react";
+import { Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { ThemeToggle } from "@/components/atoms";
 
 const previewLinks = [
   { label: "Base Components", href: "/preview" },
-  { label: "Homepage", href: "/preview/home" },
+  { label: "Marketing", href: "/preview/home" },
   { label: "Book Cards", href: "/preview/books" },
   { label: "Collections", href: "/preview/collections" },
   { label: "Spotlights", href: "/preview/spotlights" },
@@ -67,9 +67,9 @@ function PreviewBar({ currentPath, className, ...props }: PreviewBarProps) {
               aria-expanded={menuOpen}
             >
               {menuOpen ? (
-                <X className="size-4" weight="bold" />
+                <X className="size-4" strokeWidth={2.5} />
               ) : (
-                <List className="size-4" weight="bold" />
+                <Menu className="size-4" strokeWidth={2.5} />
               )}
             </button>
           </div>

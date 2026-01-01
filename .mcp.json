@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "gluestack": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "/Users/quentinellis/mcp-servers/gluestack-mcp/index.js"
+      ],
+      "env": {}
+    }
+  }
+}

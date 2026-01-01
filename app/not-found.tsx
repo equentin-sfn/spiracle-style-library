@@ -5,7 +5,7 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { Button } from "@/components/atoms";
 import { AdaptiveIllustration } from "@/components/molecules/adaptive-illustration";
-import { House, Books, Compass } from "@phosphor-icons/react";
+import { Home, Library, Compass } from "lucide-react";
 
 export default function NotFound() {
   return (
@@ -29,7 +29,7 @@ export default function NotFound() {
       >
         <Compass
           className="size-12 sm:size-16 lg:size-20 text-spiracle-terracotta/20 dark:text-spiracle-honey/15"
-          weight="thin"
+          strokeWidth={1}
         />
       </motion.div>
 
@@ -130,13 +130,13 @@ export default function NotFound() {
           >
             <Button asChild size="lg" className="min-w-[180px]">
               <Link href="/">
-                <House className="size-4 mr-2" weight="regular" />
+                <Home className="size-4 mr-2" strokeWidth={1.5} />
                 Take me home
               </Link>
             </Button>
             <Button asChild variant="outline" size="lg" className="min-w-[180px]">
               <Link href="/audiobooks">
-                <Books className="size-4 mr-2" weight="regular" />
+                <Library className="size-4 mr-2" strokeWidth={1.5} />
                 Browse audiobooks
               </Link>
             </Button>

@@ -4,7 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { Quotes, Play, ArrowRight } from "@phosphor-icons/react";
+import { Quote, Play, ArrowRight } from "lucide-react";
 import { AdaptiveIllustration } from "./adaptive-illustration";
 import { WaveDecoration } from "@/components/atoms";
 
@@ -120,7 +120,7 @@ function InterviewCard({
               )}
               aria-label={`Play ${format}`}
             >
-              <Play className="size-3.5 ml-0.5" weight="fill" />
+              <Play className="size-3.5 ml-0.5" fill="currentColor" strokeWidth={0} />
             </button>
           )}
         </div>
@@ -169,12 +169,13 @@ function InterviewCard({
       {pullQuote && (
         <div className="relative mt-4 pl-6">
           {/* Quote icon */}
-          <Quotes
+          <Quote
             className="absolute left-0 top-0 size-4 text-primary/50"
-            weight="fill"
+            fill="currentColor"
+            strokeWidth={0}
             aria-hidden="true"
           />
-          <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3 italic font-serif">
+          <p className="text-sm text-muted-foreground leading-relaxed line-clamp-3 italic">
             {pullQuote}
           </p>
         </div>
@@ -196,7 +197,7 @@ function InterviewCard({
           {hasMedia ? `Listen to ${format}` : "Read interview"}
           <ArrowRight
             className="size-3 transition-transform duration-200 group-hover:translate-x-0.5"
-            weight="bold"
+            strokeWidth={2.5}
           />
         </Link>
       </div>

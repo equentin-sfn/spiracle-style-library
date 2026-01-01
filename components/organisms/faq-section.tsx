@@ -6,7 +6,7 @@ import { cn } from "@/lib/utils";
 import { FAQAccordion } from "@/components/molecules";
 import type { FAQItem } from "@/components/molecules/faq-accordion";
 import { Button } from "@/components/atoms";
-import { Envelope } from "@phosphor-icons/react";
+import { Mail } from "lucide-react";
 import { motion } from "framer-motion";
 
 export interface FAQCategory {
@@ -57,7 +57,7 @@ function FAQSection({
               {heading}
             </h2>
             {subheading && (
-              <p className="mt-4 text-lg text-muted-foreground font-serif">
+              <p className="mt-4 text-lg text-muted-foreground">
                 {subheading}
               </p>
             )}
@@ -123,12 +123,12 @@ function FAQSection({
                 "bg-muted/30"
               )}
             >
-              <p className="text-base text-foreground font-serif italic">
+              <p className="text-base text-foreground">
                 {helpText}
               </p>
               <Button asChild variant="outline">
                 <Link href={contactCtaHref}>
-                  <Envelope className="size-4 mr-2" weight="regular" />
+                  <Mail className="size-4 mr-2" strokeWidth={1.5} />
                   {contactCtaText}
                 </Link>
               </Button>

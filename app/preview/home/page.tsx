@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { Megaphone, BookOpen, Headphones, Heart, Spiral, Sparkle, Star } from "@phosphor-icons/react";
+import { Megaphone, BookOpen, Headphones, Heart, Shell, Sparkles, Star } from "lucide-react";
 
 // Molecules
 import {
@@ -82,9 +82,9 @@ export default function HomePreviewPage() {
             Style Library Preview
           </p>
           <h1 className="font-display text-4xl sm:text-5xl lg:text-6xl text-foreground mb-6 leading-[1.1]">
-            Homepage Components
+            Marketing Components
           </h1>
-          <p className="text-muted-foreground text-lg max-w-2xl mx-auto font-serif italic">
+          <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
             A cosy collection of components for discerning book lovers. Toggle between light and dark mode to see our warm, literary palette in action.
           </p>
         </div>
@@ -149,12 +149,12 @@ export default function HomePreviewPage() {
           description="We believe audiobooks deserve the same care and attention as beautifully printed editions. Every title is selected for its literary merit and matched with narrators who bring the text to life."
           benefits={[
             {
-              icon: Spiral,
+              icon: Shell,
               title: "Curated for discerning listeners",
               description: "Every title is handpicked by our editorial team, ensuring quality narration and literary merit.",
             },
             {
-              icon: Sparkle,
+              icon: Sparkles,
               title: "Crystal-clear audio quality",
               description: "Professional studio recordings with the finest narrators bring each story vividly to life.",
             },

@@ -3,15 +3,15 @@
 import * as React from "react";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { X } from "@phosphor-icons/react";
-import type { Icon as PhosphorIcon } from "@phosphor-icons/react";
+import { X } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 
 export interface AnnouncementBarProps
   extends React.HTMLAttributes<HTMLElement> {
   /** Unique ID for localStorage persistence */
   id: string;
   /** Icon to display before the message */
-  icon?: PhosphorIcon;
+  icon?: LucideIcon;
   /** The announcement message */
   message: string;
   /** Optional link text */
@@ -74,7 +74,7 @@ function AnnouncementBar({
           {Icon && (
             <Icon
               className="size-4 flex-shrink-0 text-foreground/70"
-              weight="regular"
+              strokeWidth={1.5}
               aria-hidden="true"
             />
           )}
@@ -108,7 +108,7 @@ function AnnouncementBar({
               )}
               aria-label="Dismiss announcement"
             >
-              <X className="size-4" weight="bold" />
+              <X className="size-4" strokeWidth={2.5} />
             </button>
           )}
         </div>

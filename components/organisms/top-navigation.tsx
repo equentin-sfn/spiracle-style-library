@@ -3,10 +3,17 @@
 import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { MagnifyingGlass, Bag, List, X } from "@phosphor-icons/react";
+import { Search, ShoppingBag, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Button, ThemeToggle } from "@/components/atoms";
 import { PageWrapper } from "@/components/templates";
+
+/**
+ * TopNavigation - Multi-Platform Excellence
+ *
+ * Touch targets: All interactive elements meet 44px minimum
+ * Hover states: Scoped to desktop via CSS @media (hover: hover) in globals.css
+ */
 
 export interface NavItem {
   label: string;
@@ -42,17 +49,18 @@ function TopNavigation({
         "shadow-[0_1px_3px_0_rgba(0,0,0,0.05)]",
         className
       )}
+      data-slot="top-navigation"
       {...props}
     >
       <PageWrapper>
         <nav
-          className="flex items-center justify-between py-4"
+          className="flex items-center justify-between py-2"
           aria-label="Main navigation"
         >
-        {/* Left: Logo */}
+        {/* Left: Logo - 44px touch target */}
         <Link
           href={logoHref}
-          className="shrink-0"
+          className="shrink-0 min-h-[44px] flex items-center"
           aria-label="Spiracle home"
         >
           <Image
@@ -71,7 +79,11 @@ function TopNavigation({
             <li key={item.href}>
               <Link
                 href={item.href}
-                className="text-xs xl:text-sm uppercase tracking-[0.15em] text-foreground link-literary"
+                className={cn(
+                  "text-xs xl:text-sm uppercase tracking-[0.15em] text-foreground",
+                  "min-h-[44px] flex items-center px-1", // 44px touch target
+                  "link-literary" // Hover handled in CSS
+                )}
               >
                 {item.label}
               </Link>
@@ -80,58 +92,82 @@ function TopNavigation({
         </ul>
 
         {/* Right: Actions */}
-        <div className="flex items-center gap-2 sm:gap-3">
-          {/* Search - Hidden on mobile when menu is open */}
+        <div className="flex items-center gap-1 sm:gap-2">
+          {/* Search - 44px touch target */}
           <button
             type="button"
             onClick={onSearch}
-            className="hidden sm:flex p-2 text-foreground hover:text-muted-foreground transition-colors"
+            data-slot="nav-icon-button"
+            className={cn(
+              "hidden sm:flex items-center justify-center",
+              "min-w-[44px] min-h-[44px]", // 44px touch target
+              "text-foreground transition-colors",
+              "rounded-sm" // For focus ring
+            )}
             aria-label="Search"
           >
-            <MagnifyingGlass className="size-5" weight="regular" />
+            <Search className="size-5" strokeWidth={1.5} />
           </button>
 
-          {/* Cart - Hidden on mobile when menu is open */}
+          {/* Cart - 44px touch target */}
           <button
             type="button"
             onClick={onCart}
-            className="hidden sm:flex p-2 text-foreground hover:text-muted-foreground transition-colors"
+            data-slot="nav-icon-button"
+            className={cn(
+              "hidden sm:flex items-center justify-center",
+              "min-w-[44px] min-h-[44px]", // 44px touch target
+              "text-foreground transition-colors",
+              "rounded-sm"
+            )}
             aria-label="Shopping cart"
           >
-            <Bag className="size-5" weight="regular" />
+            <ShoppingBag className="size-5" strokeWidth={1.5} />
           </button>
 
           {/* Theme Toggle - Desktop only */}
           <ThemeToggle className="hidden sm:flex" iconSize={20} />
 
-          {/* Log In Link - Desktop only */}
+          {/* Log In Link - Desktop only, 44px touch target */}
           <Link
             href={loginHref}
-            className="hidden lg:block text-xs xl:text-sm uppercase tracking-[0.15em] text-foreground link-literary px-2"
+            className={cn(
+              "hidden lg:flex items-center",
+              "text-xs xl:text-sm uppercase tracking-[0.15em] text-foreground",
+              "min-h-[44px] px-3", // 44px touch target
+              "link-literary"
+            )}
           >
             Log In
           </Link>
 
-          {/* Join Button */}
+          {/* Join Button - inherits 44px from Button component */}
           <Button
             asChild
-            className="bg-spiracle-burgundy hover:bg-spiracle-burgundy/90 text-spiracle-cream border-spiracle-burgundy px-4 sm:px-6"
+            data-slot="nav-join-button"
+            className="bg-spiracle-burgundy text-spiracle-cream border-spiracle-burgundy px-4 sm:px-6"
           >
             <Link href={joinHref}>Join</Link>
           </Button>
 
-          {/* Mobile Menu Toggle */}
+          {/* Mobile Menu Toggle - 44px touch target */}
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="lg:hidden p-2 text-foreground hover:text-muted-foreground transition-colors ml-1"
+            data-slot="nav-icon-button"
+            className={cn(
+              "lg:hidden flex items-center justify-center",
+              "min-w-[44px] min-h-[44px]", // 44px touch target
+              "text-foreground transition-colors",
+              "rounded-sm"
+            )}
             aria-label={mobileMenuOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileMenuOpen}
           >
             {mobileMenuOpen ? (
-              <X className="size-6" weight="regular" />
+              <X className="size-6" strokeWidth={1.5} />
             ) : (
-              <List className="size-6" weight="regular" />
+              <Menu className="size-6" strokeWidth={1.5} />
             )}
           </button>
         </div>
@@ -143,13 +179,19 @@ function TopNavigation({
         <div className="lg:hidden border-t border-border bg-background">
           <PageWrapper>
             <div className="py-4 space-y-4">
-            {/* Mobile Nav Links */}
-            <ul className="space-y-3">
+            {/* Mobile Nav Links - 44px touch targets */}
+            <ul className="space-y-1">
               {navItems.map((item) => (
                 <li key={item.href}>
                   <Link
                     href={item.href}
-                    className="block text-sm uppercase tracking-[0.15em] text-foreground hover:text-muted-foreground transition-colors py-2"
+                    data-slot="mobile-nav-link"
+                    className={cn(
+                      "flex items-center",
+                      "min-h-[44px] py-2", // 44px touch target
+                      "text-sm uppercase tracking-[0.15em] text-foreground",
+                      "transition-colors"
+                    )}
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item.label}
@@ -158,18 +200,23 @@ function TopNavigation({
               ))}
             </ul>
 
-            {/* Mobile Actions */}
-            <div className="flex items-center gap-4 pt-3 border-t border-border">
+            {/* Mobile Actions - 44px touch targets */}
+            <div className="flex items-center gap-2 pt-3 border-t border-border">
               <button
                 type="button"
                 onClick={() => {
                   onSearch?.();
                   setMobileMenuOpen(false);
                 }}
-                className="flex items-center gap-2 text-sm text-foreground hover:text-muted-foreground transition-colors"
+                data-slot="mobile-action-button"
+                className={cn(
+                  "flex items-center gap-2",
+                  "min-h-[44px] px-2", // 44px touch target
+                  "text-sm text-foreground transition-colors"
+                )}
                 aria-label="Search"
               >
-                <MagnifyingGlass className="size-5" weight="regular" />
+                <Search className="size-5" strokeWidth={1.5} />
                 <span>Search</span>
               </button>
 
@@ -179,10 +226,15 @@ function TopNavigation({
                   onCart?.();
                   setMobileMenuOpen(false);
                 }}
-                className="flex items-center gap-2 text-sm text-foreground hover:text-muted-foreground transition-colors"
+                data-slot="mobile-action-button"
+                className={cn(
+                  "flex items-center gap-2",
+                  "min-h-[44px] px-2", // 44px touch target
+                  "text-sm text-foreground transition-colors"
+                )}
                 aria-label="Shopping cart"
               >
-                <Bag className="size-5" weight="regular" />
+                <ShoppingBag className="size-5" strokeWidth={1.5} />
                 <span>Cart</span>
               </button>
 
@@ -190,7 +242,13 @@ function TopNavigation({
 
               <Link
                 href={loginHref}
-                className="text-sm uppercase tracking-[0.15em] text-foreground hover:text-muted-foreground transition-colors ml-auto"
+                data-slot="mobile-nav-link"
+                className={cn(
+                  "flex items-center",
+                  "min-h-[44px] px-2", // 44px touch target
+                  "text-sm uppercase tracking-[0.15em] text-foreground",
+                  "transition-colors ml-auto"
+                )}
                 onClick={() => setMobileMenuOpen(false)}
               >
                 Log In

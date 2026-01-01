@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { CaretDown } from "@phosphor-icons/react";
+import { ChevronDown } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export interface FAQItem {
@@ -76,9 +76,9 @@ function FAQAccordion({
                 transition={{ duration: 0.2 }}
                 className="flex-shrink-0"
               >
-                <CaretDown
+                <ChevronDown
                   className="size-5 text-muted-foreground"
-                  weight="bold"
+                  strokeWidth={2.5}
                 />
               </motion.span>
             </button>
@@ -95,7 +95,7 @@ function FAQAccordion({
                 >
                   <div className="px-5 pb-5 sm:px-6 sm:pb-6 pt-0">
                     <div className="h-px bg-border/30 mb-4" aria-hidden="true" />
-                    <p className="text-sm sm:text-base text-muted-foreground leading-relaxed font-serif">
+                    <p className="text-sm sm:text-base text-muted-foreground leading-relaxed">
                       {item.answer}
                     </p>
                   </div>

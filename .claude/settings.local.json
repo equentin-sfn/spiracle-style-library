@@ -19,7 +19,16 @@
       "Bash(open http://localhost:3000/preview/components)",
       "Bash(open http://localhost:3000)",
       "Bash(pkill:*)",
-      "Bash(NEXT_TURBOPACK_PERSISTENT_CACHING=0 npx next dev:*)"
+      "Bash(NEXT_TURBOPACK_PERSISTENT_CACHING=0 npx next dev:*)",
+      "Bash(rm:*)",
+      "Bash(pnpm add:*)",
+      "Bash(pnpm remove:*)",
+      "Bash(lsof:*)",
+      "Bash(git push)"
     ]
-  }
+  },
+  "enableAllProjectMcpServers": true,
+  "enabledMcpjsonServers": [
+    "gluestack"
+  ]
 }

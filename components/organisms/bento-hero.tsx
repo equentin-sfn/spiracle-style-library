@@ -45,7 +45,7 @@ function BentoHero({
           <h2 className="font-display text-2xl sm:text-3xl lg:text-4xl leading-tight text-foreground mb-4 tracking-tight">
             {title}
           </h2>
-          <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto font-serif">
+          <p className="text-sm sm:text-base text-muted-foreground max-w-2xl mx-auto">
             {description}
           </p>
         </header>

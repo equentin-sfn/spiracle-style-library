@@ -463,6 +463,273 @@
   }
 }
 
+/* ============================================
+   BUTTON HOVER STATES - Desktop Enhancement Only
+   These delightful hover effects only apply to mouse/trackpad users.
+   Touch users get clean, functional buttons without sticky hover states.
+   ============================================ */
+@media (hover: hover) and (pointer: fine) {
+  /* Default button - subtle shadow lift */
+  [data-slot="button"][data-variant="default"]:hover {
+    background-color: color-mix(in srgb, var(--primary) 90%, transparent);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  /* Outline button - subtle fill */
+  [data-slot="button"][data-variant="outline"]:hover {
+    background-color: color-mix(in srgb, var(--muted) 50%, transparent);
+    color: var(--foreground);
+  }
+
+  /* Secondary button - darken */
+  [data-slot="button"][data-variant="secondary"]:hover {
+    background-color: color-mix(in srgb, var(--secondary) 80%, transparent);
+  }
+
+  /* Ghost button - subtle background */
+  [data-slot="button"][data-variant="ghost"]:hover {
+    background-color: var(--muted);
+    color: var(--foreground);
+  }
+  .dark [data-slot="button"][data-variant="ghost"]:hover {
+    background-color: color-mix(in srgb, var(--muted) 50%, transparent);
+  }
+
+  /* Destructive button - intensify */
+  [data-slot="button"][data-variant="destructive"]:hover {
+    background-color: color-mix(in srgb, var(--destructive) 20%, transparent);
+  }
+  .dark [data-slot="button"][data-variant="destructive"]:hover {
+    background-color: color-mix(in srgb, var(--destructive) 30%, transparent);
+  }
+
+  /* Link button - underline intensifies */
+  [data-slot="button"][data-variant="link"]:hover {
+    text-decoration-color: var(--primary);
+  }
+
+  /* Literary button - elegant shadow lift */
+  [data-slot="button"][data-variant="literary"]:hover {
+    background-color: color-mix(in srgb, var(--foreground) 90%, transparent);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  }
+
+  /* ============================================
+     NAVIGATION HOVER STATES - Desktop Enhancement Only
+     ============================================ */
+
+  /* Nav icon buttons (search, cart, menu toggle) */
+  [data-slot="nav-icon-button"]:hover {
+    color: var(--muted-foreground);
+    background-color: color-mix(in srgb, var(--muted) 30%, transparent);
+  }
+
+  /* Join button in nav - burgundy hover */
+  [data-slot="nav-join-button"]:hover {
+    background-color: color-mix(in srgb, #730000 90%, transparent);
+  }
+
+  /* Mobile nav links - subtle background on hover */
+  [data-slot="mobile-nav-link"]:hover {
+    color: var(--muted-foreground);
+  }
+
+  /* Mobile action buttons */
+  [data-slot="mobile-action-button"]:hover {
+    color: var(--muted-foreground);
+  }
+
+  /* Theme toggle */
+  [data-slot="theme-toggle"]:hover {
+    background-color: var(--secondary);
+  }
+
+  /* ============================================
+     CAROUSEL ARROW HOVER STATES - Desktop Enhancement Only
+     ============================================ */
+
+  /* Carousel arrows - enhance on hover */
+  [data-slot^="carousel-arrow"]:hover {
+    background-color: var(--background);
+    border-color: var(--border);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+  .dark [data-slot^="carousel-arrow"]:hover {
+    background-color: var(--card);
+  }
+
+  /* ============================================
+     CARD HOVER STATES - Desktop Enhancement Only
+     These delightful hover effects bring cards to life on desktop.
+     ============================================ */
+
+  /* BookCard - subtle lift with warm shadow */
+  [data-slot="book-card"]:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(45, 37, 32, 0.12), 0 2px 8px rgba(45, 37, 32, 0.08);
+  }
+  .dark [data-slot="book-card"]:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3), 0 2px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  /* BookCard cover - gentle scale and rotation like picking up a book */
+  [data-slot="book-card"]:hover [data-slot="book-card-cover"] {
+    transform: scale(1.02) rotate(-0.5deg);
+  }
+
+  /* ============================================
+     BOOK COVER ACTIONS - Desktop Enhancement Only
+     ============================================ */
+
+  /* Sample button - forest green accent on hover */
+  [data-slot="sample-button"]:hover {
+    border-color: #266D36 !important; /* spiracle-forest */
+    color: #266D36 !important;
+  }
+
+  /* Library button - forest green on hover (when not active) */
+  [data-slot="library-button"]:not([data-active]):hover {
+    border-color: #266D36;
+    color: #266D36;
+  }
+
+  /* Library icon - rotate on hover (when not active) */
+  [data-slot="library-button"]:not([data-active]):hover [data-slot="library-icon"] {
+    transform: rotate(45deg);
+  }
+
+  /* Library button - press state */
+  [data-slot="library-button"]:active [data-slot="library-icon"] {
+    transform: scale(0.9);
+  }
+
+  /* Favorite button - terracotta on hover (when not active) */
+  [data-slot="favorite-button"]:not([data-active]):hover {
+    color: #9F4300; /* spiracle-terracotta */
+  }
+
+  /* Favorite icon - scale up on hover */
+  [data-slot="favorite-button"]:hover [data-slot="favorite-icon"] {
+    transform: scale(1.1);
+  }
+
+  /* Favorite icon - press state */
+  [data-slot="favorite-button"]:active [data-slot="favorite-icon"] {
+    transform: scale(0.95);
+  }
+
+  /* Book tags - forest green on hover */
+  [data-slot="book-tag"]:hover {
+    background-color: color-mix(in srgb, #266D36 10%, transparent);
+    color: #266D36;
+  }
+
+  /* CollectionCard - subtle lift with warm shadow */
+  [data-slot="collection-card"]:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--border) 50%, transparent);
+    box-shadow: 0 8px 24px rgba(45, 37, 32, 0.1), 0 2px 8px rgba(45, 37, 32, 0.06);
+  }
+  .dark [data-slot="collection-card"]:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  /* CollectionCard image - gentle scale */
+  [data-slot="collection-card"]:hover [data-slot="collection-card-image"] {
+    transform: scale(1.02);
+  }
+
+  /* CollectionCard title - primary color on hover */
+  [data-slot="collection-card"]:hover [data-slot="collection-card-title"] {
+    color: var(--primary);
+  }
+
+  /* ReviewCard - subtle lift with warm shadow */
+  [data-slot="review-card"]:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--border) 50%, transparent);
+    box-shadow: 0 8px 24px rgba(45, 37, 32, 0.1), 0 2px 8px rgba(45, 37, 32, 0.06);
+  }
+  .dark [data-slot="review-card"]:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  /* CriticCard - subtle lift with warm shadow */
+  [data-slot="critic-card"]:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--border) 50%, transparent);
+    box-shadow: 0 8px 24px rgba(45, 37, 32, 0.1), 0 2px 8px rgba(45, 37, 32, 0.06);
+  }
+  .dark [data-slot="critic-card"]:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  /* CriticCard link - underline on hover */
+  [data-slot="critic-card-link"]:hover {
+    text-decoration: underline;
+  }
+
+  /* EssayCard - subtle lift with warm shadow */
+  [data-slot="essay-card"]:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--border) 50%, transparent);
+    box-shadow: 0 8px 24px rgba(45, 37, 32, 0.1), 0 2px 8px rgba(45, 37, 32, 0.06);
+  }
+  .dark [data-slot="essay-card"]:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  /* EssayCard image - gentle scale */
+  [data-slot="essay-card"]:hover [data-slot="essay-card-image"] {
+    transform: scale(1.02);
+  }
+
+  /* EssayCard title - primary color on hover */
+  [data-slot="essay-card"]:hover [data-slot="essay-card-title"] {
+    color: var(--primary);
+  }
+
+  /* EssayCard author link - primary color on hover */
+  [data-slot="essay-card-author-link"]:hover {
+    color: var(--primary);
+  }
+
+  /* EssayCard arrow - slide right on card hover */
+  [data-slot="essay-card"]:hover [data-slot="essay-card-arrow"] {
+    transform: translateX(4px);
+  }
+
+  /* EssayCard read link - underline on hover */
+  [data-slot="essay-card-read-link"]:hover {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  /* PricingCard (default variant) - subtle lift with warm shadow */
+  [data-slot="pricing-card"][data-variant="default"]:hover {
+    transform: translateY(-4px);
+    border-color: color-mix(in srgb, var(--border) 50%, transparent);
+    box-shadow: 0 8px 24px rgba(45, 37, 32, 0.1), 0 2px 8px rgba(45, 37, 32, 0.06);
+  }
+  .dark [data-slot="pricing-card"][data-variant="default"]:hover {
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25), 0 2px 8px rgba(0, 0, 0, 0.15);
+  }
+
+  /* PricingCard (free variant) - subtle border enhancement */
+  [data-slot="pricing-card"][data-variant="free"]:hover {
+    border-color: color-mix(in srgb, var(--border) 50%, transparent);
+  }
+
+  /* PricingCard (highlighted variant) - enhanced shadow and slight scale */
+  [data-slot="pricing-card"][data-variant="highlighted"]:hover {
+    transform: scale(1.03);
+    box-shadow: 0 16px 40px rgba(45, 37, 32, 0.15), 0 6px 16px rgba(45, 37, 32, 0.1);
+  }
+  .dark [data-slot="pricing-card"][data-variant="highlighted"]:hover {
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35), 0 6px 16px rgba(0, 0, 0, 0.25);
+  }
+}
+
 /* Respect user preference for reduced motion */
 @media (prefers-reduced-motion: reduce) {
   *,

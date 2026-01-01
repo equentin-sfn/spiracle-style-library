@@ -4,12 +4,12 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "@/lib/utils";
-import { ArrowRight, Globe, TwitterLogo, InstagramLogo } from "@phosphor-icons/react";
-import type { Icon as PhosphorIcon } from "@phosphor-icons/react";
+import { ArrowRight, Globe, Twitter, Instagram } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { AdaptiveIllustration } from "./adaptive-illustration";
 
 export interface AuthorLink {
-  icon: PhosphorIcon;
+  icon: LucideIcon;
   href: string;
   label: string;
 }
@@ -35,8 +35,8 @@ export interface AuthorBioProps extends React.HTMLAttributes<HTMLElement> {
 
 const defaultLinks: AuthorLink[] = [
   { icon: Globe, href: "#", label: "Website" },
-  { icon: TwitterLogo, href: "#", label: "Twitter" },
-  { icon: InstagramLogo, href: "#", label: "Instagram" },
+  { icon: Twitter, href: "#", label: "Twitter" },
+  { icon: Instagram, href: "#", label: "Instagram" },
 ];
 
 function AuthorBio({
@@ -147,7 +147,7 @@ function AuthorBio({
         {/* Bio */}
         <p
           className={cn(
-            "text-muted-foreground leading-relaxed text-left font-serif",
+            "text-muted-foreground leading-relaxed text-left",
             isCompact
               ? "text-sm mt-3 line-clamp-3"
               : isInline
@@ -180,7 +180,7 @@ function AuthorBio({
                   )}
                   aria-label={link.label}
                 >
-                  <Icon className="size-4" weight="regular" />
+                  <Icon className="size-4" strokeWidth={1.5} />
                 </Link>
               );
             })}
@@ -200,7 +200,7 @@ function AuthorBio({
             View all titles
             <ArrowRight
               className="size-3.5 transition-transform duration-200 group-hover:translate-x-0.5"
-              weight="bold"
+              strokeWidth={2.5}
             />
           </Link>
         )}

@@ -20,10 +20,14 @@ export { WaveDecoration, type WaveDecorationProps } from "./wave-decoration";
 // Tags & Labels
 export {
   Tag,
-  TagRibbon,
+  MinimalDotTag,
+  BelowCoverTag,
+  CornerBadge,
   type TagProps,
   type TagVariant,
-  type TagStyle,
-  type TagSize,
-  type FlagDirection,
+  type TagColor,
+  type CornerPosition,
+  type MinimalDotTagProps,
+  type BelowCoverTagProps,
+  type CornerBadgeProps,
 } from "./tag";

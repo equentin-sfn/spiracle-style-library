@@ -65,7 +65,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import { Textarea } from "@/components/ui/textarea"
-import { PlusIcon, BluetoothIcon, DotsThreeVerticalIcon, FileIcon, FolderIcon, FolderOpenIcon, CodeIcon, DotsThreeOutlineIcon, MagnifyingGlassIcon, FloppyDiskIcon, DownloadIcon, EyeIcon, LayoutIcon, PaletteIcon, SunIcon, MoonIcon, MonitorIcon, UserIcon, CreditCardIcon, GearIcon, KeyboardIcon, TranslateIcon, BellIcon, EnvelopeIcon, ShieldIcon, QuestionIcon, FileTextIcon, SignOutIcon } from "@phosphor-icons/react"
+import { Plus as PlusIcon, Bluetooth as BluetoothIcon, MoreVertical as DotsThreeVerticalIcon, File as FileIcon, Folder as FolderIcon, FolderOpen as FolderOpenIcon, Code as CodeIcon, MoreHorizontal as DotsThreeOutlineIcon, Search as MagnifyingGlassIcon, Save as FloppyDiskIcon, Download as DownloadIcon, Eye as EyeIcon, LayoutDashboard as LayoutIcon, Palette as PaletteIcon, Sun as SunIcon, Moon as MoonIcon, Monitor as MonitorIcon, User as UserIcon, CreditCard as CreditCardIcon, Settings as GearIcon, Keyboard as KeyboardIcon, Languages as TranslateIcon, Bell as BellIcon, Mail as EnvelopeIcon, Shield as ShieldIcon, HelpCircle as QuestionIcon, FileText as FileTextIcon, LogOut as SignOutIcon } from "lucide-react"
 
 export function ComponentExample() {
   return (

@@ -3,220 +3,247 @@
 import * as React from "react";
 import { cn } from "@/lib/utils";
 
+// ============================================
+// Tag System for Spiracle
+// ============================================
+// Three styles:
+// 1. MinimalDotTag (Default) - Subtle dot + text, for card footers
+// 2. BelowCoverTag (Bold) - Solid background pill, for emphasis
+// 3. CornerBadge (Accent) - On-cover badge for strong promotions
+// ============================================
+
 export type TagVariant =
+  | "staff-pick"
   | "spiracle-special"
   | "spiracle-edition"
-  | "best-value"
-  | "new"
   | "new-release"
-  | "offer"
-  | "staff-pick"
-  | "pick-of-week"
-  | "pick-of-month"
-  | "editors-choice"
-  | "limited"
-  | "exclusive"
+  | "new"
   | "free"
   | "included"
+  | "best-value"
+  | "editors-choice"
+  | "pick-of-week"
+  | "pick-of-month"
+  | "limited"
+  | "exclusive"
+  | "offer"
   | "coming-soon"
   | "preorder";
 
-export type TagStyle = "pill" | "flag" | "ribbon";
-export type TagSize = "sm" | "md";
-export type FlagDirection = "left" | "right";
+export type TagColor = "dark" | "burgundy" | "terracotta" | "forest" | "gold" | "slate";
 
-export interface TagProps extends React.HTMLAttributes<HTMLSpanElement> {
-  /** Semantic variant determining color and default label */
+export interface TagProps {
   variant: TagVariant;
-  /** Visual style of the tag */
-  tagStyle?: TagStyle;
-  /** Size of the tag */
-  size?: TagSize;
-  /** Direction of flag point (only for flag style) */
-  flagDirection?: FlagDirection;
-  /** Custom label text (overrides default) */
+  color?: TagColor;
   children?: React.ReactNode;
+  className?: string;
 }
 
-// Default labels for each variant
+// Default labels
 const defaultLabels: Record<TagVariant, string> = {
+  "staff-pick": "Staff Pick",
   "spiracle-special": "Spiracle Special",
   "spiracle-edition": "Spiracle Edition",
-  "best-value": "Best Value",
-  "new": "New",
   "new-release": "New Release",
-  "offer": "Offer",
-  "staff-pick": "Staff Pick",
+  "new": "New",
+  "free": "Free",
+  "included": "Included",
+  "best-value": "Best Value",
+  "editors-choice": "Editor's Choice",
   "pick-of-week": "Pick of the Week",
   "pick-of-month": "Pick of the Month",
-  "editors-choice": "Editor's Choice",
   "limited": "Limited",
   "exclusive": "Exclusive",
-  "free": "Free",
-  "included": "Included in Premium",
+  "offer": "Offer",
   "coming-soon": "Coming Soon",
   "preorder": "Pre-order",
 };
 
-// Color configurations for each variant
-// Format: [bgLight, textLight, bgDark, textDark]
-const variantColors: Record<TagVariant, [string, string, string, string]> = {
-  // Burgundy variants - white text
-  "spiracle-special": ["bg-[#730000]", "text-white", "dark:bg-[#730000]", "dark:text-white"],
-  "spiracle-edition": ["bg-[#730000]", "text-white", "dark:bg-[#730000]", "dark:text-white"],
-  "limited": ["bg-[#730000]", "text-white", "dark:bg-[#8a1a1a]", "dark:text-white"],
-  "exclusive": ["bg-[#730000]", "text-white", "dark:bg-[#730000]", "dark:text-white"],
-
-  // Forest green variants - white text
-  "best-value": ["bg-[#266D36]", "text-white", "dark:bg-[#2d7d40]", "dark:text-white"],
-  "editors-choice": ["bg-[#266D36]", "text-white", "dark:bg-[#2d7d40]", "dark:text-white"],
-  "free": ["bg-[#266D36]", "text-white", "dark:bg-[#2d7d40]", "dark:text-white"],
-
-  // Terracotta variants - white text
-  "new": ["bg-[#9F4300]", "text-white", "dark:bg-[#b54d00]", "dark:text-white"],
-  "new-release": ["bg-[#9F4300]", "text-white", "dark:bg-[#b54d00]", "dark:text-white"],
-  "pick-of-week": ["bg-[#9F4300]", "text-white", "dark:bg-[#b54d00]", "dark:text-white"],
-  "pick-of-month": ["bg-[#9F4300]", "text-white", "dark:bg-[#b54d00]", "dark:text-white"],
-
-  // Soft/pale variants - dark text
-  "staff-pick": ["bg-[#C0C9C2]", "text-[#2D2520]", "dark:bg-[#8a9a8d]", "dark:text-[#1a1815]"],
-  "included": ["bg-[#C0C9C2]", "text-[#2D2520]", "dark:bg-[#8a9a8d]", "dark:text-[#1a1815]"],
-
-  // Yellow/amber variants - dark text
-  "offer": ["bg-[#F1E5A3]", "text-[#5a4a00]", "dark:bg-[#d4a84b]", "dark:text-[#2D2520]"],
-  "preorder": ["bg-[#F1E5A3]", "text-[#5a4a00]", "dark:bg-[#d4a84b]", "dark:text-[#2D2520]"],
-
-  // Neutral variants
-  "coming-soon": ["bg-[#F4EEDC]", "text-[#5a5347]", "dark:bg-[#4a443a]", "dark:text-[#e8e2d0]"],
+// Default colors for each variant
+const variantColors: Record<TagVariant, TagColor> = {
+  "staff-pick": "dark",
+  "spiracle-special": "burgundy",
+  "spiracle-edition": "burgundy",
+  "new-release": "terracotta",
+  "new": "terracotta",
+  "free": "forest",
+  "included": "slate",
+  "best-value": "forest",
+  "editors-choice": "forest",
+  "pick-of-week": "terracotta",
+  "pick-of-month": "terracotta",
+  "limited": "burgundy",
+  "exclusive": "burgundy",
+  "offer": "gold",
+  "coming-soon": "slate",
+  "preorder": "gold",
 };
 
-function Tag({
+// Dot colors for MinimalDotTag
+const dotColors: Record<TagColor, string> = {
+  dark: "bg-[#2D2520] dark:bg-[#F4EEDC]",
+  burgundy: "bg-[#730000] dark:bg-[#a82222]",
+  terracotta: "bg-[#9F4300] dark:bg-[#b54d00]",
+  forest: "bg-[#266D36] dark:bg-[#2d7d40]",
+  gold: "bg-[#C9A227] dark:bg-[#d4a84b]",
+  slate: "bg-[#47507C] dark:bg-[#5a6590]",
+};
+
+// Background colors for BelowCoverTag (Bold)
+const boldColors: Record<TagColor, { bg: string; text: string }> = {
+  dark: {
+    bg: "bg-[#2D2520] dark:bg-[#F4EEDC]",
+    text: "text-[#F4EEDC] dark:text-[#2D2520]",
+  },
+  burgundy: {
+    bg: "bg-[#730000] dark:bg-[#8a1a1a]",
+    text: "text-white",
+  },
+  terracotta: {
+    bg: "bg-[#9F4300] dark:bg-[#b54d00]",
+    text: "text-white",
+  },
+  forest: {
+    bg: "bg-[#266D36] dark:bg-[#2d7d40]",
+    text: "text-white",
+  },
+  gold: {
+    bg: "bg-[#C9A227] dark:bg-[#d4a84b]",
+    text: "text-[#2D2520]",
+  },
+  slate: {
+    bg: "bg-[#47507C] dark:bg-[#5a6590]",
+    text: "text-white",
+  },
+};
+
+// ============================================
+// 1. MinimalDotTag (Default)
+// Subtle dot + text, elegant and readable
+// ============================================
+export interface MinimalDotTagProps extends TagProps {}
+
+function MinimalDotTag({
   variant,
-  tagStyle = "pill",
-  size = "md",
-  flagDirection = "right",
+  color,
   children,
   className,
-  ...props
-}: TagProps) {
+}: MinimalDotTagProps) {
   const label = children ?? defaultLabels[variant];
-  const [bgLight, textLight, bgDark, textDark] = variantColors[variant];
+  const tagColor = color ?? variantColors[variant];
 
-  // Size classes
-  const sizeClasses = {
-    sm: tagStyle === "ribbon"
-      ? "text-[9px] py-1 px-6"
-      : "text-[10px] py-0.5 px-2",
-    md: tagStyle === "ribbon"
-      ? "text-[10px] py-1.5 px-8"
-      : "text-[11px] py-1 px-2.5",
-  };
-
-  // Base classes shared across all styles
-  const baseClasses = cn(
-    "inline-flex items-center justify-center font-semibold uppercase tracking-[0.08em]",
-    bgLight,
-    textLight,
-    bgDark,
-    textDark,
-    sizeClasses[size]
-  );
-
-  // Pill style - rounded, inline
-  if (tagStyle === "pill") {
-    return (
+  return (
+    <span className={cn("inline-flex items-center gap-1.5", className)}>
       <span
-        className={cn(
-          baseClasses,
-          "rounded-full",
-          className
-        )}
-        {...props}
-      >
+        className={cn("w-1.5 h-1.5 rounded-full flex-shrink-0", dotColors[tagColor])}
+        aria-hidden="true"
+      />
+      <span className="text-[10px] font-medium uppercase tracking-[0.1em] text-foreground/80 dark:text-foreground/70">
         {label}
       </span>
-    );
-  }
-
-  // Flag style - angled edge like a bookmark ribbon
-  if (tagStyle === "flag") {
-    return (
-      <span
-        className={cn(
-          "relative inline-flex items-center",
-          className
-        )}
-        {...props}
-      >
-        <span
-          className={cn(
-            baseClasses,
-            "relative",
-            flagDirection === "right" ? "rounded-l-sm pr-4" : "rounded-r-sm pl-4",
-            "shadow-sm"
-          )}
-          style={{
-            clipPath: flagDirection === "right"
-              ? "polygon(0 0, calc(100% - 8px) 0, 100% 50%, calc(100% - 8px) 100%, 0 100%)"
-              : "polygon(8px 0, 100% 0, 100% 100%, 8px 100%, 0 50%)",
-          }}
-        >
-          {label}
-        </span>
-      </span>
-    );
-  }
-
-  // Ribbon style - 45° corner banner
-  if (tagStyle === "ribbon") {
-    return (
-      <span
-        className={cn(
-          "absolute -right-[1px] -top-[1px] overflow-hidden",
-          "w-24 h-24 pointer-events-none",
-          className
-        )}
-        aria-label={typeof label === "string" ? label : undefined}
-        {...props}
-      >
-        <span
-          className={cn(
-            baseClasses,
-            "absolute w-32 text-center",
-            "shadow-md",
-            // Position and rotate the ribbon
-            "top-[18px] -right-[32px]",
-            "rotate-45 origin-center"
-          )}
-        >
-          {label}
-        </span>
-      </span>
-    );
-  }
-
-  return null;
-}
-
-// Convenience wrapper for ribbon that includes proper positioning context
-function TagRibbon({
-  variant,
-  size = "md",
-  children,
-  className,
-  ...props
-}: Omit<TagProps, "tagStyle" | "flagDirection">) {
-  return (
-    <Tag
-      variant={variant}
-      tagStyle="ribbon"
-      size={size}
-      className={className}
-      {...props}
-    >
-      {children}
-    </Tag>
+    </span>
   );
 }
 
-export { Tag, TagRibbon };
+// ============================================
+// 2. BelowCoverTag (Bold) - KEEP AS IS
+// Solid background pill for emphasis
+// ============================================
+export interface BelowCoverTagProps extends TagProps {}
+
+function BelowCoverTag({
+  variant,
+  color,
+  children,
+  className,
+}: BelowCoverTagProps) {
+  const label = children ?? defaultLabels[variant];
+  const tagColor = color ?? variantColors[variant];
+  const colors = boldColors[tagColor];
+
+  return (
+    <span
+      className={cn(
+        "inline-flex items-center gap-1.5 px-2.5 py-1",
+        "text-[10px] font-medium uppercase tracking-[0.12em]",
+        "rounded-sm",
+        colors.bg,
+        colors.text,
+        className
+      )}
+    >
+      <span className="w-1 h-1 rounded-full bg-current opacity-60" aria-hidden="true" />
+      {label}
+    </span>
+  );
+}
+
+// ============================================
+// 3. CornerBadge (Accent) - REDESIGNED
+// Solid dark background, white text, always readable
+// Use ONLY for: "FREE", "50% OFF", "LIMITED"
+// ============================================
+export type CornerPosition = "top-left" | "top-right";
+
+export interface CornerBadgeProps extends TagProps {
+  position?: CornerPosition;
+}
+
+// Always use dark solid backgrounds for maximum readability
+const badgeColors: Record<TagColor, { bg: string; text: string }> = {
+  dark: { bg: "bg-[#2D2520]", text: "text-white" },
+  burgundy: { bg: "bg-[#5a0000]", text: "text-white" },
+  terracotta: { bg: "bg-[#7a3300]", text: "text-white" },
+  forest: { bg: "bg-[#1a4d24]", text: "text-white" },
+  gold: { bg: "bg-[#2D2520]", text: "text-[#E8D48A]" },
+  slate: { bg: "bg-[#3a4260]", text: "text-white" },
+};
+
+const positionClasses: Record<CornerPosition, string> = {
+  "top-left": "top-2 left-2",
+  "top-right": "top-2 right-2",
+};
+
+function CornerBadge({
+  variant,
+  color,
+  position = "top-left",
+  children,
+  className,
+}: CornerBadgeProps) {
+  const label = children ?? defaultLabels[variant];
+  const tagColor = color ?? variantColors[variant];
+  const colors = badgeColors[tagColor];
+
+  return (
+    <span
+      className={cn(
+        "absolute z-10",
+        positionClasses[position],
+        "inline-flex items-center px-2 py-1",
+        "text-[9px] font-bold uppercase tracking-[0.08em]",
+        "rounded-sm",
+        "shadow-md",
+        colors.bg,
+        colors.text,
+        className
+      )}
+    >
+      {label}
+    </span>
+  );
+}
+
+// ============================================
+// Exports
+// ============================================
+
+// Tag is an alias for MinimalDotTag (default style)
+const Tag = MinimalDotTag;
+
+export {
+  Tag,
+  MinimalDotTag,
+  BelowCoverTag,
+  CornerBadge,
+};

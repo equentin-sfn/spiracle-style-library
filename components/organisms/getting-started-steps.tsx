@@ -2,16 +2,16 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import type { Icon as PhosphorIcon } from "@phosphor-icons/react";
+import type { LucideIcon } from "lucide-react";
 import {
   Headphones,
   BookOpen,
   Heart,
-} from "@phosphor-icons/react";
+} from "lucide-react";
 
 export interface Step {
   /** Step icon */
-  icon: PhosphorIcon;
+  icon: LucideIcon;
   /** Step heading */
   heading: string;
   /** Step description */
@@ -74,7 +74,7 @@ function GettingStartedSteps({
               {heading}
             </h2>
             {subheading && (
-              <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto font-serif italic">
+              <p className="mt-5 text-lg text-muted-foreground max-w-2xl mx-auto">
                 {subheading}
               </p>
             )}
@@ -103,7 +103,7 @@ function GettingStartedSteps({
                   >
                     <Icon
                       className="size-8 sm:size-9 text-primary"
-                      weight="regular"
+                      strokeWidth={1.5}
                       aria-hidden="true"
                     />
                     {/* Step Number */}

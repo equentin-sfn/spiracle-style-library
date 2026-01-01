@@ -24,6 +24,10 @@ export interface BookCoverActionsProps
   /** Book title for accessible image alt text */
   bookTitle: string;
   coverImage: string;
+  /** Override image (e.g., AIAC card when Card Edition selected) */
+  coverImageOverride?: string;
+  /** Whether the current image represents a physical product (shows with shadow/angle) */
+  isPhysicalProduct?: boolean;
   onSample?: () => void;
   addToLibraryHref?: string;
   favoriteHref?: string;
@@ -37,6 +41,8 @@ export interface BookCoverActionsProps
 function BookCoverActions({
   bookTitle,
   coverImage,
+  coverImageOverride,
+  isPhysicalProduct = false,
   onSample,
   addToLibraryHref = "#",
   favoriteHref = "#",
@@ -46,6 +52,12 @@ function BookCoverActions({
   className,
   ...props
 }: BookCoverActionsProps) {
+  // Use override image if provided (e.g., AIAC card design)
+  const displayImage = coverImageOverride || coverImage;
+  const altText = coverImageOverride
+    ? `${bookTitle} - Card Edition`
+    : `Cover of ${bookTitle}`;
+
   return (
     <article
       className={cn("flex flex-col gap-5", className)}
@@ -53,15 +65,43 @@ function BookCoverActions({
       {...props}
     >
       {/* Book Cover */}
-      <figure className="relative aspect-square w-full overflow-hidden rounded-sm shadow-sm">
-        <Image
-          src={coverImage}
-          alt={`Cover of ${bookTitle}`}
-          fill
-          className="object-cover"
-          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px"
-          priority
-        />
+      <figure
+        className={cn(
+          "relative w-full overflow-hidden",
+          // Physical product gets special presentation
+          isPhysicalProduct
+            ? "aspect-[3/4] flex items-center justify-center bg-spiracle-sand/30 dark:bg-muted/30 rounded-sm p-4"
+            : "aspect-square rounded-sm shadow-sm"
+        )}
+      >
+        <div
+          className={cn(
+            "relative",
+            isPhysicalProduct
+              ? // Physical product: angled with shadow for tactile feel
+                "w-[85%] h-full transform rotate-[2deg] transition-transform duration-300 hover:rotate-0"
+              : "w-full h-full"
+          )}
+        >
+          <Image
+            src={displayImage}
+            alt={altText}
+            fill
+            className={cn(
+              "object-cover transition-all duration-300",
+              isPhysicalProduct && "rounded-sm shadow-lg"
+            )}
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px"
+            priority
+          />
+        </div>
+        {/* Subtle envelope hint for physical products */}
+        {isPhysicalProduct && (
+          <div
+            className="absolute bottom-2 right-2 w-[30%] h-[15%] bg-[#c4a77d]/60 dark:bg-[#8b7355]/40 rounded-sm -rotate-3 -z-10"
+            aria-hidden="true"
+          />
+        )}
       </figure>
 
       {/* Action Row */}

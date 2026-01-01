@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { CollectionCard, InfoBar, BookCoverActions, BookDetails, PurchasePanel, PreviewBar, SerendipityPills, BookCard, type SerendipityPill } from "@/components/molecules";
+import { CollectionCard, InfoBar, BookCoverActions, BookDetails, PurchasePanel, PreviewBar, SerendipityPills, BookCard, FormatSelector, type SerendipityPill, type Format } from "@/components/molecules";
 import { Tag, MinimalDotTag, CornerBadge } from "@/components/atoms";
 import Image from "next/image";
 import {
@@ -71,10 +71,30 @@ const infoBarItems = [
   { icon: Headphones, label: "Audiobook", value: "" },
 ];
 
+// Format selector sample data
+const audiobookOnlyFormats: Format[] = [
+  { type: "audiobook", price: 12.99, memberPrice: 9.99, available: true },
+];
+
+const audiobookPlusAiacFormats: Format[] = [
+  { type: "audiobook", price: 12.99, memberPrice: 9.99, available: true },
+  { type: "aiac", price: 16.99, memberPrice: 14.99, available: true },
+];
+
+const allFormatsAvailable: Format[] = [
+  { type: "audiobook", price: 12.99, memberPrice: 9.99, available: true },
+  { type: "aiac", price: 16.99, memberPrice: 14.99, available: true },
+  { type: "ebook", price: 8.99, memberPrice: 6.99, available: true },
+];
+
 export default function ShowcasePage() {
   const [discoveryValue, setDiscoveryValue] = React.useState("");
   const [isGenerating, setIsGenerating] = React.useState(false);
   const [showResults, setShowResults] = React.useState(false);
+
+  // Format selector states
+  const [formatState2, setFormatState2] = React.useState<"audiobook" | "aiac">("audiobook");
+  const [formatState3, setFormatState3] = React.useState<"audiobook" | "aiac" | "ebook">("audiobook");
 
   const handleGenerate = (_prompt: string) => {
     setIsGenerating(true);
@@ -161,6 +181,171 @@ In this rollicking collection of his hilarious columns, the award-winning writer
               memberPrice="£5"
               buyCtaHref="/buy"
             />
+          </div>
+        </div>
+      </section>
+
+      {/* Section: Format Selector Component */}
+      <section className="py-16 sm:py-20 bg-spiracle-parchment dark:bg-[#1a1815]">
+        <div className="max-w-6xl mx-auto px-6 sm:px-8">
+          <header className="text-center mb-12">
+            <p className="text-[10px] sm:text-xs uppercase tracking-[0.25em] text-spiracle-terracotta dark:text-spiracle-honey font-medium mb-3">
+              New Component
+            </p>
+            <h2 className="font-display text-3xl sm:text-4xl text-foreground">
+              Format Selector
+            </h2>
+            <p className="mt-3 text-muted-foreground max-w-lg mx-auto">
+              Segmented control for choosing between audiobook, Card Edition (AIAC), eBook, and physical books. Only shows when 2+ formats available.
+            </p>
+          </header>
+
+          <div className="space-y-12">
+            {/* State 1: Audiobook Only - No selector */}
+            <div className="p-6 bg-spiracle-cream dark:bg-[#2D2520] rounded-sm">
+              <h3 className="font-display text-xl text-foreground mb-2">
+                1. Audiobook Only
+              </h3>
+              <p className="text-sm text-muted-foreground mb-6">
+                When only audiobook is available, the selector is hidden — no need to choose.
+              </p>
+              <div className="flex items-center gap-4">
+                <FormatSelector
+                  formats={audiobookOnlyFormats}
+                  selectedFormat="audiobook"
+                  onFormatChange={() => {}}
+                />
+                <span className="text-sm text-muted-foreground italic">
+                  (Nothing renders — selector hidden)
+                </span>
+              </div>
+            </div>
+
+            {/* State 2: Audiobook + Card Edition */}
+            <div className="p-6 bg-spiracle-cream dark:bg-[#2D2520] rounded-sm">
+              <h3 className="font-display text-xl text-foreground mb-2">
+                2. Audiobook + Card Edition
+              </h3>
+              <p className="text-sm text-muted-foreground mb-6">
+                Most common multi-format state. Shows two options with clean segmented control.
+              </p>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                <div className="flex flex-col gap-4">
+                  <FormatSelector
+                    formats={audiobookPlusAiacFormats}
+                    selectedFormat={formatState2}
+                    onFormatChange={(f) => setFormatState2(f as "audiobook" | "aiac")}
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    Selected: <strong className="text-foreground">{formatState2}</strong>
+                    {formatState2 === "aiac" && (
+                      <span className="block mt-1">
+                        A beautifully designed card, perfect for gifting. Posted to you or your recipient.
+                      </span>
+                    )}
+                  </p>
+                </div>
+                {/* Preview cover swap */}
+                <div className="flex gap-4 items-start">
+                  <div className="relative w-32 flex-shrink-0">
+                    <BookCoverActions
+                      bookTitle="Treasure Island"
+                      coverImage="/images/covers/cover-med-01.png"
+                      coverImageOverride={formatState2 === "aiac" ? "/images/aiac/treasure-island-card.jpg" : undefined}
+                      isPhysicalProduct={formatState2 === "aiac"}
+                      tags={[]}
+                    />
+                  </div>
+                  <p className="text-xs text-muted-foreground pt-2">
+                    ← Cover image swaps when Card Edition selected. Physical product shown with subtle angle and envelope hint.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* State 3: Audiobook + Card Edition + eBook (Future) */}
+            <div className="p-6 bg-spiracle-cream dark:bg-[#2D2520] rounded-sm">
+              <h3 className="font-display text-xl text-foreground mb-2">
+                3. Audiobook + Card Edition + eBook
+              </h3>
+              <p className="text-sm text-muted-foreground mb-6">
+                Future state with three format options. Scales gracefully.
+              </p>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+                <div className="flex flex-col gap-4">
+                  <FormatSelector
+                    formats={allFormatsAvailable}
+                    selectedFormat={formatState3}
+                    onFormatChange={(f) => setFormatState3(f as "audiobook" | "aiac" | "ebook")}
+                  />
+                  <p className="text-xs text-muted-foreground">
+                    Selected: <strong className="text-foreground">{formatState3}</strong>
+                    {formatState3 === "aiac" && (
+                      <span className="block mt-1">
+                        A beautifully designed card, perfect for gifting.
+                      </span>
+                    )}
+                    {formatState3 === "ebook" && (
+                      <span className="block mt-1">
+                        Download and read on any device.
+                      </span>
+                    )}
+                  </p>
+                </div>
+                {/* Price preview */}
+                <div className="bg-card border border-border/50 rounded-sm p-4">
+                  <p className="text-xs uppercase tracking-wider text-muted-foreground mb-2">
+                    Price Preview
+                  </p>
+                  {formatState3 === "audiobook" && (
+                    <p className="text-lg font-semibold text-foreground">
+                      £9.99 <span className="text-sm font-normal text-muted-foreground">(£12.99 non-member)</span>
+                    </p>
+                  )}
+                  {formatState3 === "aiac" && (
+                    <p className="text-lg font-semibold text-foreground">
+                      £14.99 <span className="text-sm font-normal text-muted-foreground">(£16.99 non-member)</span>
+                    </p>
+                  )}
+                  {formatState3 === "ebook" && (
+                    <p className="text-lg font-semibold text-foreground">
+                      £6.99 <span className="text-sm font-normal text-muted-foreground">(£8.99 non-member)</span>
+                    </p>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Usage Guidelines */}
+            <div className="py-6 border-t border-border">
+              <h3 className="font-display text-xl text-foreground mb-4">
+                Integration Notes
+              </h3>
+              <div className="grid sm:grid-cols-2 gap-6">
+                <div>
+                  <p className="font-medium text-foreground mb-2">Format Selector</p>
+                  <code className="block text-xs bg-muted p-3 rounded-sm overflow-x-auto">
+{`<FormatSelector
+  formats={formats}
+  selectedFormat={selected}
+  onFormatChange={setSelected}
+/>`}
+                  </code>
+                </div>
+                <div>
+                  <p className="font-medium text-foreground mb-2">With Image Swap</p>
+                  <code className="block text-xs bg-muted p-3 rounded-sm overflow-x-auto">
+{`<BookCoverActions
+  coverImage={cover}
+  coverImageOverride={
+    selected === "aiac" ? aiacImage : undefined
+  }
+  isPhysicalProduct={selected === "aiac"}
+/>`}
+                  </code>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

@@ -6,14 +6,20 @@ import {
   BookCoverActions,
   BookDetails,
   PurchasePanel,
+  FormatSelector,
+  getFormatDescription,
   type BookTag,
   type LinkedValue,
   type BookSeries,
+  type Format,
+  type FormatType,
 } from "@/components/molecules";
 import { PageWrapper } from "@/components/templates";
 
 export interface BookDetailsHeroCover {
   image: string;
+  /** Image variants for different formats (e.g., AIAC card image) */
+  formatImages?: Partial<Record<FormatType, string>>;
   tags: BookTag[];
   onSample?: () => void;
   addToLibraryHref?: string;
@@ -51,15 +57,62 @@ export interface BookDetailsHeroProps
   cover: BookDetailsHeroCover;
   details: BookDetailsHeroDetails;
   purchase: BookDetailsHeroPurchase;
+  /** Available formats for this title (if empty/single, selector hidden) */
+  formats?: Format[];
+  /** Default selected format */
+  defaultFormat?: FormatType;
+  /** Controlled selected format */
+  selectedFormat?: FormatType;
+  /** Callback when format changes */
+  onFormatChange?: (format: FormatType) => void;
 }
 
 function BookDetailsHero({
   cover,
   details,
   purchase,
+  formats = [],
+  defaultFormat = "audiobook",
+  selectedFormat: controlledFormat,
+  onFormatChange,
   className,
   ...props
 }: BookDetailsHeroProps) {
+  // Internal state for uncontrolled mode
+  const [internalFormat, setInternalFormat] = React.useState<FormatType>(defaultFormat);
+
+  // Use controlled value if provided, otherwise use internal state
+  const currentFormat = controlledFormat ?? internalFormat;
+
+  const handleFormatChange = (format: FormatType) => {
+    if (controlledFormat === undefined) {
+      setInternalFormat(format);
+    }
+    onFormatChange?.(format);
+  };
+
+  // Get format-specific data
+  const selectedFormatData = formats.find((f) => f.type === currentFormat);
+  const isPhysicalProduct = currentFormat === "aiac" || currentFormat === "hardback" || currentFormat === "paperback";
+  const formatImage = cover.formatImages?.[currentFormat];
+
+  // Get format-specific pricing
+  const formatPrice = selectedFormatData?.price;
+  const formatMemberPrice = selectedFormatData?.memberPrice;
+  const formatDescription = getFormatDescription(currentFormat);
+
+  // Build purchase panel props based on format
+  const purchaseProps = {
+    ...purchase,
+    // Override prices if format has specific pricing
+    ...(formatPrice !== undefined && {
+      buyPrice: `£${formatPrice.toFixed(2)}`,
+    }),
+    ...(formatMemberPrice !== undefined && {
+      memberPrice: `£${formatMemberPrice.toFixed(2)}`,
+    }),
+  };
+
   return (
     <section
       className={cn("w-full bg-background pt-6 pb-10 sm:pt-8 sm:pb-12 lg:pt-10 lg:pb-16", className)}
@@ -71,6 +124,8 @@ function BookDetailsHero({
           <BookCoverActions
             bookTitle={details.title}
             coverImage={cover.image}
+            coverImageOverride={formatImage}
+            isPhysicalProduct={isPhysicalProduct}
             onSample={cover.onSample}
             addToLibraryHref={cover.addToLibraryHref}
             favoriteHref={cover.favoriteHref}
@@ -93,18 +148,36 @@ function BookDetailsHero({
             maxDescriptionLength={details.maxDescriptionLength}
           />
 
-          {/* Column 3: Purchase Panel */}
-          <PurchasePanel
-            trialMessage={purchase.trialMessage}
-            trialPrice={purchase.trialPrice}
-            trialCtaText={purchase.trialCtaText}
-            trialCtaHref={purchase.trialCtaHref}
-            benefits={purchase.benefits}
-            buyPrice={purchase.buyPrice}
-            memberPrice={purchase.memberPrice}
-            buyCtaHref={purchase.buyCtaHref}
-            className="md:col-span-2 lg:col-span-1"
-          />
+          {/* Column 3: Format Selector + Purchase Panel */}
+          <div className="md:col-span-2 lg:col-span-1 flex flex-col gap-4">
+            {/* Format Selector - only shows if 2+ formats */}
+            {formats.length > 1 && (
+              <div className="flex flex-col gap-2">
+                <FormatSelector
+                  formats={formats}
+                  selectedFormat={currentFormat}
+                  onFormatChange={handleFormatChange}
+                />
+                {/* Format description */}
+                {formatDescription && (
+                  <p className="text-xs text-muted-foreground leading-relaxed">
+                    {formatDescription}
+                  </p>
+                )}
+              </div>
+            )}
+
+            <PurchasePanel
+              trialMessage={purchaseProps.trialMessage}
+              trialPrice={purchaseProps.trialPrice}
+              trialCtaText={purchaseProps.trialCtaText}
+              trialCtaHref={purchaseProps.trialCtaHref}
+              benefits={purchaseProps.benefits}
+              buyPrice={purchaseProps.buyPrice}
+              memberPrice={purchaseProps.memberPrice}
+              buyCtaHref={purchaseProps.buyCtaHref}
+            />
+          </div>
         </div>
       </PageWrapper>
     </section>

@@ -86,7 +86,7 @@ export default function ShowcasePage() {
   };
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-spiracle-cream dark:bg-[#2D2520]">
       <PreviewBar currentPath="/preview/showcase" />
       {/* Top Navigation */}
       <TopNavigation
@@ -102,7 +102,7 @@ export default function ShowcasePage() {
       <InfoBar items={infoBarItems} className="border-y border-border" />
 
       {/* Book Details Section */}
-      <section className="py-12 sm:py-16 bg-spiracle-cream">
+      <section className="py-12 sm:py-16 bg-spiracle-cream dark:bg-[#2D2520]">
         <div className="max-w-6xl mx-auto px-6 sm:px-8">
           <div className="grid grid-cols-1 md:grid-cols-[280px_1fr] lg:grid-cols-[280px_1fr_280px] gap-8 lg:gap-10">
             {/* Left Column: Cover + Actions */}

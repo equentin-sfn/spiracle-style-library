@@ -6,6 +6,7 @@
 // =============================================================================
 
 import * as React from "react";
+import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Button, ThemeToggle } from "@/components/atoms";
 import {
@@ -37,6 +38,7 @@ export interface ProfileHeaderProps {
   isProfilePublic: boolean;
   onProfileVisibilityChange?: (isPublic: boolean) => void;
   onEditProfile?: () => void;
+  editProfileHref?: string;
   className?: string;
 }
 
@@ -49,6 +51,7 @@ export function ProfileHeader({
   isProfilePublic,
   onProfileVisibilityChange,
   onEditProfile,
+  editProfileHref,
   className,
 }: ProfileHeaderProps) {
   const [localIsPublic, setLocalIsPublic] = React.useState(isProfilePublic);
@@ -130,15 +133,29 @@ export function ProfileHeader({
                 iconSize={18}
                 className="min-w-[36px] min-h-[36px] rounded-full border border-spiracle-sand dark:border-border hover:bg-spiracle-sand/50 dark:hover:bg-secondary/50"
               />
-              <Button
-                variant="outline"
-                size="sm"
-                className="gap-1.5"
-                onClick={onEditProfile}
-              >
-                <Pencil className="size-3.5" />
-                Edit profile
-              </Button>
+              {editProfileHref ? (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="gap-1.5"
+                  asChild
+                >
+                  <Link href={editProfileHref}>
+                    <Pencil className="size-3.5" />
+                    Edit profile
+                  </Link>
+                </Button>
+              ) : (
+                <Button
+                  variant="outline"
+                  size="sm"
+                  className="gap-1.5"
+                  onClick={onEditProfile}
+                >
+                  <Pencil className="size-3.5" />
+                  Edit profile
+                </Button>
+              )}
             </div>
 
             {/* Profile visibility dropdown */}
@@ -190,10 +207,19 @@ export function ProfileHeader({
         {/* Edit profile and visibility (mobile) */}
         <div className="mt-6 sm:hidden space-y-3">
           <div className="flex gap-2">
-            <Button variant="outline" size="sm" className="flex-1 gap-1.5" onClick={onEditProfile}>
-              <Pencil className="size-3.5" />
-              Edit profile
-            </Button>
+            {editProfileHref ? (
+              <Button variant="outline" size="sm" className="flex-1 gap-1.5" asChild>
+                <Link href={editProfileHref}>
+                  <Pencil className="size-3.5" />
+                  Edit profile
+                </Link>
+              </Button>
+            ) : (
+              <Button variant="outline" size="sm" className="flex-1 gap-1.5" onClick={onEditProfile}>
+                <Pencil className="size-3.5" />
+                Edit profile
+              </Button>
+            )}
             <ThemeToggle
               iconSize={18}
               className="min-w-[40px] min-h-[40px] rounded-lg border border-spiracle-sand dark:border-border hover:bg-spiracle-sand/50 dark:hover:bg-secondary/50"

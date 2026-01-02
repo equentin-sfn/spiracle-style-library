@@ -9,7 +9,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/atoms";
 import { Play, Plus, Sparkles } from "lucide-react";
-import { Section, SectionLabel, BookCover, ProgressBar } from "./helpers";
+import { Section, SectionLabel, BookCover, ProgressBar, type SectionBackground } from "./helpers";
 import type { CurrentlyListeningBook, Book, AISuggestion } from "./types";
 import { sampleCurrentlyListening, sampleUpNext, sampleAiSuggestion } from "./sample-data";
 
@@ -20,6 +20,7 @@ export interface CurrentlyListeningProps {
   onContinue?: () => void;
   onAddToQueue?: () => void;
   onExploreSuggestion?: () => void;
+  background?: SectionBackground;
   className?: string;
 }
 
@@ -30,10 +31,11 @@ export function CurrentlyListening({
   onContinue,
   onAddToQueue,
   onExploreSuggestion,
+  background = "parchment",
   className,
 }: CurrentlyListeningProps) {
   return (
-    <Section className={cn("bg-spiracle-parchment dark:bg-card/50 border-y border-spiracle-sand dark:border-border", className)}>
+    <Section background={background} className={className}>
       <SectionLabel>Currently listening</SectionLabel>
 
       {/* Currently listening - prominent display */}

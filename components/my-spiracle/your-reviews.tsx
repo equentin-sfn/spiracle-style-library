@@ -13,7 +13,7 @@ import {
   MessageSquare,
   ChevronRight,
 } from "lucide-react";
-import { Section, SectionLabel, BookCover, StarRating } from "./helpers";
+import { Section, SectionLabel, BookCover, StarRating, type SectionBackground } from "./helpers";
 import type { Review } from "./types";
 import { sampleReviews } from "./sample-data";
 
@@ -23,6 +23,7 @@ export interface YourReviewsProps {
   maxVisible?: number;
   onViewAll?: () => void;
   onWriteReview?: () => void;
+  background?: SectionBackground;
   className?: string;
 }
 
@@ -32,12 +33,13 @@ export function YourReviews({
   maxVisible = 3,
   onViewAll,
   onWriteReview,
+  background,
   className,
 }: YourReviewsProps) {
   const visibleReviews = reviews.slice(0, maxVisible);
 
   return (
-    <Section className={className}>
+    <Section background={background} className={className}>
       <SectionLabel href="/reviews">Your reviews</SectionLabel>
 
       {reviews.length > 0 ? (

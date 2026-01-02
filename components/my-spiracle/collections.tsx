@@ -16,7 +16,7 @@ import {
   Heart,
   MessageSquare,
 } from "lucide-react";
-import { Section, SectionLabel, BookCover, UserAvatar } from "./helpers";
+import { Section, SectionLabel, BookCover, UserAvatar, type SectionBackground } from "./helpers";
 import type { Collection, Book } from "./types";
 import { sampleCollections, sampleShortlist } from "./sample-data";
 
@@ -24,6 +24,7 @@ export interface CollectionsProps {
   collections: Collection[];
   shortlist: Book[];
   onCreateCollection?: () => void;
+  background?: SectionBackground;
   className?: string;
 }
 
@@ -31,10 +32,11 @@ export function Collections({
   collections,
   shortlist,
   onCreateCollection,
+  background,
   className,
 }: CollectionsProps) {
   return (
-    <Section className={className}>
+    <Section background={background} className={className}>
       <SectionLabel href="/collections">Your collections</SectionLabel>
 
       {/* Collections grid */}

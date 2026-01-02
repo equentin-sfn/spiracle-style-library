@@ -10,7 +10,7 @@ import * as React from "react";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/atoms";
 import { Plus, ChevronRight, Sparkles } from "lucide-react";
-import { Section, SectionLabel } from "./helpers";
+import { Section, SectionLabel, type SectionBackground } from "./helpers";
 import { TasteConstellation } from "./taste-constellation";
 import { DiscoveryTreeTeaser } from "./discovery-tree-teaser";
 import type { TasteProfile } from "./types";
@@ -24,6 +24,7 @@ export interface ReadingConstellationProps {
   onExploreDiscovery?: () => void;
   showImportCta?: boolean;
   showDiscoveryTeaser?: boolean;
+  background?: SectionBackground;
   className?: string;
 }
 
@@ -35,10 +36,11 @@ export function ReadingConstellation({
   onExploreDiscovery,
   showImportCta = true,
   showDiscoveryTeaser = true,
+  background = "parchment",
   className,
 }: ReadingConstellationProps) {
   return (
-    <Section className={cn("bg-spiracle-parchment dark:bg-card/50 border-y border-spiracle-sand dark:border-border", className)}>
+    <Section background={background} className={className}>
       <SectionLabel>Your reading constellation</SectionLabel>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">

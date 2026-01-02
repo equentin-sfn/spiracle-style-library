@@ -7,17 +7,19 @@
 
 import * as React from "react";
 import { cn } from "@/lib/utils";
-import { Section, SectionLabel } from "./helpers";
+import { Section, SectionLabel, type SectionBackground } from "./helpers";
 import type { Achievement } from "./types";
 import { sampleAchievements } from "./sample-data";
 
 export interface LiteraryMilestonesProps {
   achievements: Achievement[];
+  background?: SectionBackground;
   className?: string;
 }
 
 export function LiteraryMilestones({
   achievements,
+  background = "parchment",
   className,
 }: LiteraryMilestonesProps) {
   if (achievements.length === 0) {
@@ -25,7 +27,7 @@ export function LiteraryMilestones({
   }
 
   return (
-    <Section className={cn("bg-spiracle-parchment dark:bg-card/50 border-t border-spiracle-sand dark:border-border", className)}>
+    <Section background={background} className={className}>
       <SectionLabel>Literary milestones</SectionLabel>
 
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">

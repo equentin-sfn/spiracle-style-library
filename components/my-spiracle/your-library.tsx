@@ -18,19 +18,21 @@ import {
   ChevronDown,
   Sparkles,
 } from "lucide-react";
-import { Section, SectionLabel, SquareBookCover } from "./helpers";
+import { Section, SectionLabel, SquareBookCover, type SectionBackground } from "./helpers";
 import type { LibraryBook } from "./types";
 import { sampleLibrary } from "./sample-data";
 
 export interface YourLibraryProps {
   library: LibraryBook[];
   onDiscoverNew?: () => void;
+  background?: SectionBackground;
   className?: string;
 }
 
 export function YourLibrary({
   library,
   onDiscoverNew,
+  background = "parchment",
   className,
 }: YourLibraryProps) {
   const inProgressBooks = library.filter(b => b.status === "in_progress");
@@ -38,7 +40,7 @@ export function YourLibrary({
   const abandonedBooks = library.filter(b => b.status === "abandoned");
 
   return (
-    <Section className={cn("bg-spiracle-parchment dark:bg-card/50 border-y border-spiracle-sand dark:border-border", className)}>
+    <Section background={background} className={className}>
       <SectionLabel href="/library">Your bookshelf</SectionLabel>
 
       {library.length > 0 ? (

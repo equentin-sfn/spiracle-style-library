@@ -54,47 +54,52 @@ export default function MySpiraclePage() {
         isProfilePublic={true}
       />
 
-      {/* Listening Life Stats */}
+      {/* Listening Life Stats - Blush background */}
       <ListeningLife
         stats={profile.stats}
         favouriteGenres={profile.favouriteGenres}
         listeningPersonality={profile.listeningPersonality}
+        background="blush"
       />
 
-      {/* Reading Constellation / Taste Profile */}
+      {/* Reading Constellation / Taste Profile - Sage background */}
       <ReadingConstellation
         tasteProfile={profile.tasteProfile}
         showImportCta={true}
         showDiscoveryTeaser={true}
+        background="sage"
       />
 
-      {/* Currently Listening */}
+      {/* Currently Listening - Honey background */}
       <CurrentlyListening
         currentlyListening={sampleCurrentlyListening}
         upNext={sampleUpNext}
         aiSuggestion={sampleAiSuggestion}
+        background="honey"
       />
 
-      {/* Collections */}
+      {/* Collections - Cream background */}
       <Collections
         collections={sampleCollections}
         shortlist={sampleShortlist}
+        background="cream"
       />
 
-      {/* Your Library / Bookshelf */}
-      <YourLibrary library={sampleLibrary} />
+      {/* Your Library / Bookshelf - Parchment background */}
+      <YourLibrary library={sampleLibrary} background="parchment" />
 
-      {/* Book Clubs */}
-      <BookClubs bookClubs={sampleBookClubs} />
+      {/* Book Clubs - Blush background */}
+      <BookClubs bookClubs={sampleBookClubs} background="blush" />
 
-      {/* Your Reviews */}
+      {/* Your Reviews - Cream background */}
       <YourReviews
         reviews={sampleReviews}
         totalHelpfulVotes={profile.totalHelpfulVotes}
+        background="cream"
       />
 
-      {/* Literary Milestones / Achievements */}
-      <LiteraryMilestones achievements={sampleAchievements} />
+      {/* Literary Milestones / Achievements - Sage background */}
+      <LiteraryMilestones achievements={sampleAchievements} background="sage" />
 
       {/* Account Footer */}
       <AccountFooter />

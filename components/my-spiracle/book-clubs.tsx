@@ -15,7 +15,7 @@ import {
   Plus,
   Sparkles,
 } from "lucide-react";
-import { Section, SectionLabel, BookCover } from "./helpers";
+import { Section, SectionLabel, BookCover, type SectionBackground } from "./helpers";
 import type { BookClub } from "./types";
 import { sampleBookClubs } from "./sample-data";
 
@@ -24,6 +24,7 @@ export interface BookClubsProps {
   onBrowseClubs?: () => void;
   onCreateClub?: () => void;
   onDiscoverMore?: () => void;
+  background?: SectionBackground;
   className?: string;
 }
 
@@ -32,10 +33,11 @@ export function BookClubs({
   onBrowseClubs,
   onCreateClub,
   onDiscoverMore,
+  background,
   className,
 }: BookClubsProps) {
   return (
-    <Section className={cn("border-t border-spiracle-sand dark:border-border", className)}>
+    <Section background={background} className={className}>
       <SectionLabel href="/book-clubs">Book clubs</SectionLabel>
 
       {bookClubs.length > 0 ? (

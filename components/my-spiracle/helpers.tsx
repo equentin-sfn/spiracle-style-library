@@ -14,14 +14,38 @@ import { ChevronRight, Check, Star } from "lucide-react";
 // SECTION WRAPPER
 // =============================================================================
 
+export type SectionBackground =
+  | "cream"
+  | "parchment"
+  | "blush"
+  | "sage"
+  | "honey"
+  | "dark"
+  | "transparent";
+
 export interface SectionProps {
   children: React.ReactNode;
+  background?: SectionBackground;
   className?: string;
 }
 
-export function Section({ children, className }: SectionProps) {
+const backgroundClasses: Record<SectionBackground, string> = {
+  cream: "bg-spiracle-cream dark:bg-background",
+  parchment: "bg-spiracle-parchment dark:bg-card",
+  blush: "bg-[#EBDEDB] dark:bg-[#3D2D2A]",
+  sage: "bg-[#C0C9C2] dark:bg-[#2A3330]",
+  honey: "bg-[#f6eecd] dark:bg-[#3D3820]",
+  dark: "bg-[#2D2520] dark:bg-[#1A1512] text-spiracle-cream",
+  transparent: "",
+};
+
+export function Section({ children, background = "transparent", className }: SectionProps) {
   return (
-    <section className={cn("px-4 sm:px-6 lg:px-8 py-8 sm:py-12", className)}>
+    <section className={cn(
+      "px-4 sm:px-6 lg:px-8 py-8 sm:py-12",
+      backgroundClasses[background],
+      className
+    )}>
       <div className="max-w-4xl mx-auto">{children}</div>
     </section>
   );

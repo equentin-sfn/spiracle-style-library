@@ -20,6 +20,7 @@ export {
   WatercolorBar,
   StarRating,
 } from "./helpers";
+export type { SectionBackground } from "./helpers";
 
 // Visualization components
 export { TasteConstellation } from "./taste-constellation";

@@ -14,7 +14,7 @@ import {
   Coffee,
   Moon,
 } from "lucide-react";
-import { Section, SectionLabel, WatercolorBar } from "./helpers";
+import { Section, SectionLabel, WatercolorBar, type SectionBackground } from "./helpers";
 import type { ListeningStats, FavouriteGenre, ListeningPersonality } from "./types";
 import { sampleStats, sampleGenres, samplePersonality } from "./sample-data";
 
@@ -22,6 +22,7 @@ export interface ListeningLifeProps {
   stats: ListeningStats;
   favouriteGenres: FavouriteGenre[];
   listeningPersonality: ListeningPersonality;
+  background?: SectionBackground;
   className?: string;
 }
 
@@ -29,10 +30,11 @@ export function ListeningLife({
   stats,
   favouriteGenres,
   listeningPersonality,
+  background,
   className,
 }: ListeningLifeProps) {
   return (
-    <Section className={cn("border-t border-spiracle-sand dark:border-border", className)}>
+    <Section background={background} className={className}>
       <SectionLabel>Your listening life</SectionLabel>
 
       {/* Main stats grid */}

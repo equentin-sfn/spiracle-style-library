@@ -19,6 +19,14 @@ import type {
   Achievement,
   FavouriteGenre,
   TasteProfile,
+  NotificationSettings,
+  EmailPreferences,
+  ConnectedAccount,
+  Subscription,
+  PaymentMethod,
+  BillingHistoryEntry,
+  Purchase,
+  Address,
 } from "./types";
 
 // =============================================================================
@@ -280,3 +288,142 @@ export const sampleShortlist = sampleProfile.shortlist;
 export const sampleBookClubs = sampleProfile.bookClubs;
 export const sampleReviews = sampleProfile.reviews;
 export const sampleAchievements = sampleProfile.achievements;
+
+// =============================================================================
+// ACCOUNT SETTINGS SAMPLE DATA
+// =============================================================================
+
+export const sampleNotificationSettings: NotificationSettings = {
+  newReleases: true,
+  bookClubUpdates: true,
+  recommendations: false,
+  weeklyDigest: true,
+};
+
+export const sampleEmailPreferences: EmailPreferences = {
+  marketing: false,
+  newsletter: true,
+  personalizedRecommendations: true,
+};
+
+export const sampleConnectedAccounts: Record<string, ConnectedAccount> = {
+  goodreads: { connected: true, username: "eleanor.vance" },
+  apple: { connected: false },
+};
+
+export const sampleSubscription: Subscription = {
+  plan: "full",
+  planName: "Full Membership",
+  billingPeriod: "annually",
+  nextBillingDate: "15 January 2027",
+  price: "£89.99/year",
+  creditsRemaining: 2,
+  creditsPerMonth: 1,
+  features: [
+    "1 audiobook credit per month",
+    "Unlimited streaming of 500+ classics",
+    "Early access to new releases",
+    "Exclusive member events",
+  ],
+};
+
+export const samplePaymentMethod: PaymentMethod = {
+  type: "visa",
+  last4: "4242",
+  expiryDate: "03/28",
+  isDefault: true,
+};
+
+export const sampleBillingHistory: BillingHistoryEntry[] = [
+  {
+    id: "inv-001",
+    date: "15 Dec 2025",
+    description: "Annual subscription renewal",
+    amount: "£89.99",
+    status: "paid",
+    invoiceUrl: "/invoices/inv-001.pdf",
+  },
+  {
+    id: "inv-002",
+    date: "1 Dec 2025",
+    description: "Gift audiobook — Pachinko",
+    amount: "£12.99",
+    status: "paid",
+    invoiceUrl: "/invoices/inv-002.pdf",
+  },
+  {
+    id: "inv-003",
+    date: "15 Nov 2024",
+    description: "Annual subscription",
+    amount: "£89.99",
+    status: "paid",
+    invoiceUrl: "/invoices/inv-003.pdf",
+  },
+];
+
+export const samplePurchases: Purchase[] = [
+  {
+    id: "pur-001",
+    book: { title: "The Remains of the Day", author: "Kazuo Ishiguro" },
+    purchaseType: "credit",
+    date: "Dec 2025",
+  },
+  {
+    id: "pur-002",
+    book: { title: "Circe", author: "Madeline Miller" },
+    purchaseType: "bought",
+    date: "Nov 2025",
+    price: "£14.99",
+    receiptUrl: "/receipts/pur-002.pdf",
+  },
+  {
+    id: "pur-003",
+    book: { title: "Pachinko", author: "Min Jin Lee" },
+    purchaseType: "gift_sent",
+    date: "Dec 2025",
+    price: "£12.99",
+    recipient: "Sarah Mitchell",
+  },
+  {
+    id: "pur-004",
+    book: { title: "Lessons in Chemistry", author: "Bonnie Garmus" },
+    purchaseType: "gift_received",
+    date: "Nov 2025",
+  },
+  {
+    id: "pur-005",
+    book: { title: "A Gentleman in Moscow", author: "Amor Towles" },
+    purchaseType: "credit",
+    date: "Oct 2025",
+  },
+  {
+    id: "pur-006",
+    book: { title: "The House in the Cerulean Sea", author: "TJ Klune" },
+    purchaseType: "bought",
+    date: "Sep 2025",
+    price: "£11.99",
+  },
+];
+
+export const sampleDeliveryAddress: Address = {
+  id: "addr-001",
+  label: "Home",
+  name: "Eleanor Vance",
+  addressLines: ["42 Bloomsbury Way", "London", "WC1A 2SR", "United Kingdom"],
+  isDefault: true,
+};
+
+export const sampleGiftAddresses: Address[] = [
+  {
+    id: "addr-002",
+    label: "Sarah's Birthday",
+    name: "Sarah Mitchell",
+    addressLines: ["15 Maple Street", "Manchester", "M1 4BH", "United Kingdom"],
+  },
+  {
+    id: "addr-003",
+    label: "Mum",
+    name: "Margaret Vance",
+    addressLines: ["7 Rose Cottage", "Burford", "Cotswolds", "GL54 1AA", "United Kingdom"],
+  },
+];

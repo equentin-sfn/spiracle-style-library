@@ -116,6 +116,75 @@ export interface AISuggestion {
   book: Book;
 }
 
+// =============================================================================
+// ACCOUNT SETTINGS TYPES
+// =============================================================================
+
+export interface NotificationSettings {
+  newReleases: boolean;
+  bookClubUpdates: boolean;
+  recommendations: boolean;
+  weeklyDigest: boolean;
+}
+
+export interface EmailPreferences {
+  marketing: boolean;
+  newsletter: boolean;
+  personalizedRecommendations: boolean;
+}
+
+export interface ConnectedAccount {
+  connected: boolean;
+  username?: string;
+}
+
+export interface Subscription {
+  plan: "free" | "essential" | "full";
+  planName: string;
+  billingPeriod: "monthly" | "annually";
+  nextBillingDate: string;
+  price: string;
+  creditsRemaining: number;
+  creditsPerMonth: number;
+  features: string[];
+}
+
+export interface PaymentMethod {
+  type: "visa" | "mastercard" | "amex" | "paypal";
+  last4: string;
+  expiryDate: string;
+  isDefault: boolean;
+}
+
+export interface BillingHistoryEntry {
+  id: string;
+  date: string;
+  description: string;
+  amount: string;
+  status: "paid" | "pending" | "failed";
+  invoiceUrl?: string;
+}
+
+export type PurchaseType = "bought" | "credit" | "gift_sent" | "gift_received";
+
+export interface Purchase {
+  id: string;
+  book: Pick<Book, "title" | "author">;
+  purchaseType: PurchaseType;
+  date: string;
+  price?: string;
+  receiptUrl?: string;
+  recipient?: string;
+}
+
+export interface Address {
+  id: string;
+  label: string;
+  name: string;
+  addressLines: string[];
+  isDefault?: boolean;
+}
+
 // Full profile type (for composition)
 export interface UserProfile {
   id: string;

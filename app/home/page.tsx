@@ -4,7 +4,7 @@ import * as React from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { isAuthenticated, logout } from "@/lib/auth";
-import { Menu, X, LogOut, Book, Palette, LayoutDashboard, Star, Library, LayoutGrid, Home } from "lucide-react";
+import { Menu, X, LogOut, Book, Palette, LayoutDashboard, Star, Library, LayoutGrid, Home, User, FileText } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const navItems = [
@@ -49,6 +49,18 @@ const navItems = [
     href: "/preview/collections",
     description: "CollectionCard examples",
     icon: LayoutGrid,
+  },
+  {
+    label: "My Spiracle",
+    href: "/explorations/my-spiracle",
+    description: "Profile page exploration",
+    icon: User,
+  },
+  {
+    label: "My Spiracle Style Guide",
+    href: "/style-guide/my-spiracle",
+    description: "Profile components documentation",
+    icon: FileText,
   },
 ];
 

@@ -170,6 +170,33 @@
   --sidebar-accent-foreground: #1a1a18;
   --sidebar-border: #E8E1CF;
   --sidebar-ring: #266D36;
+
+  /* Constellation visualization - sepia ink on cream */
+  --constellation-ink: #3d2e24;
+  --constellation-ink-mid: #5c4a3d;
+  --constellation-ink-light: #7a6555;
+  --constellation-wash-base: #a8c4d4;
+  --constellation-wash-edge: #7a9eb8;
+
+  /* Watercolor bar colors - brand colors */
+  --watercolor-forest-base: #4a9e5b;
+  --watercolor-forest-edge: #266D36;
+  --watercolor-burgundy-base: #a33333;
+  --watercolor-burgundy-edge: #730000;
+  --watercolor-terracotta-base: #c66a2d;
+  --watercolor-terracotta-edge: #9F4300;
+  --watercolor-slate-base: #6b7db0;
+  --watercolor-slate-edge: #47507C;
+
+  /* Discovery tree tag colors - soft watercolor blobs */
+  --discovery-tag-blue: #b8d4e8;
+  --discovery-tag-blue-edge: #8bb8d4;
+  --discovery-tag-amber: #e8d4a8;
+  --discovery-tag-amber-edge: #d4b878;
+  --discovery-tag-rose: #e8c4d4;
+  --discovery-tag-rose-edge: #d4a0b8;
+  --discovery-tag-sage: #c4d8c8;
+  --discovery-tag-sage-edge: #a0c4a8;
 }
 
 .dark {
@@ -210,6 +237,33 @@
   --sidebar-accent-foreground: #F9F7ED;
   --sidebar-border: rgba(249, 247, 237, 0.12);
   --sidebar-ring: #4aad60;
+
+  /* Constellation visualization - warm candlelight glow */
+  --constellation-ink: #e8dcc8;
+  --constellation-ink-mid: #c4b8a8;
+  --constellation-ink-light: #9a8f80;
+  --constellation-wash-base: #d4a855;
+  --constellation-wash-edge: #b8863a;
+
+  /* Watercolor bar colors - warmer, more luminous for lamplight feel */
+  --watercolor-forest-base: #5cb870;
+  --watercolor-forest-edge: #3d9955;
+  --watercolor-burgundy-base: #c45555;
+  --watercolor-burgundy-edge: #a33838;
+  --watercolor-terracotta-base: #d88040;
+  --watercolor-terracotta-edge: #c46830;
+  --watercolor-slate-base: #8895c4;
+  --watercolor-slate-edge: #6b78a8;
+
+  /* Discovery tree tag colors - warmer tones for lamplight feel */
+  --discovery-tag-blue: #a8c4d8;
+  --discovery-tag-blue-edge: #7a9eb8;
+  --discovery-tag-amber: #d4b888;
+  --discovery-tag-amber-edge: #c4a060;
+  --discovery-tag-rose: #d4a8b8;
+  --discovery-tag-rose-edge: #c48898;
+  --discovery-tag-sage: #a8c4a8;
+  --discovery-tag-sage-edge: #88a888;
 }
 
 @layer base {
